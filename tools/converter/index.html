@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/monokai_sublime.min.css">
+
+  <style>
+    html, body {
+      background-color: #EAEAEA;
+    }
+    .cv-page {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .cv-content {
+      margin: 30px;
+      background-color: #FFF;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
+    }
+    textarea {
+      width: 100%;
+      height: 300px;
+    }
+    .alert-danger {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      padding: 10px 30px;
+    }
+    .alert-content {
+      max-width: 1400px;
+      padding: 0px 30px;
+      margin: 0px auto;
+    }
+    .alert .close {
+      padding-left: 20px;
+    }
+  </style>
+
+</head>
+<body>
+
+<div class="cv-page">
+  <div class="cv-content">
+
+    <div class="cv-head">
+      <div class="alert alert-warning">
+        <strong>Notice:</strong> this is an <em>ad-hoc</em> converter from Behavior3 JSON format to Hanson Python code, specifically used for example puporse. It may not work for real applications.
+      </div>
+
+      <h1>JSON to Python converter</h1>
+      <textarea id="input_text">
+        {"version":"0.3.0","scope":"project","selectedTree":"e7c9443e-8ff4-4f08-883a-d0f0593974bb","trees":[{"version":"0.3.0","scope":"tree","id":"a7a22d22-7cf5-4d08-81f4-fdb9ed50a7aa","title":"nothing_is_happening","description":"","root":"33d26b64-278b-428e-92bd-b388bce073a2","properties":{},"nodes":{"33d26b64-278b-428e-92bd-b388bce073a2":{"id":"33d26b64-278b-428e-92bd-b388bce073a2","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":204,"y":0},"children":["34e4e690-997c-43cd-8714-8af91b04ae1d","10fa82eb-52c7-4f86-91ce-2edf0b04b307"]},"34e4e690-997c-43cd-8714-8af91b04ae1d":{"id":"34e4e690-997c-43cd-8714-8af91b04ae1d","name":"Priority","title":"Priority","description":"","properties":{},"display":{"x":408,"y":-336},"children":["3ba89fef-b51f-4e6f-8c1a-0c9352a7a898","d25fd1b6-f367-4d2f-8168-782559e22ecb"]},"10fa82eb-52c7-4f86-91ce-2edf0b04b307":{"id":"10fa82eb-52c7-4f86-91ce-2edf0b04b307","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":408,"y":324},"children":["a77a9db4-f941-4ba1-8706-c9e23eac1de5","650d3891-63b3-49da-9b01-5c0cf4a8ec61","cdc3ab43-c216-4057-b743-a8dd6866636a","6f16e42e-0002-40a8-93ed-156f3c7a7505"]},"3ba89fef-b51f-4e6f-8c1a-0c9352a7a898":{"id":"3ba89fef-b51f-4e6f-8c1a-0c9352a7a898","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":624,"y":-612},"children":["7db5188a-8f09-45f7-8279-fbf79e3f0649","fb5235d6-eb15-4b76-8828-16c11f0d6901"]},"d25fd1b6-f367-4d2f-8168-782559e22ecb":{"id":"d25fd1b6-f367-4d2f-8168-782559e22ecb","name":"Priority","title":"Priority","description":"","properties":{},"display":{"x":624,"y":-48},"children":["0f22635b-988c-4422-89c2-a59ce34d4e17","a7f395ef-9a98-42be-9e37-50cecbcb92a7"]},"7db5188a-8f09-45f7-8279-fbf79e3f0649":{"id":"7db5188a-8f09-45f7-8279-fbf79e3f0649","name":"is_not_sleeping","title":"is Not Sleeping?","description":"","properties":{},"display":{"x":828,"y":-780}},"fb5235d6-eb15-4b76-8828-16c11f0d6901":{"id":"fb5235d6-eb15-4b76-8828-16c11f0d6901","name":"Priority","title":"Priority","description":"","properties":{},"display":{"x":828,"y":-444},"children":["5173e2ee-d181-45ef-a824-f45412e6e23f","7f0a5b25-abc2-416c-8611-3ead08bc0555"]},"5173e2ee-d181-45ef-a824-f45412e6e23f":{"id":"5173e2ee-d181-45ef-a824-f45412e6e23f","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":1032,"y":-564},"children":["d1b088eb-16bf-4e05-a199-92ef29c627f3","a2fdd9ac-b7fb-49ba-8711-42a5d310537f","62b5dc34-5776-49f7-9f79-cf11ca6b46d7","4a663c34-d4e2-44bd-8257-f87b11e348d5"]},"7f0a5b25-abc2-416c-8611-3ead08bc0555":{"id":"7f0a5b25-abc2-416c-8611-3ead08bc0555","name":"search_for_attention","title":"Search For Attention","description":"","properties":{"trigger":"nothing_is_happening"},"display":{"x":1032,"y":-336}},"d1b088eb-16bf-4e05-a199-92ef29c627f3":{"id":"d1b088eb-16bf-4e05-a199-92ef29c627f3","name":"dice_roll","title":"Dice Roll","description":"","properties":{"event":"go_to_sleep"},"display":{"x":1248,"y":-696}},"a2fdd9ac-b7fb-49ba-8711-42a5d310537f":{"id":"a2fdd9ac-b7fb-49ba-8711-42a5d310537f","name":"record_start_time","title":"Record Start Time","description":"","properties":{"variable":"sleep_since"},"display":{"x":1248,"y":-600}},"62b5dc34-5776-49f7-9f79-cf11ca6b46d7":{"id":"62b5dc34-5776-49f7-9f79-cf11ca6b46d7","name":"print_status","title":"Print Status","description":"","properties":{"str":"----- Go to sleep!"},"display":{"x":1248,"y":-516}},"4a663c34-d4e2-44bd-8257-f87b11e348d5":{"id":"4a663c34-d4e2-44bd-8257-f87b11e348d5","name":"go_to_sleep","title":"Go To Sleep","description":"","properties":{"trigger":"nothing_is_happening"},"display":{"x":1248,"y":-432}},"0f22635b-988c-4422-89c2-a59ce34d4e17":{"id":"0f22635b-988c-4422-89c2-a59ce34d4e17","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":828,"y":-168},"children":["37d75b81-29eb-44f0-a4e3-56ae2cc62f65","c8103439-6891-41fb-8637-68de2e897110","82df764f-cf5f-4ccf-89f4-c38e6bcda245"]},"37d75b81-29eb-44f0-a4e3-56ae2cc62f65":{"id":"37d75b81-29eb-44f0-a4e3-56ae2cc62f65","name":"dice_roll","title":"Dice Roll","description":"","properties":{"event":"wake_up"},"display":{"x":1032,"y":-252}},"c8103439-6891-41fb-8637-68de2e897110":{"id":"c8103439-6891-41fb-8637-68de2e897110","name":"is_time_to_wake_up","title":"is Time To Wake Up?","description":"","properties":{},"display":{"x":1032,"y":-168}},"82df764f-cf5f-4ccf-89f4-c38e6bcda245":{"id":"82df764f-cf5f-4ccf-89f4-c38e6bcda245","name":"wake_up","title":"Wake Up","description":"","properties":{"trigger":"time_to_wake_up"},"display":{"x":1032,"y":-72}},"a7f395ef-9a98-42be-9e37-50cecbcb92a7":{"id":"a7f395ef-9a98-42be-9e37-50cecbcb92a7","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":828,"y":60},"children":["56ea02ff-494c-407c-b52f-5c66c376d525","396196fb-d187-4bd9-a181-2ecacca1bdca"]},"56ea02ff-494c-407c-b52f-5c66c376d525":{"id":"56ea02ff-494c-407c-b52f-5c66c376d525","name":"print_status","title":"Print Status","description":"","properties":{"str":"----- Continue to sleep."},"display":{"x":1032,"y":12}},"396196fb-d187-4bd9-a181-2ecacca1bdca":{"id":"396196fb-d187-4bd9-a181-2ecacca1bdca","name":"go_to_sleep","title":"Go To Sleep","description":"","properties":{"trigger":"nothing_is_happening"},"display":{"x":1032,"y":96}},"a77a9db4-f941-4ba1-8706-c9e23eac1de5":{"id":"a77a9db4-f941-4ba1-8706-c9e23eac1de5","name":"is_interruption","title":"is Interruption?","description":"","properties":{},"display":{"x":624,"y":192}},"650d3891-63b3-49da-9b01-5c0cf4a8ec61":{"id":"650d3891-63b3-49da-9b01-5c0cf4a8ec61","name":"is_sleeping","title":"is Sleeping?","description":"","properties":{},"display":{"x":624,"y":276}},"cdc3ab43-c216-4057-b743-a8dd6866636a":{"id":"cdc3ab43-c216-4057-b743-a8dd6866636a","name":"wake_up","title":"Wake Up","description":"","properties":{"trigger":"interruption"},"display":{"x":624,"y":360}},"6f16e42e-0002-40a8-93ed-156f3c7a7505":{"id":"6f16e42e-0002-40a8-93ed-156f3c7a7505","name":"print_status","title":"Print Status","description":"","properties":{"str":"----- Interruption: Wake up!"},"display":{"x":624,"y":456}}},"display":{"camera_x":383.5,"camera_y":438.5,"camera_z":0.25,"x":0,"y":0}},{"version":"0.3.0","scope":"tree","id":"25161b15-5c50-4e87-8e4e-b73111f225db","title":"interact_with_people","description":"","root":"f93c188f-08c3-433e-8bce-d58c7375da54","properties":{},"nodes":{"f93c188f-08c3-433e-8bce-d58c7375da54":{"id":"f93c188f-08c3-433e-8bce-d58c7375da54","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":204,"y":0},"children":["4af01db1-f627-4e7b-8f61-afe2b362feac","184a2d72-ddfb-4abd-8833-78af85738c85"]},"184a2d72-ddfb-4abd-8833-78af85738c85":{"id":"184a2d72-ddfb-4abd-8833-78af85738c85","name":"Priority","title":"Priority","description":"","properties":{},"display":{"x":408,"y":336},"children":["080bb6e0-8f23-4e88-873f-069473fb1bbf","dde2107a-de0b-47af-abed-16df8dfa7490"]},"4af01db1-f627-4e7b-8f61-afe2b362feac":{"id":"4af01db1-f627-4e7b-8f61-afe2b362feac","name":"is_face_target","title":"is Face Target?","description":"","properties":{},"display":{"x":408,"y":-348}},"080bb6e0-8f23-4e88-873f-069473fb1bbf":{"id":"080bb6e0-8f23-4e88-873f-069473fb1bbf","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":624,"y":12},"children":["e25d7bbe-d0f6-4beb-935b-0e5afe57a626","e2a7a0b6-37dc-4112-87c0-abd0a8186a66","14a8804e-3440-4baf-8c70-2cee375b98ca","899f7a7e-b687-4f8a-9098-c3179dfaa3c8"]},"dde2107a-de0b-47af-abed-16df8dfa7490":{"id":"dde2107a-de0b-47af-abed-16df8dfa7490","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":624,"y":660},"children":["6561d13c-2927-4b8d-88a0-8a73545f8da8","5c893b21-4ce7-45ff-b6e0-f06d09baa2e2","ba0e6239-d6df-458d-8a3a-4014ed2e949f","31704b82-18d1-4e46-8ef5-83135af37ba4"]},"e25d7bbe-d0f6-4beb-935b-0e5afe57a626":{"id":"e25d7bbe-d0f6-4beb-935b-0e5afe57a626","name":"Priority","title":"Priority","description":"","properties":{},"display":{"x":828,"y":-192},"children":["e0df7146-1913-4de4-883c-2bd15a60a91b","01103f86-d202-439f-990f-e853032f9492"]},"e2a7a0b6-37dc-4112-87c0-abd0a8186a66":{"id":"e2a7a0b6-37dc-4112-87c0-abd0a8186a66","name":"select_a_face_target","title":"Select A Face Target","description":"","properties":{},"display":{"x":828,"y":0}},"14a8804e-3440-4baf-8c70-2cee375b98ca":{"id":"14a8804e-3440-4baf-8c70-2cee375b98ca","name":"record_start_time","title":"Record Start Time","description":"","properties":{"variable":"interact_with_face_target_since"},"display":{"x":828,"y":84}},"899f7a7e-b687-4f8a-9098-c3179dfaa3c8":{"id":"899f7a7e-b687-4f8a-9098-c3179dfaa3c8","name":"interact_with_face_target","title":"Interact With Face Target","description":"","properties":{"id":"current_face_target","new_face":"false","trigger":"people_in_scene"},"display":{"x":828,"y":180}},"e0df7146-1913-4de4-883c-2bd15a60a91b":{"id":"e0df7146-1913-4de4-883c-2bd15a60a91b","name":"is_not_interacting_with_someone","title":"is Not Interacting With Someone?","description":"","properties":{},"display":{"x":1032,"y":-264}},"01103f86-d202-439f-990f-e853032f9492":{"id":"01103f86-d202-439f-990f-e853032f9492","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":1032,"y":-132},"children":["ebc912c1-1ae6-4530-8f20-147e1562379a","86f17a3c-7d74-4ec9-91c2-1017e15e872f"]},"ebc912c1-1ae6-4530-8f20-147e1562379a":{"id":"ebc912c1-1ae6-4530-8f20-147e1562379a","name":"is_more_than_one_face_target","title":"is More Than One Face Target?","description":"","properties":{},"display":{"x":1248,"y":-180}},"86f17a3c-7d74-4ec9-91c2-1017e15e872f":{"id":"86f17a3c-7d74-4ec9-91c2-1017e15e872f","name":"is_time_to_change_face_target","title":"is Time To Change Face Target?","description":"","properties":{},"display":{"x":1248,"y":-84}},"6561d13c-2927-4b8d-88a0-8a73545f8da8":{"id":"6561d13c-2927-4b8d-88a0-8a73545f8da8","name":"print_status","title":"Print Status","description":"","properties":{"str":"----- Continue interaction"},"display":{"x":828,"y":264}},"5c893b21-4ce7-45ff-b6e0-f06d09baa2e2":{"id":"5c893b21-4ce7-45ff-b6e0-f06d09baa2e2","name":"Priority","title":"Priority","description":"","properties":{},"display":{"x":828,"y":600},"children":["318af689-5f4c-4c72-9abc-16557fa1e6b4","c0494a40-74aa-46c7-86f4-fe515105ccf1"]},"ba0e6239-d6df-458d-8a3a-4014ed2e949f":{"id":"ba0e6239-d6df-458d-8a3a-4014ed2e949f","name":"interact_with_face_target","title":"Interact With Face Target","description":"","properties":{"id":"current_face_target","new_face":"false","trigger":"people_in_scene"},"display":{"x":828,"y":792}},"31704b82-18d1-4e46-8ef5-83135af37ba4":{"id":"31704b82-18d1-4e46-8ef5-83135af37ba4","name":"Priority","title":"Priority","description":"","properties":{},"display":{"x":828,"y":996},"children":["253c79cc-79a6-4b0a-95fa-bdfc9dccb4d1","87086fef-bdf4-4e15-80fe-a055fe2be51a"]},"318af689-5f4c-4c72-9abc-16557fa1e6b4":{"id":"318af689-5f4c-4c72-9abc-16557fa1e6b4","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":1032,"y":480},"children":["29e7f68a-623b-4cc6-9084-14de4d8397bd","3bd8330a-07cb-40af-b5b6-fbcfbd622f4c","3e9136ca-8b0a-468f-a489-a27703a095c4","0172b5be-401a-4682-8023-80f6bdbdd7b1"]},"c0494a40-74aa-46c7-86f4-fe515105ccf1":{"id":"c0494a40-74aa-46c7-86f4-fe515105ccf1","name":"Succeeder","title":"Succeeder","description":"","properties":{},"display":{"x":1032,"y":708}},"29e7f68a-623b-4cc6-9084-14de4d8397bd":{"id":"29e7f68a-623b-4cc6-9084-14de4d8397bd","name":"is_more_than_one_face_target","title":"is More Than One Face Target?","description":"","properties":{},"display":{"x":1248,"y":348}},"3bd8330a-07cb-40af-b5b6-fbcfbd622f4c":{"id":"3bd8330a-07cb-40af-b5b6-fbcfbd622f4c","name":"dice_roll","title":"Dice Roll","description":"","properties":{"event":"group_interaction"},"display":{"x":1248,"y":444}},"3e9136ca-8b0a-468f-a489-a27703a095c4":{"id":"3e9136ca-8b0a-468f-a489-a27703a095c4","name":"select_a_glance_target","title":"Select A Glance Target","description":"","properties":{},"display":{"x":1248,"y":528}},"0172b5be-401a-4682-8023-80f6bdbdd7b1":{"id":"0172b5be-401a-4682-8023-80f6bdbdd7b1","name":"glance_at","title":"Glance At","description":"","properties":{"id":"current_glance_target","trigger":"people_in_scene"},"display":{"x":1248,"y":612}},"87086fef-bdf4-4e15-80fe-a055fe2be51a":{"id":"87086fef-bdf4-4e15-80fe-a055fe2be51a","name":"Succeeder","title":"Succeeder","description":"","properties":{},"display":{"x":1032,"y":1056}},"253c79cc-79a6-4b0a-95fa-bdfc9dccb4d1":{"id":"253c79cc-79a6-4b0a-95fa-bdfc9dccb4d1","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":1032,"y":924},"children":["1f750d1c-9cba-461e-860c-9f79079ed9f2","088e1fcd-b0ae-4129-8e9d-71eb6b104a06"]},"1f750d1c-9cba-461e-860c-9f79079ed9f2":{"id":"1f750d1c-9cba-461e-860c-9f79079ed9f2","name":"dice_roll","title":"Dice Roll","description":"","properties":{"event":"face_study_saccade"},"display":{"x":1248,"y":876}},"088e1fcd-b0ae-4129-8e9d-71eb6b104a06":{"id":"088e1fcd-b0ae-4129-8e9d-71eb6b104a06","name":"face_study_saccade","title":"Face Study Saccade","description":"","properties":{"id":"current_face_target","trigger":"people_in_scene"},"display":{"x":1248,"y":972}}},"display":{"camera_x":300.5,"camera_y":381.5,"camera_z":0.75,"x":0,"y":0}},{"version":"0.3.0","scope":"tree","id":"180e7a7e-45cf-4425-93cb-10ad8c6ef3ea","title":"someone_left","description":"","root":"50a82cb7-0cc5-48b3-8ec4-cbc368c0dee5","properties":{},"nodes":{"50a82cb7-0cc5-48b3-8ec4-cbc368c0dee5":{"id":"50a82cb7-0cc5-48b3-8ec4-cbc368c0dee5","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":204,"y":0},"children":["c254d937-d5df-4bcd-adc1-f4eeeb6dd33e","5430f7e5-389e-4685-83f9-cf2e7eabe000","62624a3e-cf16-4529-bbaf-07ab16b2cdf4"]},"c254d937-d5df-4bcd-adc1-f4eeeb6dd33e":{"id":"c254d937-d5df-4bcd-adc1-f4eeeb6dd33e","name":"is_someone_left","title":"is Someone Left?","description":"","properties":{},"display":{"x":408,"y":-444}},"62624a3e-cf16-4529-bbaf-07ab16b2cdf4":{"id":"62624a3e-cf16-4529-bbaf-07ab16b2cdf4","name":"clear_lost_face_target","title":"Clear Lost Face Target","description":"","properties":{},"display":{"x":408,"y":432}},"5430f7e5-389e-4685-83f9-cf2e7eabe000":{"id":"5430f7e5-389e-4685-83f9-cf2e7eabe000","name":"Priority","title":"Priority","description":"","properties":{},"display":{"x":408,"y":0},"children":["75f74220-cd3a-4cb6-b375-f5d017934e29","d1792f08-1443-45f0-a14a-48aa478cf030","7b7d6fb3-ae80-40bd-8885-067869cd3852"]},"75f74220-cd3a-4cb6-b375-f5d017934e29":{"id":"75f74220-cd3a-4cb6-b375-f5d017934e29","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":624,"y":-264},"children":["57bdb4ea-b959-4146-88d5-c44984a3c3ce","e016404e-455d-40cb-8f62-9b1bc249f6fd","a98a1e45-98a5-4c1e-88a9-a36491845566"]},"d1792f08-1443-45f0-a14a-48aa478cf030":{"id":"d1792f08-1443-45f0-a14a-48aa478cf030","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":624,"y":0},"children":["84867d3c-780d-4564-8cb3-bc382f91aea1","c97cba32-3d35-4e0a-b0ef-7663109f333b","b8c42a19-396c-46dd-8cc6-4a3926d141dd"]},"7b7d6fb3-ae80-40bd-8885-067869cd3852":{"id":"7b7d6fb3-ae80-40bd-8885-067869cd3852","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":624,"y":264},"children":["b005653a-3bd4-4739-8342-0445f84907db","3fdb3306-7392-471a-91b3-178ff227ad13","c6ac40f0-3af9-4dc4-8813-35de97889d0d"]},"57bdb4ea-b959-4146-88d5-c44984a3c3ce":{"id":"57bdb4ea-b959-4146-88d5-c44984a3c3ce","name":"was_interacting_with_that_person","title":"Was Interacting With That Person","description":"","properties":{},"display":{"x":828,"y":-360}},"e016404e-455d-40cb-8f62-9b1bc249f6fd":{"id":"e016404e-455d-40cb-8f62-9b1bc249f6fd","name":"return_to_neutral_position","title":"Return To Neutral Position","description":"","properties":{"trigger":"someone_left"},"display":{"x":828,"y":-264}},"a98a1e45-98a5-4c1e-88a9-a36491845566":{"id":"a98a1e45-98a5-4c1e-88a9-a36491845566","name":"show_frustrated_expression","title":"Show Frustrated Expression","description":"","properties":{"trigger":"someone_left"},"display":{"x":828,"y":-180}},"84867d3c-780d-4564-8cb3-bc382f91aea1":{"id":"84867d3c-780d-4564-8cb3-bc382f91aea1","name":"is_interacting_with_someone","title":"is Interacting With Someone?","description":"","properties":{},"display":{"x":828,"y":-96}},"c97cba32-3d35-4e0a-b0ef-7663109f333b":{"id":"c97cba32-3d35-4e0a-b0ef-7663109f333b","name":"dice_roll","title":"Dice Roll","description":"","properties":{"event":"glance_lost_face"},"display":{"x":828,"y":0}},"b8c42a19-396c-46dd-8cc6-4a3926d141dd":{"id":"b8c42a19-396c-46dd-8cc6-4a3926d141dd","name":"glance_at_lost_face","title":"Glance At Lost Face","description":"","properties":{"trigger":"someone_left"},"display":{"x":828,"y":84}},"b005653a-3bd4-4739-8342-0445f84907db":{"id":"b005653a-3bd4-4739-8342-0445f84907db","name":"print_status","title":"Print Status","description":"","properties":{"str":"----- Ignoring the new face!"},"display":{"x":828,"y":168}},"3fdb3306-7392-471a-91b3-178ff227ad13":{"id":"3fdb3306-7392-471a-91b3-178ff227ad13","name":"log","title":"Log","description":"","properties":{"behavior":"ignore_face","trigger":"someone_arrived"},"display":{"x":828,"y":264}},"c6ac40f0-3af9-4dc4-8813-35de97889d0d":{"id":"c6ac40f0-3af9-4dc4-8813-35de97889d0d","name":"Succeeder","title":"Succeeder","description":"","properties":{},"display":{"x":828,"y":348}}},"display":{"camera_x":365.5,"camera_y":417.5,"camera_z":0.5,"x":0,"y":0}},{"version":"0.3.0","scope":"tree","id":"a2406cc4-254f-427e-90fc-a515d7480ca8","title":"someone_arrived","description":"","root":"de6b1fe5-594f-4b67-801c-281724d61666","properties":{},"nodes":{"de6b1fe5-594f-4b67-801c-281724d61666":{"id":"de6b1fe5-594f-4b67-801c-281724d61666","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":204,"y":0},"children":["7ea127d0-128f-4fd9-a427-25bd287fcd9e","560f4e1e-0a69-4077-a924-67fe8c65cfdd","190c5594-4c45-42f3-8a50-231cdc70cc94"]},"7ea127d0-128f-4fd9-a427-25bd287fcd9e":{"id":"7ea127d0-128f-4fd9-a427-25bd287fcd9e","name":"is_someone_arrived","title":"is Someone Arrived?","description":"","properties":{},"display":{"x":408,"y":-552}},"560f4e1e-0a69-4077-a924-67fe8c65cfdd":{"id":"560f4e1e-0a69-4077-a924-67fe8c65cfdd","name":"Priority","title":"Priority","description":"","properties":{},"display":{"x":408,"y":36},"children":["a642a4c5-14eb-4f49-b331-2752964a47e5","1b7999ff-ad61-4900-af55-0569265eae5c","31dbf4b4-afbd-4593-a8aa-e7cfcba8ba6e"]},"190c5594-4c45-42f3-8a50-231cdc70cc94":{"id":"190c5594-4c45-42f3-8a50-231cdc70cc94","name":"clear_new_face_target","title":"Clear New Face Target","description":"","properties":{},"display":{"x":408,"y":504}},"a642a4c5-14eb-4f49-b331-2752964a47e5":{"id":"a642a4c5-14eb-4f49-b331-2752964a47e5","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":624,"y":-288},"children":["f0f1d022-81a6-4e60-8aa3-cf258c012b9c","c22991c1-e63d-4bf4-8f2f-17091328e84a","643bc26c-fb51-4ff9-8dcf-8d77de7c95b8","6a5370c7-6d42-4a6d-9236-60839b8a2af7","e5440058-2833-4b0f-bc6c-6fc61b223759"]},"1b7999ff-ad61-4900-af55-0569265eae5c":{"id":"1b7999ff-ad61-4900-af55-0569265eae5c","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":624,"y":60},"children":["64c5b9a8-e828-4541-817e-2db9f3e1a3f4","14d6cf8a-4d8e-4398-81bc-8c5bc4b28019","0fc3e275-8652-441f-a868-4168337cb100"]},"31dbf4b4-afbd-4593-a8aa-e7cfcba8ba6e":{"id":"31dbf4b4-afbd-4593-a8aa-e7cfcba8ba6e","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":624,"y":324},"children":["5cd1472f-2b47-43f0-8fe9-ddbf61eae6f3","071ac46c-7947-456d-9f5b-339f41e93a60","8029aa32-e785-439b-b31c-0b0637cf45c3"]},"f0f1d022-81a6-4e60-8aa3-cf258c012b9c":{"id":"f0f1d022-81a6-4e60-8aa3-cf258c012b9c","name":"were_no_people_in_the_scene","title":"were No People In The Scene?","description":"","properties":{},"display":{"x":828,"y":-468}},"c22991c1-e63d-4bf4-8f2f-17091328e84a":{"id":"c22991c1-e63d-4bf4-8f2f-17091328e84a","name":"assign_face_target","title":"Assign Face Target","description":"","properties":{"variable":"current_face_target","value":"new_face"},"display":{"x":828,"y":-372}},"643bc26c-fb51-4ff9-8dcf-8d77de7c95b8":{"id":"643bc26c-fb51-4ff9-8dcf-8d77de7c95b8","name":"record_start_time","title":"Record Start Time","description":"","properties":{"variable":"interact_with_face_target_since"},"display":{"x":828,"y":-288}},"6a5370c7-6d42-4a6d-9236-60839b8a2af7":{"id":"6a5370c7-6d42-4a6d-9236-60839b8a2af7","name":"show_expression","title":"Show Expression","description":"","properties":{"emo_class":"new_arrival_emotions","trigger":"someone_arrived"},"display":{"x":828,"y":-204}},"e5440058-2833-4b0f-bc6c-6fc61b223759":{"id":"e5440058-2833-4b0f-bc6c-6fc61b223759","name":"interact_with_face_target","title":"Interact With Face Target","description":"","properties":{"id":"current_face_target","new_face":true,"trigger":"someone_arrived"},"display":{"x":828,"y":-108}},"64c5b9a8-e828-4541-817e-2db9f3e1a3f4":{"id":"64c5b9a8-e828-4541-817e-2db9f3e1a3f4","name":"is_interacting_with_someone","title":"is Interacting With Someone?","description":"","properties":{},"display":{"x":828,"y":-24}},"14d6cf8a-4d8e-4398-81bc-8c5bc4b28019":{"id":"14d6cf8a-4d8e-4398-81bc-8c5bc4b28019","name":"dice_roll","title":"Dice Roll","description":"","properties":{"event":"glance_new_face"},"display":{"x":828,"y":60}},"0fc3e275-8652-441f-a868-4168337cb100":{"id":"0fc3e275-8652-441f-a868-4168337cb100","name":"glance_at_new_face","title":"Glance At New Face","description":"","properties":{"trigger":"someone_arrived"},"display":{"x":828,"y":156}},"5cd1472f-2b47-43f0-8fe9-ddbf61eae6f3":{"id":"5cd1472f-2b47-43f0-8fe9-ddbf61eae6f3","name":"print_status","title":"Print Status","description":"","properties":{"str":"----- Ignoring the new face!"},"display":{"x":828,"y":240}},"071ac46c-7947-456d-9f5b-339f41e93a60":{"id":"071ac46c-7947-456d-9f5b-339f41e93a60","name":"log","title":"Log","description":"","properties":{"behavior":"ignore_face","trigger":"someone_arrived"},"display":{"x":828,"y":324}},"8029aa32-e785-439b-b31c-0b0637cf45c3":{"id":"8029aa32-e785-439b-b31c-0b0637cf45c3","name":"Succeeder","title":"Succeeder","description":"","properties":{},"display":{"x":828,"y":420}}},"display":{"camera_x":349.5,"camera_y":404.5,"camera_z":0.5,"x":0,"y":0}},{"version":"0.3.0","scope":"tree","id":"e7c9443e-8ff4-4f08-883a-d0f0593974bb","title":"main","description":"","root":"8fc45536-f063-42be-a3fd-eee6bfc65dab","properties":{},"nodes":{"8fc45536-f063-42be-a3fd-eee6bfc65dab":{"id":"8fc45536-f063-42be-a3fd-eee6bfc65dab","name":"RepeatAlways","title":"Repeat Always","description":"","properties":{},"display":{"x":204,"y":0},"child":"7ca63e84-776d-4dba-80f1-50ab966c55cd"},"7ca63e84-776d-4dba-80f1-50ab966c55cd":{"id":"7ca63e84-776d-4dba-80f1-50ab966c55cd","name":"Priority","title":"Priority","description":"","properties":{},"display":{"x":408,"y":0},"children":["2b574d4e-7bb3-4e56-b489-a8fc91a464e2","fe7aacc4-8ca4-427c-88a6-2df63275f47b"]},"2b574d4e-7bb3-4e56-b489-a8fc91a464e2":{"id":"2b574d4e-7bb3-4e56-b489-a8fc91a464e2","name":"Sequence","title":"Sequence","description":"","properties":{},"display":{"x":624,"y":-204},"children":["9935f2ed-e416-4fbc-8c34-917a09c80ece","e4c99598-3628-443b-bc22-fdc2b917cccf","4e62a5a1-307f-420b-985e-1a497e281d44"]},"fe7aacc4-8ca4-427c-88a6-2df63275f47b":{"id":"fe7aacc4-8ca4-427c-88a6-2df63275f47b","name":"idle_spin","title":"Idle Spin","description":"","properties":{},"display":{"x":624,"y":192}},"9935f2ed-e416-4fbc-8c34-917a09c80ece":{"id":"9935f2ed-e416-4fbc-8c34-917a09c80ece","name":"is_behavior_tree_on","title":"is Behavior Tree On?","description":"","properties":{},"display":{"x":828,"y":-336}},"e4c99598-3628-443b-bc22-fdc2b917cccf":{"id":"e4c99598-3628-443b-bc22-fdc2b917cccf","name":"sync_variables","title":"Sync Variables","description":"","properties":{},"display":{"x":828,"y":-252}},"4e62a5a1-307f-420b-985e-1a497e281d44":{"id":"4e62a5a1-307f-420b-985e-1a497e281d44","name":"Priority","title":"Priority","description":"","properties":{},"display":{"x":828,"y":-24},"children":["995eeb11-18fa-432b-89d0-fec578a82bee","8165dbd2-5ff7-4002-82fe-4f05565254a5","532ca2d7-03fd-4798-8e92-50dc8398a6af","0c716ace-f8b4-46ad-aef4-abed299c38d0"]},"995eeb11-18fa-432b-89d0-fec578a82bee":{"id":"995eeb11-18fa-432b-89d0-fec578a82bee","name":"a2406cc4-254f-427e-90fc-a515d7480ca8","title":"someone_arrived","description":"","properties":{},"display":{"x":1032,"y":-156}},"8165dbd2-5ff7-4002-82fe-4f05565254a5":{"id":"8165dbd2-5ff7-4002-82fe-4f05565254a5","name":"180e7a7e-45cf-4425-93cb-10ad8c6ef3ea","title":"someone_left","description":"","properties":{},"display":{"x":1032,"y":-72}},"532ca2d7-03fd-4798-8e92-50dc8398a6af":{"id":"532ca2d7-03fd-4798-8e92-50dc8398a6af","name":"25161b15-5c50-4e87-8e4e-b73111f225db","title":"interact_with_people","description":"","properties":{},"display":{"x":1032,"y":12}},"0c716ace-f8b4-46ad-aef4-abed299c38d0":{"id":"0c716ace-f8b4-46ad-aef4-abed299c38d0","name":"a7a22d22-7cf5-4d08-81f4-fdb9ed50a7aa","title":"nothing_is_happening","description":"","properties":{},"display":{"x":1032,"y":108}}},"display":{"camera_x":331.5,"camera_y":412.5,"camera_z":0.5,"x":0,"y":0}}],"custom_nodes":[{"version":"0.3.0","scope":"node","name":"is_someone_arrived","category":"condition","title":"is Someone Arrived?","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"is_someone_left","category":"condition","title":"is Someone Left?","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"is_face_target","category":"condition","title":"is Face Target?","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"is_not_interacting_with_someone","category":"condition","title":"is Not Interacting With Someone?","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"is_more_than_one_face_target","category":"condition","title":"is More Than One Face Target?","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"is_time_to_change_face_target","category":"condition","title":"is Time To Change Face Target?","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"is_not_sleeping","category":"condition","title":"is Not Sleeping?","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"is_time_to_wake_up","category":"condition","title":"is Time To Wake Up?","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"is_interruption","category":"condition","title":"is Interruption?","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"is_sleeping","category":"condition","title":"is Sleeping?","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"is_behavior_tree_on","category":"condition","title":"is Behavior Tree On?","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"is_interacting_with_someone","category":"condition","title":"is Interacting With Someone?","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"were_no_people_in_the_scene","category":"condition","title":"were No People In The Scene?","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"clear_lost_face_target","category":"action","title":"Clear Lost Face Target","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"select_a_face_target","category":"action","title":"Select A Face Target","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"select_a_glance_target","category":"action","title":"Select A Glance Target","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"clear_new_face_target","category":"action","title":"Clear New Face Target","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"was_interacting_with_that_person","category":"action","title":"Was Interacting With That Person","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"sync_variables","category":"action","title":"Sync Variables","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"idle_spin","category":"action","title":"Idle Spin","description":null,"properties":{}},{"version":"0.3.0","scope":"node","name":"assign_face_target","category":"action","title":"Assign Face Target","description":null,"properties":{"variable":"current_face_target","value":"new_face"}},{"version":"0.3.0","scope":"node","name":"record_start_time","category":"action","title":"Record Start Time","description":null,"properties":{"variable":"interact_with_face_target_since"}},{"version":"0.3.0","scope":"node","name":"show_expression","category":"action","title":"Show Expression","description":null,"properties":{"emo_class":"new_arrival_emotions","trigger":"someone_arrived"}},{"version":"0.3.0","scope":"node","name":"interact_with_face_target","category":"action","title":"Interact With Face Target","description":null,"properties":{"id":"current_face_target","new_face":true,"trigger":"someone_arrived"}},{"version":"0.3.0","scope":"node","name":"dice_roll","category":"action","title":"Dice Roll","description":null,"properties":{"event":"glance_new_face"}},{"version":"0.3.0","scope":"node","name":"glance_at_new_face","category":"action","title":"Glance At New Face","description":null,"properties":{"trigger":"someone_arrived"}},{"version":"0.3.0","scope":"node","name":"print_status","category":"action","title":"Print Status","description":null,"properties":{"str":"----- Ignoring the new face!"}},{"version":"0.3.0","scope":"node","name":"log","category":"action","title":"Log","description":null,"properties":{"behavior":"ignore_face","trigger":"someone_arrived"}},{"version":"0.3.0","scope":"node","name":"return_to_neutral_position","category":"action","title":"Return To Neutral Position","description":null,"properties":{"trigger":"someone_left"}},{"version":"0.3.0","scope":"node","name":"show_frustrated_expression","category":"action","title":"Show Frustrated Expression","description":null,"properties":{"trigger":"someone_left"}},{"version":"0.3.0","scope":"node","name":"glance_at_lost_face","category":"action","title":"Glance At Lost Face","description":null,"properties":{"trigger":"someone_left"}},{"version":"0.3.0","scope":"node","name":"glance_at","category":"action","title":"Glance At","description":null,"properties":{"id":"current_glance_target","trigger":"people_in_scene"}},{"version":"0.3.0","scope":"node","name":"face_study_saccade","category":"action","title":"Face Study Saccade","description":null,"properties":{"id":"current_face_target","trigger":"people_in_scene"}},{"version":"0.3.0","scope":"node","name":"go_to_sleep","category":"action","title":"Go To Sleep","description":null,"properties":{"trigger":"nothing_is_happening"}},{"version":"0.3.0","scope":"node","name":"search_for_attention","category":"action","title":"Search For Attention","description":null,"properties":{"trigger":"nothing_is_happening"}},{"version":"0.3.0","scope":"node","name":"wake_up","category":"action","title":"Wake Up","description":null,"properties":{"trigger":"time_to_wake_up"}},{"version":"0.3.0","scope":"node","name":"RepeatAlways","category":"decorator","title":"Repeat Always","description":null,"properties":{}}]}
+      </textarea>
+      <div class="text-right">
+        <button id="btn_convert" 
+                href="#"
+                class="btn btn-success"
+                onclick="convert()"
+                data-loading-text="<i class='fa fa-gear fa-spin'></i>">
+                Convert
+        </button>
+      </div>
+    </div>
+
+    <div id="results" class="cv-body" style="display:none">
+      <h2>Result:</h2>
+
+      <pre><code id="output_text" class="python"></code></pre>
+    </div>
+  </div>
+</div>
+
+<div id="alert_error" class="alert alert-danger alert-dimissible" style="opacity:0; top:-50px;">
+  <div class="alert-content">
+    <button type="button" class="close" onclick="dismiss_alert();">
+      <span>&times;</span>
+    </button>
+
+    <strong class="title"></strong><strong>:</strong>
+    <span class="message"></span>
+  </div>
+</div>
+
+
+
+</body>
+</html>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/languages/python.min.js"></script>
+
+
+<script>
+  var nargs = /\{([0-9a-zA-Z]+)\}/g;
+  var slice = Array.prototype.slice;
+
+  var conversion_dict = {
+    'Priority': 'Selector',
+    'Succeeder': 'Succeed'
+  }
+
+  var input_text  = $('#input_text');
+  var output_text = $('#output_text');
+  var btn_convert = $('#btn_convert');
+  var alert_error = $('#alert_error');
+  var results     = $('#results');
+
+  var t_class     = 'class Tree(object):\n';
+  var t_owyl      = '    @owyl.taskmethod\n';
+  var t_def       = '    def {name}({params}):\n';
+  var t_line      = '        {space}{s}\n';
+  var t_line_     = '        {space}{s}';
+
+
+  function template(string) {
+      var args
+
+      if (arguments.length === 2 && typeof arguments[1] === "object") {
+          args = arguments[1]
+      } else {
+          args = slice.call(arguments, 1)
+      }
+
+      if (!args || !args.hasOwnProperty) {
+          args = {}
+      }
+
+      return string.replace(nargs, function replaceArg(match, i, index) {
+          var result
+
+          if (string[index - 1] === "{" &&
+              string[index + match.length] === "}") {
+              return i
+          } else {
+              result = args.hasOwnProperty(i) ? args[i] : null
+              if (result === null || result === undefined) {
+                  return ""
+              }
+
+              return result
+          }
+      })
+  }
+  function dismiss_alert() {
+    alert_error.animate({top:'-50px', opacity:'0'});
+  }
+  function show_alert(title, text) {
+    alert_error.animate({top:'0px', opacity:'1'});
+    alert_error.find('.title').html(title);
+    alert_error.find('.message').html(text);
+  }
+  function scroll_to(element) {
+    $('html, body').animate({
+        scrollTop: element.offset().top
+    }, 500);
+  }
+
+  function convert() {
+    btn_convert.button('loading');
+
+    try {
+      var data = JSON.parse(input_text.val());
+    } catch (error) {
+      show_alert('UNABLE TO CONVERT JSON', error.message);
+      btn_convert.button('reset');
+      return;
+    }
+
+    try {
+      output_text.html(_to_python(data));
+    } catch (error) {
+      show_alert('INVALID JSON INPUT', error.message);
+      btn_convert.button('reset');
+      return;
+    }
+
+    hljs.initHighlighting();
+    results.show('fast', function() { scroll_to(results); });
+    
+    btn_convert.button('reset');
+  }
+
+  function _space(n) {
+    s = '';
+    for (var i=0; i<n; i++) {
+      s += '    ';
+    }
+    return s;
+  }
+
+  function _to_python(data) {
+
+    var result = '';
+    result += template(t_class);
+
+    // convert subtrees
+    var main_tree = null;
+    for (var i=0; i<data.trees.length; i++) {
+      var tree_data = data.trees[i];
+      if (tree_data.title !== 'main') {
+        result += _to_subtree(tree_data);
+      } else {
+        main_tree = tree_data;
+      }
+    }
+
+    // convert main tree
+    if (main_tree !== null) {
+      result += _to_tree(main_tree);
+    }
+
+    // convert nodes
+    for (var i=0; i<data.custom_nodes.length; i++) {
+      var node_data = data.custom_nodes[i];
+      result += _to_node(node_data);
+    }
+
+    return result;
+  }
+  function isNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  }
+  function _my_name(name) {
+    if (conversion_dict[name]) {
+      name = conversion_dict[name];
+    }
+
+    f = name[0];
+    if (f !== f.toLowerCase()) {
+      name = 'owyl.'+f.toLowerCase()+name.substr(1, name.length);
+    } else {
+      name = 'self.'+name;
+    }
+
+    return name;
+  }
+  function _my_params(properties) {
+    var params = [];
+    for (var key in properties) {
+      var v = properties[key];
+      var s = key+'=';
+
+      if (v === true || v === 'true') s += 'True';
+      else if (v === false || v === 'false') s += 'False';
+      else if (isNumber(v)) s += v;
+      else s += '"'+v+'"';
+
+      params.push(s);
+    }
+
+    return params.join(', ');
+  }
+  function _expand_node(root, nodes, identation) {
+    identation = identation || 1;
+
+    var result = '';
+    var node = nodes[root];
+
+    // if composite or decorator
+    if (node.children || node.child) {
+      var children = node.children || [node.child];
+
+      var values = [];
+      for (var i=0; i<children.length; i++) {
+        values.push(_expand_node(children[i], nodes, identation+1));
+      }
+
+      var n = values.join(',\n');
+      var s = _my_name(node.name)+'(';
+      result += template(t_line, {s:s, space:_space(identation)});
+      result += n+'\n';
+      result += template(t_line_, {s:')', space:_space(identation)});
+
+    // if action or condition
+    } else {
+
+      // if subtree
+      if (node.name.indexOf('-') > -1) {
+        var s = _my_name(node.title);
+
+      // if normal node
+      } else {
+        var s = _my_name(node.name);
+      }
+
+      // parameters
+      s += '('+_my_params(node.properties)+')';
+
+      result += template(t_line_, {s:s, space:_space(identation)});
+    }
+
+
+    return result;
+  }
+
+  function _to_subtree(data) {
+    var result = '';
+    result += template(t_def, {name:data.title, params:'self'})
+    result += template(t_line, {s:'tree = \\'});
+    result += _expand_node(data.root, data.nodes);
+    result += template(t_line);
+    result += template(t_line, {s:'return tree'});
+    result += template(t_line);
+    
+    return result;
+  }
+
+  function _to_tree(data) {
+    var result = '';
+    result += template(t_def, {name:'build_tree', params:'self'})
+    result += template(t_line, {s:'tree = \\'});
+    result += _expand_node(data.root, data.nodes);
+    result += template(t_line);
+    result += template(t_line, {s:'return owyl.visit(tree, blackboard=self.blackboard)'});
+    result += template(t_line);
+
+    return result;
+  }
+
+  function _to_node(data) {
+    var result = '';
+    result += template(t_owyl);
+    result += template(t_def, {name:data.name, params:'self, **kwargs'});
+    result += template(t_line, {s:'pass'})
+    result += template(t_line);
+
+    return result;
+  }
+</script>

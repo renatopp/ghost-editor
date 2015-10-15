@@ -1,0 +1,73 @@
+html, body {
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+  line-height: 1.42857143;
+}
+
+.preloading {
+  position    : absolute;
+  top         : 0;
+  left        : 0;
+  width       : 100%;
+  height      : 100%;
+  color       : #999999;
+  background  : #171717;
+  z-index     : 10000000;
+  text-align  : center;
+  font-size   : 16px !important;
+  font-family : sans-serif !important;
+  font-weight: 300 !important;
+
+  -webkit-transition : opacity .5s ease-in-out;
+  -moz-transition    : opacity .5s ease-in-out;
+  -o-transition      : opacity .5s ease-in-out;
+  transition         : opacity .5s ease-in-out;
+}
+
+.preloading-body {
+  height: 210px;
+  margin : 35vh 0px;
+  padding: 0px 35px;
+  /*background-color: #2F2F2F;*/
+  text-align: left;
+}
+.preloading-body-left {
+  display: inline;
+  font-size : 2.0em;
+  margin: 10px;
+  float: left;
+}
+.preloading-body-right {
+  display: block-inline;
+  margin-left: 50px;
+  padding-left: 10px;
+  height: 210px;
+  border-left: 1px solid #999999;
+}
+.preloading-body-right span {
+  display : block;
+}
+.preloading-body-brand {
+  padding-top: 18px;
+  font-size : 1.4em;
+}
+.preloading-body-title {
+  font-size : 2.5em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.preloading-body-subtitle,
+.preloading-body-version {
+  font-size : 0.8em;
+}
+
+.preloading-body-loading {
+  margin-top: 30px;
+  font-size : 0.8em;
+  opacity   : 0.8;
+}
+
+.preloading.preload-fade {
+  opacity: 0;
+}
