@@ -25,11 +25,15 @@
  * 
  */
 
-window.b3e         = window.b3e || {};
-window.b3e.draw    = window.b3e.draw || {};
-window.b3e.editor  = window.b3e.editor || {};
-window.b3e.project = window.b3e.project || {};
-window.b3e.tree    = window.b3e.tree || {};
+window.b3e            = {};
+window.b3e.editor     = {};
+window.b3e.project    = {};
+window.b3e.tree       = {};
+window.b3e.node       = {};
+window.b3e.connection = {};
+window.b3e.nodes      = {};
 
+window.b3e.VERSION    = '[BUILD_VERSION]';
 
-window.b3e.VERSION = '0.3.0';
+// Deprecated
+window.b3e.draw       = {};
