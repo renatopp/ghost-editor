@@ -52,7 +52,8 @@ var preload_css = [
 
 var app_js = [
   'src/editor/namespaces.js',
-  'src/editor/utils/*.js',
+  'src/editor/node/**/*.js',
+  'src/editor/utils/**/*.js',
   'src/editor/**/*.js',
   'src/app/app.js',
   'src/app/app.routes.js',

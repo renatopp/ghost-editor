@@ -52,12 +52,20 @@
    * @protected
    */
   p.redraw = function() {
-    // var attrs = this.node.attributes;
-    // var category = attrs.category;
+    var attrs = this.node.attributes;
+    var category = attrs.category;
+
+    // Select the right shape (will be replaced in future tasks)
+    var shape = b3e.draw.SHAPES.composite;
+    if (category == 'root') {
+      shape = b3e.draw.SHAPES.root;
+
+    } else if (category == 'input' || category == 'output') {
+      shape = b3e.draw.SHAPES.action;
+    }
     
-    var category = 'category';
-    var shape = b3e.draw.SHAPES[category];
-    var symbol = b3e.draw.SYMBOLS[name] || b3e.draw.textSymbol;
+    // Select only root
+    var symbol = b3e.draw.textSymbol;
 
     this.width = this._settings.get('block_'+category+'_width');
     this.height = this._settings.get('block_'+category+'_height');
