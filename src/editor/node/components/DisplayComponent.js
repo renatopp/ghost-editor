@@ -19,11 +19,11 @@
     this.node = node;
     this.width = null;
     this.height = null;
-    this.shape = new createjs.Shape();
-    this.symbol = null;
-    this.shadow = null;
 
     this.isSelected = null;
+
+    this.shape = null;
+    this._shadow = null;
     this._isDragging = null;
     this._dragOffsetX = null;
     this._dragOffsetY = null;
@@ -41,7 +41,7 @@
     this._settings = settings;
 
     var color = this._settings.get('selection_color');
-    this.shadow = new createjs.Shadow(color, 0, 0, 5);
+    this._shadow = new createjs.Shadow(color, 0, 0, 5);
     this.redraw();
   };
 
@@ -52,30 +52,11 @@
    * @protected
    */
   p.redraw = function() {
-    var attrs = this.node.attributes;
-    var category = attrs.category;
-
-    // Select the right shape (will be replaced in future tasks)
-    var shape = b3e.draw.SHAPES.composite;
-    if (category == 'root') {
-      shape = b3e.draw.SHAPES.root;
-
-    } else if (category == 'input' || category == 'output') {
-      shape = b3e.draw.SHAPES.action;
-    }
-    
-    // Select only root
-    var symbol = b3e.draw.textSymbol;
-
-    this.width = this._settings.get('block_'+category+'_width');
-    this.height = this._settings.get('block_'+category+'_height');
-
-    this.symbol = symbol(this.node, this._settings);
-    this.shape = shape(this.node, this._settings);
-
     this.removeAllChildren();
-    this.addChild(this.shape);
-    this.addChild(this.symbol);
+    
+    this.width = this._settings.get('block_action_width');
+    this.height = this._settings.get('block_action_height');
+    b3e.node.draw(this.node, this._settings);
   };
 
   /**
@@ -105,7 +86,7 @@
    */
   p.select = function() {
     this.isSelected = true;
-    this.shape.shadow = this.shadow;
+    this.shape.shadow = this._shadow;
   };
 
   /**

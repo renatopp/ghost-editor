@@ -4,7 +4,7 @@
   "use strict";
 
   /**
-   * The BaseNode class provides base variables and methods for all nodes in 
+   * The Node class provides base variables and methods for all nodes in 
    * the editor. These variables and methods are organized into different 
    * components:
    *
@@ -19,17 +19,38 @@
    * It is recommended the use of the shortcut `b3e.node.create` instead of
    * this class directly.
    *
-   * @class BaseNode
+   * @class Node
    * @constructor
    */
-  var BaseNode = function() {
+  var Node = function() {
     this.id = b3.createUUID();
     
+    // components
     this.display = new b3e.node.DisplayComponent(this);
     this.attributes = new b3e.node.AttributeComponent(this);
     this.graph = new b3e.node.GraphComponent(this);
+
+    // control
+    this.maxInConnections = 0;
+    this.maxOutConnections = 0;
   };
-  var p = BaseNode.prototype;
+  var p = Node.prototype;
   
-  b3e.node.BaseNode = BaseNode;
+  p.onAdd = function(e) {};
+  p.onLoad = function(e) {};
+  p.onSelect = function(e) {};
+  p.onDeselect = function(e) {};
+  p.onConnected = function(e) {};
+  p.onInConnected = function(e) {};
+  p.onOutConnected = function(e) {};
+  p.onDisconnected = function(e) {};
+  p.onInDisconnected = function(e) {};
+  p.onOutDisconnected = function(e) {};
+  p.onRemove = function(e) {};
+
+  p._applySettings = function(settings) {
+    this.display._applySettings(settings);
+  };
+
+  b3e.node.Node = Node;
 })();
