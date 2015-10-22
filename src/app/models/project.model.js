@@ -83,7 +83,9 @@
 
           try {
             data = storageService.load(recentPath);
-          } catch (e) {}
+          } catch (e) {
+            reject(e);
+          }
 
           if (!data) {
             data = [];

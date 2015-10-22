@@ -63,8 +63,8 @@
     this._systems.push(new b3e.editor.ConnectionSystem(this));
     this._systems.push(new b3e.editor.SelectionSystem(this));
     this._systems.push(new b3e.editor.DragSystem(this));
-    this._systems.push(new b3e.editor.CollapseSystem(this));
-    this._systems.push(new b3e.editor.ShortcutSystem(this));
+    // this._systems.push(new b3e.editor.CollapseSystem(this));
+    // this._systems.push(new b3e.editor.ShortcutSystem(this));
     
     // SETTINGS
     this.applySettings('default');

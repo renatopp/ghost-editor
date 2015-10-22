@@ -21,27 +21,27 @@ b3e.editor.DragSystem = function(editor) {
     var point = tree.view.getLocalPoint();
     var x = point.x;
     var y = point.y;
-    var block = tree.blocks.getUnderPoint(x, y);
+    var node = tree.nodes.getUnderPoint(x, y);
 
-    // if mouse not on block
-    if (!block) return;
+    // if mouse not on node
+    if (!node) return;
 
-    // if no block selected
-    if (!block._isSelected) return;
+    // if no node selected
+    if (!node.display.isSelected) return;
 
     // if mouse in anchor
-    if (!block._hitBody(x, y)) return;
+    if (!node.display.hitBody(x, y)) return;
 
     // start dragging
     isDragging = true;
     dragX0 = x;
     dragY0 = y;
 
-    for (var i=0; i<tree._selectedBlocks.length; i++) {
-      block = tree._selectedBlocks[i];
-      block._isDragging = true;
-      block._dragOffsetX = x - block.x;
-      block._dragOffsetY = y - block.y;
+    for (var i=0; i<tree._selectedNodes.length; i++) {
+      node = tree._selectedNodes[i];
+      node.display.isDragging = true;
+      node.display.dragOffsetX = x - node.display.x;
+      node.display.dragOffsetY = y - node.display.y;
     }
   };
 
@@ -58,22 +58,23 @@ b3e.editor.DragSystem = function(editor) {
     var x = point.x;
     var y = point.y;
 
-    for (var i=0; i<tree._selectedBlocks.length; i++) {
-      var block = tree._selectedBlocks[i];
+    for (var i=0; i<tree._selectedNodes.length; i++) {
+      var node = tree._selectedNodes[i];
 
-      var dx = x - block._dragOffsetX;
-      var dy = y - block._dragOffsetY;
+      var dx = x - node.display.dragOffsetX;
+      var dy = y - node.display.dragOffsetY;
 
-      block.x = dx;
-      block.y = dy;
-      block._snap();
+      node.display.x = dx;
+      node.display.y = dy;
+      node.display.snap();
 
       // redraw connections linked to the entity
-      if (block._inConnection) {
-        block._inConnection._redraw();
+      var j;
+      for (j=0; j<node.graph.inConnections.length; j++) {
+        node.graph.inConnections[j]._redraw();
       }
-      for (var j=0; j<block._outConnections.length; j++) {
-        block._outConnections[j]._redraw();
+      for (j=0; j<node.graph.outConnections.length; j++) {
+        node.graph.outConnections[j]._redraw();
       }
     }
   };
@@ -94,18 +95,19 @@ b3e.editor.DragSystem = function(editor) {
 
 
     project.history._beginBatch();
-    for (var i=0; i<tree._selectedBlocks.length; i++) {
-      var block = tree._selectedBlocks[i];
-      block._isDragging = false;
+    for (var i=0; i<tree._selectedNodes.length; i++) {
+      var node = tree._selectedNodes[i];
+      node.display.isDragging = false;
 
-      var _old = [block, dragX0-block._dragOffsetX, dragY0-block._dragOffsetY];
-      var _new = [block, block.x, block.y];
+      var _old = [node, dragX0-node.display.dragOffsetX, 
+                        dragY0-node.display.dragOffsetY];
+      var _new = [node, node.display.x, node.display.y];
 
       if (_old[1] === _new[1] && _old[2] === _new[2]) break;
 
       project.history._add(new b3e.Command(
-        [tree.blocks, tree.blocks._move, _old],
-        [tree.blocks, tree.blocks._move, _new]
+        [tree.nodes, tree.nodes._move, _old],
+        [tree.nodes, tree.nodes._move, _new]
       ));
     }
     project.history._endBatch();

@@ -15,27 +15,27 @@ b3e.editor.ConnectionSystem = function(editor) {
     var tree = project.trees.getSelected();
     if (!tree) return;
 
-    // if clicked on block
+    // if clicked on node
     var point = tree.view.getLocalPoint();
     var x = point.x;
     var y = point.y;
-    var block = tree.blocks.getUnderPoint(x, y);
+    var node = tree.nodes.getUnderPoint(x, y);
 
-    if (connection || !block) return;
+    if (connection || !node) return;
 
-    if (block._hitOutAnchor(x, y)) {
+    if (node.display.hitOutAnchor(x, y)) {
       // if user clicked at the outAnchor
-      connection = tree.connections.add(block, null);
+      connection = tree.connections.add(node, null);
 
-    } else if (block._hitInAnchor(x, y)) {
+    } else if (node.display.hitInAnchor(x, y)) {
       // if user clicked at the inAnchor
-      var c = block._inConnection;
+      var c = node._inConnection;
       if (!c)
           return;
 
-      block._inConnection = null;
+      node._inConnection = null;
       c._outBlock = null;
-      lastOutBlock = block;
+      lastOutBlock = node;
 
       connection = c;
     }

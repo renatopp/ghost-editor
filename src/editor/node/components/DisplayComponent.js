@@ -21,12 +21,12 @@
     this.height = null;
 
     this.isSelected = null;
+    this.isDragging = null;
+    this.dragOffsetX = null;
+    this.dragOffsetY = null;
 
     this.shape = null;
     this._shadow = null;
-    this._isDragging = null;
-    this._dragOffsetX = null;
-    this._dragOffsetY = null;
   };
   var p = createjs.extend(DisplayComponent, createjs.Container);
 
@@ -115,8 +115,8 @@
    * @returns {Boolean} Whether hit the block or not.
    * @protected
    */
-  p.hitTest = function() {
-    return this._displayShape.hitTest(x-this.x, y-this.y);
+  p.hitTest = function(x, y) {
+    return this.shape.hitTest(x-this.x, y-this.y);
   };
 
   /**

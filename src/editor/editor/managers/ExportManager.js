@@ -1,8 +1,8 @@
 b3e.editor.ExportManager = function(editor) {
   "use strict";
 
-  function getBlockChildrenIds(block) {
-    var conns = block._outConnections.slice(0);
+  function getBlockChildrenIds(node) {
+    var conns = node.graph.outConnections.slice(0);
     if (editor._settings.get('layout') === 'horizontal') {
       conns.sort(function(a, b) {
         return a._outBlock.y - 
@@ -33,8 +33,8 @@ b3e.editor.ExportManager = function(editor) {
       version      : b3e.VERSION,
       scope        : 'project',
       selectedTree : (tree?tree._id:null),
-      trees        : [],
-      custom_nodes : this.nodesToData()
+      trees        : []
+      // custom_nodes : this.nodesToData()
     };
 
     project.trees.each(function(tree) {
@@ -57,7 +57,7 @@ b3e.editor.ExportManager = function(editor) {
       if (!tree) return;
     }
 
-    var root = tree.blocks.getRoot();
+    var root = tree.nodes.getRoot();
     var first = getBlockChildrenIds(root);
     var data = {
       version      : b3e.VERSION,
@@ -81,52 +81,53 @@ b3e.editor.ExportManager = function(editor) {
       data.custom_nodes = this.nodesToData();
     }
 
-    tree.blocks.each(function(block) {
-      if (block.category !== 'root') {
+    tree.nodes.each(function(node) {
+      var attrs = node.attributes;
+      if (attrs.category !== 'root') {
         var d ={
-          id          : block.id,
-          name        : block.name,
-          title       : block.title,
-          description : block.description,
-          properties  : block.properties,
-          display     : {x:block.x, y:block.y}
+          id          : node.id,
+          name        : attrs.name,
+          title       : attrs.title,
+          description : attrs.description,
+          properties  : attrs.properties,
+          display     : {x:node.display.x, y:node.display.y}
         };
 
-        var children = getBlockChildrenIds(block);
-        if (block.category === 'composite') {
+        var children = getBlockChildrenIds(node);
+        if (node.category === 'composite') {
           d.children = children;
-        } else if (block.category === 'decorator') {
+        } else if (node.category === 'modulator') {
           d.child = children[0];
         }
 
-        data.nodes[block.id] = d;
+        data.nodes[node.id] = d;
       }
     });
 
     return data;
   };
 
-  this.nodesToData = function() {
-    var project = editor.project.get();
-    if (!project) return;
+  // this.nodesToData = function() {
+  //   var project = editor.project.get();
+  //   if (!project) return;
 
-    var data = [];
-    project.nodes.each(function(node) {
-      if (!node.isDefault) {
-        data.push({
-          version     : b3e.VERSION,
-          scope       : 'node',
-          name        : node.name,
-          category    : node.category,
-          title       : node.title,
-          description : node.description,
-          properties  : node.properties,
-        });
-      }
-    });
+  //   var data = [];
+  //   project.nodes.each(function(node) {
+  //     if (!node.isDefault) {
+  //       data.push({
+  //         version     : b3e.VERSION,
+  //         scope       : 'node',
+  //         name        : node.name,
+  //         category    : node.category,
+  //         title       : node.title,
+  //         description : node.description,
+  //         properties  : node.properties,
+  //       });
+  //     }
+  //   });
 
-    return data;
-  };
+  //   return data;
+  // };
 
   this.nodesToJavascript = function() {};
 

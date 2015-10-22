@@ -13,7 +13,7 @@ b3e.tree.ConnectionManager = function(editor, project, tree) {
 
     if (inBlock) {
       connection._inBlock = inBlock;
-      inBlock._outConnections.push(connection);
+      inBlock.graph.outConnections.push(connection);
 
       editor.trigger('blockconnected', inBlock, {
         connection: connection,
@@ -24,7 +24,7 @@ b3e.tree.ConnectionManager = function(editor, project, tree) {
 
     if (outBlock) {
       connection._outBlock = outBlock;
-      outBlock._inConnection = connection;
+      outBlock.graph.inConnections.push(connection);
 
       editor.trigger('blockconnected', outBlock, {
         connection: connection,
@@ -54,7 +54,7 @@ b3e.tree.ConnectionManager = function(editor, project, tree) {
     }
 
     if (connection._inBlock) {
-      connection._inBlock._outConnections.remove(connection);
+      connection._inBlock.graph.outConnections.remove(connection);
       connection._inBlock = null;
     }
 

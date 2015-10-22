@@ -54,23 +54,23 @@
     // var outAnchor = this._inBlock._getOutAnchorPosition();
 
     if (!(x1 === 0||x1)) {
-      var outAnchor = this._inBlock._getOutAnchorPosition();
+      var outAnchor = this._inBlock.display.getOutAnchorPosition();
       if (layout === 'horizontal') {
         x1 = outAnchor.x;
-        y1 = this._inBlock.y;
+        y1 = this._inBlock.display.y;
       } else {
-        x1 = this._inBlock.x;
+        x1 = this._inBlock.display.x;
         y1 = outAnchor.y;
       }
     }
 
     if (!(x2 === 0||x2)) {
-      var inAnchor = this._outBlock._getInAnchorPosition();
+      var inAnchor = this._outBlock.display.getInAnchorPosition();
       if (layout === 'horizontal') {
         x2 = inAnchor.x - diff;
-        y2 = this._outBlock.y;
+        y2 = this._outBlock.display.y;
       } else {
-        x2 = this._outBlock.x;
+        x2 = this._outBlock.display.x;
         y2 = inAnchor.y - diff;
       }
     }

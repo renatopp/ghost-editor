@@ -67,14 +67,14 @@
     // create and draw the shape
     var shape = new createjs.Shape();
     if (hasInAnchor) {
-      _drawAnchor(shape, x, y, 
+      _drawAnchor(shape, -x, -y, 
                   anchorRadius,
                   anchorBg,
                   anchorBorderWidth,
                   borderColor);
     }
     if (hasOutAnchor) {
-      _drawAnchor(shape, -x, -y, 
+      _drawAnchor(shape, x, y, 
                   anchorRadius,
                   anchorBg,
                   anchorBorderWidth,

@@ -1,70 +1,70 @@
 b3e.tree.SelectionManager = function(editor, project, tree) {
   "use strict";
 
-  this.select = function(block) {
-    if (block._isSelected) return;
+  this.select = function(node) {
+    if (node.display.isSelected) return;
 
-    block._select();
-    tree._selectedBlocks.push(block);
+    node.display.select();
+    tree._selectedNodes.push(node);
 
-    editor.trigger('blockselected', block);
+    editor.trigger('nodeselected', node);
   };
 
-  this.deselect = function(block) {
-    if (!block._isSelected) return;
+  this.deselect = function(node) {
+    if (!node.display.isSelected) return;
 
-    block._deselect();
-    tree._selectedBlocks.remove(block);
+    node.display.deselect();
+    tree._selectedNodes.remove(node);
 
-    editor.trigger('blockdeselected', block);
+    editor.trigger('nodedeselected', node);
   };
 
   this.selectAll = function() {
-    tree.blocks.each(function(block) {
-      this.select(block);
+    tree.nodes.each(function(node) {
+      this.select(node);
     }, this);
   };
 
   this.deselectAll = function() {
-    for (var i=tree._selectedBlocks.length-1; i>=0; i--) {
-      this.deselect(tree._selectedBlocks[i]);
+    for (var i=tree._selectedNodes.length-1; i>=0; i--) {
+      this.deselect(tree._selectedNodes[i]);
     }
   };
 
-  this.invertSelection = function(block) {
-    var blocks = (block)?[block]:tree.blocks.getAll();
+  this.invertSelection = function(node) {
+    var nodes = (node)?[node]:tree.nodes.getAll();
 
-    blocks.forEach(function(block) {
-      if (block._isSelected) {
-        this.deselect(block);
+    nodes.forEach(function(node) {
+      if (node.display.isSelected) {
+        this.deselect(node);
       } else {
-        this.select(block);
+        this.select(node);
       }
     }, this);
   };
 
-  this.selectSubtree = function(block) {
-    var blocks = (block)?[block]:tree._selectedBlocks;
-    var fSelect = function(block) {
-      blocks.remove(block);
-      this.select(block);
+  this.selectSubtree = function(node) {
+    var nodes = (node)?[node]:tree._selectedNodes;
+    var fSelect = function(node) {
+      nodes.remove(node);
+      this.select(node);
     };
 
-    while (blocks.length > 0) {
-      blocks.pop().traversal(fSelect, this);
+    while (nodes.length > 0) {
+      nodes.pop().traversal(fSelect, this);
     }
   };
 
-  this.deselectSubtree = function(block) {
-    var blocks = (block)?[block]:tree._selectedBlocks;
+  this.deselectSubtree = function(node) {
+    var nodes = (node)?[node]:tree._selectedNodes;
 
-    var fDeselect = function(block) {
-      blocks.remove(block);
-      this.deselect(block);
+    var fDeselect = function(node) {
+      nodes.remove(node);
+      this.deselect(node);
     };
 
-    while (blocks.length > 0) {
-      blocks.pop().traversal(fDeselect, this);
+    while (nodes.length > 0) {
+      nodes.pop().traversal(fDeselect, this);
     }
   };
 

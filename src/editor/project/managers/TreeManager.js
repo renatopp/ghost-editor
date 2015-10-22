@@ -16,18 +16,11 @@ b3e.project.TreeManager = function(editor, project) {
     } else {
       project.history._beginBatch();
       tree = new b3e.tree.Tree(editor, project);
-      var root = tree.blocks.getRoot();
+      var root = tree.nodes.getRoot();
       project.addChild(tree);
       editor.trigger('treeadded', tree);
 
       if (_id) tree._id = _id;
-
-      var node = {
-        name     : tree._id,
-        title    : root.title,
-        category : 'tree', 
-      };
-      project.nodes.add(node, true);
 
       // select if this is the only tree
       this.select(tree);

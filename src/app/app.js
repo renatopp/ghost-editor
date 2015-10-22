@@ -53,10 +53,16 @@ angular.module('app', [
             .openProject(projects[0].path)
             .then(function() {
               closePreload();
+            }, function(error) {
+              closePreload();
+              throw(error);
             });
         } else {
           closePreload();
         }
+      }, function(error) {
+        closePreload();
+        throw(error);
       });
   }
 ]);

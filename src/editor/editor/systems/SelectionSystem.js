@@ -23,35 +23,35 @@ b3e.editor.SelectionSystem = function(editor) {
     shift = e.nativeEvent.shiftKey;
     alt = e.nativeEvent.altKey;
 
-    // if clicked on block
+    // if clicked on node
     var point = tree.view.getLocalPoint();
     var x = point.x;
     var y = point.y;
-    var block = tree.blocks.getUnderPoint(x, y);
+    var node = tree.nodes.getUnderPoint(x, y);
 
-    if (block && block._isSelected && ctrl) {
+    if (node && node.display.isSelected && ctrl) {
       if (alt) {
-        tree.selection.deselectSubtree(block);
+        tree.selection.deselectSubtree(node);
       } else {
-        tree.selection.deselect(block);
+        tree.selection.deselect(node);
       }
     }
 
-    else if (block && !block._isSelected && block._hitBody(x, y)) {
+    else if (node && !node.display.isSelected && node.display.hitBody(x, y)) {
       if (!ctrl) tree.selection.deselectAll();
       if (alt) {
-        tree.selection.selectSubtree(block);
+        tree.selection.selectSubtree(node);
       } else {
-        tree.selection.select(block);
+        tree.selection.select(node);
       }
     }
-    else if (block && block._hitBody(x, y)) {
+    else if (node && node.display.hitBody(x, y)) {
       if (alt) {
-        tree.selection.selectSubtree(block);
+        tree.selection.selectSubtree(node);
       }
     }
 
-    else if (!block) {
+    else if (!node) {
       isSelecting = true;
       x0 = x;
       y0 = y;
@@ -95,9 +95,9 @@ b3e.editor.SelectionSystem = function(editor) {
     var x2 = Math.max(x0, x);
     var y2 = Math.max(y0, y);
 
-    tree.blocks.each(function(block) {
-      if (block._isContainedIn(x1, y1, x2, y2)) {
-        tree.selection.select(block);
+    tree.nodes.each(function(node) {
+      if (node.display.isContainedIn(x1, y1, x2, y2)) {
+        tree.selection.select(node);
       }
     });
 
