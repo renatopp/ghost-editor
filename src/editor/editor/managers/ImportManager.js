@@ -43,9 +43,9 @@ b3e.editor.ImportManager = function(editor) {
 
       node = tree.nodes.add(spec.name, spec.display.x, spec.display.y);
       node.id = spec.id;
-      node.attributes.title = spec.title;
-      node.attributes.description = spec.description;
-      node.attributes.properties = tine.merge({}, node.attributes.properties, spec.properties);
+      node.title = spec.title;
+      node.description = spec.description;
+      node.properties = tine.merge({}, node.properties, spec.properties);
       node.display.redraw();
       
       if (spec.id === data.root) {
@@ -56,21 +56,21 @@ b3e.editor.ImportManager = function(editor) {
     // Add connections
     for (id in data.nodes) {
       spec = data.nodes[id];
-      var inBlock = tree.nodes.get(id);
+      var inNode = tree.nodes.get(id);
 
       var children = null;
-      if (inBlock.category === 'composite' && spec.children) {
+      if (inNode.category === b3e.COMPOSITE && spec.children) {
         children = spec.children;
       }
-      else if (spec.child && (inBlock.category == 'decorator' ||
-                              inBlock.category == 'root')) {
+      else if (spec.child && (inNode.category === b3e.MODULATOR ||
+                              inNode.category === b3e.ROOT)) {
         children = [spec.child];
       }
       
       if (children) {
         for (var i=0; i<children.length; i++) {
-          var outBlock = tree.nodes.get(children[i]);
-          tree.connections.add(inBlock, outBlock);
+          var outNode = tree.nodes.get(children[i]);
+          tree.connections.add(inNode, outNode);
         }
       }
     }

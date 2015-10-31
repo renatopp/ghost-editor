@@ -70,11 +70,11 @@ b3e.editor.DragSystem = function(editor) {
 
       // redraw connections linked to the entity
       var j;
-      for (j=0; j<node.graph.inConnections.length; j++) {
-        node.graph.inConnections[j]._redraw();
+      for (j=0; j<node.inConnections.length; j++) {
+        node.inConnections[j].display.redraw();
       }
-      for (j=0; j<node.graph.outConnections.length; j++) {
-        node.graph.outConnections[j]._redraw();
+      for (j=0; j<node.outConnections.length; j++) {
+        node.outConnections[j].display.redraw();
       }
     }
   };

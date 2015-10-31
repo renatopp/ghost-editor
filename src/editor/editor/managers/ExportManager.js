@@ -2,22 +2,22 @@ b3e.editor.ExportManager = function(editor) {
   "use strict";
 
   function getBlockChildrenIds(node) {
-    var conns = node.graph.outConnections.slice(0);
+    var conns = node.outConnections.slice(0);
     if (editor._settings.get('layout') === 'horizontal') {
       conns.sort(function(a, b) {
-        return a._outBlock.y - 
-               b._outBlock.y;
+        return a.outNode.y - 
+               b.outNode.y;
       });
     } else {
       conns.sort(function(a, b) {
-        return a._outBlock.x - 
-               b._outBlock.x;
+        return a.outNode.x - 
+               b.outNode.x;
       });
     }
 
     var nodes = [];
     for (var i=0; i<conns.length; i++) {
-      nodes.push(conns[i]._outBlock.id);
+      nodes.push(conns[i].outNode.id);
     }
 
     return nodes;
@@ -82,21 +82,20 @@ b3e.editor.ExportManager = function(editor) {
     }
 
     tree.nodes.each(function(node) {
-      var attrs = node.attributes;
-      if (attrs.category !== 'root') {
+      if (node.category !== b3e.ROOT) {
         var d ={
           id          : node.id,
-          name        : attrs.name,
-          title       : attrs.title,
-          description : attrs.description,
-          properties  : attrs.properties,
+          name        : node.name,
+          title       : node.title,
+          description : node.description,
+          properties  : node.properties,
           display     : {x:node.display.x, y:node.display.y}
         };
 
         var children = getBlockChildrenIds(node);
-        if (node.category === 'composite') {
+        if (node.category === b3e.COMPOSITE) {
           d.children = children;
-        } else if (node.category === 'modulator') {
+        } else if (node.category === b3e.MODULATOR) {
           d.child = children[0];
         }
 

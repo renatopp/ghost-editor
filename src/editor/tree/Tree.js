@@ -12,11 +12,13 @@
     this._selectionBox = null;
     this._root = null;
 
-    // Layers
     this._nodes = [];
+    this._connections = [];
+    
+    // Layers
+    this._connectionsLayer = new createjs.Container();
     this._nodesLayer = new createjs.Container();
-    this._connections = new createjs.Container();
-    this._overlay = new createjs.Container();
+    this._overlayLayer = new createjs.Container();
 
     // Managers
     this.nodes = null;
@@ -38,12 +40,12 @@
     this.view = new b3e.tree.ViewManager(this._editor, this._project, this);
     this.organize = new b3e.tree.OrganizeManager(this._editor, this._project, this);
 
-    this.addChild(this._connections);
+    this.addChild(this._connectionsLayer);
     this.addChild(this._nodesLayer);
-    this.addChild(this._overlay);
+    this.addChild(this._overlayLayer);
 
     this._selectionBox = new b3e.SelectionBox();
-    this._overlay.addChild(this._selectionBox);
+    this._overlayLayer.addChild(this._selectionBox);
 
     this._root = this.nodes.add('Root', 0, 0);
     this._applySettings(this._editor._settings);

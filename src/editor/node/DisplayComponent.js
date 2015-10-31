@@ -1,5 +1,5 @@
 (function() {
-  "use strict";
+  'use strict';
 
   /**
    * This class represents the visual of nodes and procedures related to the 

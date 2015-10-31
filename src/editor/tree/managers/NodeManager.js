@@ -1,5 +1,5 @@
 b3e.tree.NodeManager = function(editor, project, tree) {
-  "use strict";
+  'use strict';
 
   this._move = function(node, x, y) {
     node.display.x = x;
@@ -7,11 +7,11 @@ b3e.tree.NodeManager = function(editor, project, tree) {
     node.display.redraw();
 
     // redraw connections linked to the entity
-    for (var i=0; i<node.graph.outConnections.length; i++) {
-      node.graph.inConnections[i]._redraw();
+    for (var i=0; i<node.outConnections.length; i++) {
+      node.inConnections[i]._redraw();
     }
-    for (var j=0; j<node.graph.outConnections.length; j++) {
-      node.graph.outConnections[j]._redraw();
+    for (var j=0; j<node.outConnections.length; j++) {
+      node.outConnections[j]._redraw();
     }
   };
 
@@ -19,9 +19,9 @@ b3e.tree.NodeManager = function(editor, project, tree) {
    * Add a node.
    */
   this.add = function(name, x, y) {
-    // If name is a node
     var node;
 
+    // If name is a node
     if (name instanceof b3e.node.Node) {
       node = name;
       node.display.snap();
@@ -35,7 +35,8 @@ b3e.tree.NodeManager = function(editor, project, tree) {
       x = x||0;
       y = y||0;
 
-      node = b3e.nodes[name]();
+      var Cls = b3e.nodes[name];
+      node = new Cls();
       node._applySettings(editor._settings);
       node.display.x = x;
       node.display.y = y;
@@ -135,18 +136,19 @@ b3e.tree.NodeManager = function(editor, project, tree) {
     };
 
     // redraw connections linked to the entity
-    if (node._inConnection) {
-      node._inConnection._redraw();
+    var j;
+    for (j=0; j<node.inConnections.length; j++) {
+      node.inConnections[j]._redraw();
     }
-    for (var j=0; j<node._outConnections.length; j++) {
-      node._outConnections[j]._redraw();
+    for (j=0; j<node.outConnections.length; j++) {
+      node.outConnections[j]._redraw();
     }
     
     if (!mustSave) project.history._lock();
 
     project.history._beginBatch();
 
-    if (node.category === 'root') {
+    if (node.category === b3e.ROOT) {
       project.nodes.update(tree._id, {title: node.title||'A behavior tree'});
     }
 
@@ -163,17 +165,20 @@ b3e.tree.NodeManager = function(editor, project, tree) {
     project.history._beginBatch();
     tree._nodes.removeChild(node);
 
-    if (node._inConnection) {
-      tree.connections.remove(node._inConnection);
-    }
-
-    if (node._outConnections.length > 0) {
-      for (var i=node._outConnections.length-1; i>=0; i--) {
-        tree.connections.remove(node._outConnections[i]);
+    var i;
+    if (node.inConnections.length > 0) {
+      for (i=node.inConnections.length-1; i>=0; i--) {
+        tree.connections.remove(node.inConnections[i]);
       }
     }
 
-    if (node._isSelected) {
+    if (node.outConnections.length > 0) {
+      for (i=node.outConnections.length-1; i>=0; i--) {
+        tree.connections.remove(node.outConnections[i]);
+      }
+    }
+
+    if (node.isSelected) {
       tree.selection.deselect(node);
     }
 
@@ -188,20 +193,23 @@ b3e.tree.NodeManager = function(editor, project, tree) {
     project.history._beginBatch();
     tree._nodes.removeChild(node);
 
-    if (node._inConnection) {
-      if (!node._inConnection._outnode._isSelected) {
-        tree.connections.remove(node._inConnection);
-      } else {
-        node._inConnection.visible = false;
+    var i;
+    if (node.inConnections.length > 0) {
+      for (i=node.inConnections.length-1; i>=0; i--) {
+        if (!node.inConnections[i].inNode.display.isSelected) {
+          tree.connections.remove(node.inConnections[i]);
+        } else {
+          node.inConnections[i].display.visible = false;
+        }
       }
     }
 
-    if (node._outConnections.length > 0) {
-      for (var i=node._outConnections.length-1; i>=0; i--) {
-        if (!node._outConnections[i]._innode._isSelected) {
-          tree.connections.remove(node._outConnections[i]);
+    if (node.outConnections.length > 0) {
+      for (i=node.outConnections.length-1; i>=0; i--) {
+        if (!node.outConnections[i].inNode.display.isSelected) {
+          tree.connections.remove(node.outConnections[i]);
         } else {
-          node._outConnections[i].visible = false;
+          node.outConnections[i].display.visible = false;
         }
       }
     }

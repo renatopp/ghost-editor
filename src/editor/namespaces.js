@@ -34,6 +34,11 @@ window.b3e.connection = {};
 window.b3e.nodes      = {};
 
 window.b3e.VERSION    = '[BUILD_VERSION]';
+window.b3e.ROOT       = 'root';
+window.b3e.COMPOSITE  = 'composite';
+window.b3e.MODULATOR  = 'modulator';
+window.b3e.INPUT      = 'input';
+window.b3e.OUTPUT     = 'output';
 
 // Deprecated
 window.b3e.draw       = {};

@@ -1,73 +1,75 @@
 b3e.tree.ConnectionManager = function(editor, project, tree) {
-  "use strict";
+  'use strict';
 
   /** Needed to history manager */
-  this._remove = function(block) {
+  this._remove = function(connection) {
     project.history._lock();
-    this.remove(block._inConnection);
+    this.remove(connection);
     project.history._unlock();
   };
 
-  this.add = function(inBlock, outBlock) {
-    var connection = new b3e.Connection();
+  this.add = function(inNode, outNode) {
+    var connection = new b3e.connection.Connection();
 
-    if (inBlock) {
-      connection._inBlock = inBlock;
-      inBlock.graph.outConnections.push(connection);
+    if (inNode) {
+      connection.inNode = inNode;
+      inNode.outConnections.push(connection);
 
-      editor.trigger('blockconnected', inBlock, {
-        connection: connection,
-        type: 'outConnection',
-        other: outBlock,
+      editor.trigger('nodeconnected', inNode, {
+        type       : 'outConnection',
+        connection : connection,
+        other      : outNode,
       });
     }
 
-    if (outBlock) {
-      connection._outBlock = outBlock;
-      outBlock.graph.inConnections.push(connection);
+    if (outNode) {
+      connection.outNode = outNode;
+      outNode.inConnections.push(connection);
 
-      editor.trigger('blockconnected', outBlock, {
-        connection: connection,
-        type: 'inConnection',
-        other: inBlock,
+      editor.trigger('nodeconnected', outNode, {
+        type       : 'inConnection',
+        connection : connection,
+        other      : inNode,
       });
     }
 
-    if (inBlock && outBlock) {
-      var _old = [this, this._remove, [outBlock]];
-      var _new = [this, this.add, [inBlock, outBlock]];
+    if (inNode && outNode) {
+      var _old = [this, this._remove, [connection]];
+      var _new = [this, this.add, [inNode, outNode]];
       project.history._add(new b3e.Command(_old, _new));
     }
 
     connection._applySettings(editor._settings);
-    tree._connections.addChild(connection);
+    tree._connections.push(connection);
+    tree._connectionsLayer.addChild(connection.display);
 
     // editor.trigger('connectionadded', connection);
     return connection;
   };
 
   this.remove = function(connection) {
-    if (connection._inBlock && connection._outBlock) {
-      var _old = [this, this.add, [connection._inBlock, connection._outBlock]];
-      var _new = [this, this._remove, [connection._outBlock]];
+    if (connection.inNode && connection.outNode) {
+      var _old = [this, this.add, [connection.inNode, connection.outNode]];
+      var _new = [this, this._remove, [connection]];
       project.history._add(new b3e.Command(_old, _new));
     }
 
-    if (connection._inBlock) {
-      connection._inBlock.graph.outConnections.remove(connection);
-      connection._inBlock = null;
+    if (connection.inNode) {
+      connection.inNode.outConnections.remove(connection);
+      connection.inNode = null;
     }
 
-    if (connection._outBlock) {
-      connection._outBlock._inConnection = null;
-      connection._outBlock = null;
+    if (connection.outNode) {
+      connection.outNode.inConnections.remove(connection);
+      connection.outNode = null;
     }
 
-    tree._connections.removeChild(connection);
+    tree._connectionsLayer.removeChild(connection.display);
+    tree._connections.remove(connection);
     editor.trigger('connectionremoved', connection);
   };
   this.each = function(callback, thisarg) {
-    tree._connections.children.forEach(callback, thisarg);
+    tree._connections.forEach(callback, thisarg);
   };
 
   this._applySettings = function(settings) {

@@ -24,8 +24,7 @@
   };
 
   function _makeSymbol(node, settings) {
-    var attrs = node.attributes;
-    var title = attrs.getTitle();
+    var title = node.getTitle();
     var symbolColor = settings.get('block_symbol_color');
     var symbol = _makeText(title, symbolColor);
 
@@ -43,8 +42,7 @@
     var nodeBorderWidth = settings.get('block_border_width');
 
     // variables
-    var attrs = node.attributes;
-    var category = attrs.category;
+    var category = node.category;
 
     var w = node.display.width;
     var h = node.display.height;

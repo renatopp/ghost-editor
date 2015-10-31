@@ -1,41 +1,29 @@
 b3e.tree.EditManager = function(editor, project, tree) {
-  "use strict";
+  'use strict';
 
   this._selectionToClipboard = function() {
-    var clipboard = {blocks:{}, connections:[]};
-    var blocks = tree._selectedBlocks;
-    var i, j, block, other;
+    var clipboard = {nodes:{}, connections:[]};
+    var nodes = tree._selectedNodes;
+    var i, j, node, other;
 
-    // Copy block
-    for (i=0; i<blocks.length; i++) {
-      block = blocks[i];
-      if (block.category === 'root') continue;
-      
-      var cp = {};
-      cp.id = block.id;
-      cp.node = block.node;
-      cp.name = block.name;
-      cp.title = block.title;
-      cp.category = block.category;
-      cp.description = block.description;
-      cp.properties = block.properties;
-      cp._settings = block._settings;
-      cp.x = block.x;
-      cp.y = block.y;
-      clipboard.blocks[block.id] = cp;
+    // Copy nodes
+    for (i=0; i<nodes.length; i++) {
+      node = nodes[i];
+      if (node.category === b3e.ROOT) continue;
+    
+      clipboard.nodes[node.id] = node;
     }
 
     // Copy connections
-    for (i=0; i<blocks.length; i++) {
-      block = blocks[i];
+    for (i=0; i<nodes.length; i++) {
+      node = nodes[i];
+      if (node.category === b3e.ROOT) continue;
       
-      if (block.category === 'root') continue;
-      
-      for (j=0; j<block._outConnections.length; j++) {
-        other = block._outConnections[j]._outBlock;
+      for (j=0; j<node.outConnections.length; j++) {
+        other = node.outConnections[j].outNode;
         
-        if (clipboard.blocks[other.id]) {
-          clipboard.connections.push([block.id, other.id]);
+        if (clipboard.nodes[other.id]) {
+          clipboard.connections.push([node.id, other.id]);
         }
       }
     }
@@ -51,17 +39,16 @@ b3e.tree.EditManager = function(editor, project, tree) {
     this._selectionToClipboard();
 
     project.history._beginBatch();
-    for (var i=tree._selectedBlocks.length-1; i>=0; i--) {
-      var block = tree._selectedBlocks[i];
+    for (var i=tree._selectedNodes.length-1; i>=0; i--) {
+      var node = tree._selectedNodes[i];
 
-      if (block.category != 'root') {
-        tree.blocks.remove(tree._selectedBlocks[i]);
+      if (node.category != b3e.ROOT) {
+        tree.nodes.remove(tree._selectedNodes[i]);
       }
     }
     project.history._endBatch();
-    tree._selectedBlocks = [];
 
-    console.log(project._clipboard);
+    tree._selectedNodes = [];
   };
 
   this.paste = function() {
@@ -69,38 +56,35 @@ b3e.tree.EditManager = function(editor, project, tree) {
 
     var i;
     var table = {};
-    var blocks = [];
+    var nodes = [];
 
     project.history._beginBatch();
 
-    // copy blocks
-    for (var key in project._clipboard.blocks) {
-      var spec = project._clipboard.blocks[key];
-      var block = new b3e.Block(spec);
+    // copy nodes
+    for (var key in project._clipboard.nodes) {
+      var base = project._clipboard.nodes[key];
+      var node = base.copy();
 
-      spec.x += 50;
-      spec.y += 50;
-      block._applySettings(spec._settings);
-      block.x = spec.x;
-      block.y = spec.y;
+      node.display.x += 50;
+      node.display.y += 50;
 
-      tree.blocks.add(block);
-      table[key] = block;
-      blocks.push(block);
+      tree.nodes.add(node);
+      table[key] = node;
+      nodes.push(node);
     }
 
     // copy connections
     for (i=0; i<project._clipboard.connections.length; i++) {
       var connection = project._clipboard.connections[i];
-      var inBlock = table[connection[0]];
-      var outBlock = table[connection[1]];
-      tree.connections.add(inBlock, outBlock);
+      var inNode = table[connection[0]];
+      var outNode = table[connection[1]];
+      tree.connections.add(inNode, outNode);
     }
 
     // select the new nodes    
     tree.selection.deselectAll();
-    for (i=0; i<blocks.length; i++) {
-      tree.selection.select(blocks[i]);
+    for (i=0; i<nodes.length; i++) {
+      tree.selection.select(nodes[i]);
     }
 
     project.history._endBatch();
@@ -117,34 +101,31 @@ b3e.tree.EditManager = function(editor, project, tree) {
 
   this.remove = function() {
     project.history._beginBatch();
-    var root = null;
-    for (var i=tree._selectedBlocks.length-1; i>=0; i--) {
-      if (tree._selectedBlocks[i].category === 'root') {
-        root = tree._selectedBlocks[i];
-      } else {
-        tree.blocks.remove(tree._selectedBlocks[i]);
-      }
+    
+    for (var i=tree._selectedNodes.length-1; i>=0; i--) {
+      if (tree._selectedNodes[i].category === b3e.ROOT) continue;
+      
+      tree.nodes.remove(tree._selectedNodes[i]);
     }
 
-    // tree.selection.deselectAll();
-    // if (root) {
-    //   tree.selection.select(root);
-    // }
     project.history._endBatch();
   };
 
   this.removeConnections = function() {
     project.history._beginBatch();
-    for (var i=0; i<tree._selectedBlocks.length; i++) {
-      var block = tree._selectedBlocks[i];
+    for (var i=0; i<tree._selectedNodes.length; i++) {
+      var node = tree._selectedNodes[i];
 
-      if (block._inConnection) {
-        tree.connections.remove(block._inConnection);
+      var j;
+      if (node.inConnections.length > 0) {
+        for (j=node.outConnections.length-1; j>=0; j--) {
+          tree.connections.remove(node.outConnections[j]);
+        }
       }
 
-      if (block._outConnections.length > 0) {
-        for (var j=block._outConnections.length-1; j>=0; j--) {
-          tree.connections.remove(block._outConnections[j]);
+      if (node.outConnections.length > 0) {
+        for (j=node.outConnections.length-1; j>=0; j--) {
+          tree.connections.remove(node.outConnections[j]);
         }
       }
     }
@@ -153,11 +134,13 @@ b3e.tree.EditManager = function(editor, project, tree) {
 
   this.removeInConnections = function() {
     project.history._beginBatch();
-    for (var i=0; i<tree._selectedBlocks.length; i++) {
-      var block = tree._selectedBlocks[i];
+    for (var i=0; i<tree._selectedNodes.length; i++) {
+      var node = tree._selectedNodes[i];
 
-      if (block._inConnection) {
-        tree.connections.remove(block._inConnection);
+      if (node.inConnections.length > 0) {
+        for (var j=node.outConnections.length-1; j>=0; j--) {
+          tree.connections.remove(node.outConnections[j]);
+        }
       }
     }
     project.history._endBatch();
@@ -165,12 +148,12 @@ b3e.tree.EditManager = function(editor, project, tree) {
 
   this.removeOutConnections = function() {
     project.history._beginBatch();
-    for (var i=0; i<tree._selectedBlocks.length; i++) {
-      var block = tree._selectedBlocks[i];
+    for (var i=0; i<tree._selectedNodes.length; i++) {
+      var node = tree._selectedNodes[i];
 
-      if (block._outConnections.length > 0) {
-        for (var j=block._outConnections.length-1; j>=0; j--) {
-          tree.connections.remove(block._outConnections[j]);
+      if (node.outConnections.length > 0) {
+        for (var j=node.outConnections.length-1; j>=0; j--) {
+          tree.connections.remove(node.outConnections[j]);
         }
       }
     }
