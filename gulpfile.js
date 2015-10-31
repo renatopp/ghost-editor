@@ -118,12 +118,25 @@ gulp.task('_preload', ['_preload_js', '_preload_css']);
 
 
 // TASKS (APP) ================================================================
-gulp.task('_app_js', function() {
+gulp.task('_app_js_dev', function() {
+  return gulp.src(app_js)
+             .pipe(jshint())
+             .pipe(jshint.reporter(stylish))
+             .pipe(concat('app.min.js'))
+             .pipe(replace('[BUILD_VERSION]', build_version))
+             .pipe(replace('[BUILD_DATE]', build_date))
+             .pipe(gulp.dest('build/js'))
+             .pipe(connect.reload())
+});
+
+gulp.task('_app_js_build', function() {
   return gulp.src(app_js)
              .pipe(jshint())
              .pipe(jshint.reporter(stylish))
              .pipe(uglify())
              .pipe(concat('app.min.js'))
+             .pipe(replace('[BUILD_VERSION]', build_version))
+             .pipe(replace('[BUILD_DATE]', build_date))
              .pipe(gulp.dest('build/js'))
              .pipe(connect.reload())
 });
@@ -156,7 +169,8 @@ gulp.task('_app_entry', function() {
              .pipe(connect.reload())
 });
 
-gulp.task('_app', ['_app_js', '_app_less', '_app_html', '_app_entry']);
+gulp.task('_app_dev', ['_app_js_dev', '_app_less', '_app_html', '_app_entry']);
+gulp.task('_app_build', ['_app_js_build', '_app_less', '_app_html', '_app_entry']);
 
 
 // TASKS (LIVE RELOAD) ========================================================
@@ -168,10 +182,10 @@ gulp.task('_livereload', function() {
   });
 });
 
-gulp.task('_watch', ['_livereload'], function() {
+gulp.task('_serve', ['_vendor', '_preload', '_app_dev' ,'_livereload'], function() {
   gulp.watch(preload_js, ['_preload_js']);
   gulp.watch(preload_css, ['_preload_css']);
-  gulp.watch(app_js, ['_app_js']);
+  gulp.watch(app_js, ['_app_js_dev']);
   gulp.watch(app_less, ['_app_less']);
   gulp.watch(app_html, ['_app_html']);
   gulp.watch(app_entry, ['_app_entry']);
@@ -189,7 +203,7 @@ gulp.task('_dist', ['build'], function() {
 
 
 // COMMANDS ===================================================================
-gulp.task('build', ['_vendor', '_preload', '_app']);
-gulp.task('serve', ['build', '_watch']);
+gulp.task('build', ['_vendor', '_preload', '_app_build']);
+gulp.task('serve', ['_serve']);
 gulp.task('nw',    ['_nw']);
 gulp.task('dist',  ['_dist'])
