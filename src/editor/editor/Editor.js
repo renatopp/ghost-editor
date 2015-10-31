@@ -112,28 +112,25 @@
     var canvas = document.createElement('canvas');
 
     var p = this.project.get();
-    var node = p.nodes.get(name);
+    var Cls = b3e.nodes[name];
     var tree = p.trees.getSelected();
 
-    if (!node) return;
-    var block = new b3e.Block(node);
-    block._applySettings(this._settings);
-    block.x = block._width;
-    block.y = block._height;
+    if (!Cls) return;
+    var node = new Cls();
+    node._applySettings(this._settings);
+    node.display.x = node.display.width;
+    node.display.y = node.display.height;
 
-    canvas.setAttribute('width', block._width*tree.scaleX*2);
-    canvas.setAttribute('height', block._height*tree.scaleY*2);
+    canvas.setAttribute('width', node.display.width*tree.scaleX*2);
+    canvas.setAttribute('height', node.display.height*tree.scaleY*2);
 
     var stage = new createjs.Stage(canvas);
     stage.scaleX = tree.scaleX;
     stage.scaleY = tree.scaleY;
-    stage.addChild(block);
+    stage.addChild(node.display);
     stage.update();
 
-    var img = document.createElement("img");
-    img.src = canvas.toDataURL();
-
-    return img;
+    return canvas;
   };
 
   p.isDirty = function() {

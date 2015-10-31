@@ -36,7 +36,7 @@
         var project = $window.editor.project.get();
         var tree = project.trees.getSelected();
         var point = tree.view.getLocalPoint(e.clientX, e.clientY);
-        tree.blocks.add(name, point.x, point.y);
+        tree.nodes.add(name, point.x, point.y);
 
         $window.editor._game.canvas.focus();
       });

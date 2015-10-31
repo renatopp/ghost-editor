@@ -20,9 +20,18 @@
       element.attr('draggable', 'true');
 
       element.bind('dragstart', function(e) {
-        var img = $window.editor.preview(attrs.name);
+        var canvas = $window.editor.preview(attrs.name);
+        var isChrome = navigator.userAgent.toLowerCase().indexOf('chrome')>-1;
+
+        if (isChrome) {
+          var img = document.createElement('img');
+          img.src = canvas.toDataURL();
+          canvas = img;
+        }
+
         e.dataTransfer.setData('name', attrs.name);
-        e.dataTransfer.setDragImage(img, img.width/2, img.height/2);
+        e.dataTransfer.setDragImage(canvas, canvas.width/2, canvas.height/2);
+
       });
     }
   }
