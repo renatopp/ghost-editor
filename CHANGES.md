@@ -1,6 +1,11 @@
 # CHANGES
 
-## 0.1.1-beta
+## 0.1.2-dev
+
+- New node structure finished (new Node and Connection classes).
+- Node panel fixed.
+
+## 0.1.1-dev
 
 - New node structure (not fully working, needs connection).
   - No need of Behavior3JS nodes.
