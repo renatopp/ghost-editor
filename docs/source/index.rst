@@ -14,4 +14,5 @@ Documentation for the Ghost behavior authoring tool.
    :maxdepth: 2
 
    dev/building.rst
+   dev/customnodes.rst
 
