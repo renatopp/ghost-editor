@@ -5,16 +5,11 @@
 
   /**
    * The Node class provides base variables and methods for all nodes in 
-   * the editor. These variables and methods are organized into different 
-   * components:
+   * the editor. 
    *
-   * - display: the CreateJS container, which will be used to render the node 
-   *   in the canvas. This component also provides methods to verify hit tests
-   *   and other visual effects.
-   * - graph: provides the mechanisms of a graph node, including a list of 
-   *   parents and children (by using connection objects), and methods for 
-   *   traversal.
-   * - attribute: the attributes of the node in the editor. 
+   * This class has a display component, which is in fact a CreateJS container
+   * that will be used to render the node in the canvas. This component also 
+   * provides methods to verify hit tests and other visual effects.
    *
    * It is recommended the use of the shortcut `b3e.node.create` instead of
    * this class directly.
