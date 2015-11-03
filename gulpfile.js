@@ -36,7 +36,7 @@ var vendor_css = [
   'bower_components/sweetalert/dist/sweetalert.css',
 ];
 var vendor_fonts = [
-  'bower_components/fontawesome/fonts/*',
+  'bower_components/font-awesome/fonts/*',
   'src/assets/fonts/**/*',
 ];
 
@@ -45,7 +45,7 @@ var preload_js = [
 ];
 
 var preload_css = [
-  'bower_components/fontawesome/css/font-awesome.min.css',
+  'bower_components/font-awesome/css/font-awesome.min.css',
   'src/assets/css/fonts.css',
   'src/assets/css/preload.css',
 ];
