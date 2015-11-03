@@ -7,11 +7,11 @@ b3e.tree.NodeManager = function(editor, project, tree) {
     node.display.redraw();
 
     // redraw connections linked to the entity
-    for (var i=0; i<node.outConnections.length; i++) {
-      node.inConnections[i]._redraw();
+    for (var i=0; i<node.inConnections.length; i++) {
+      node.inConnections[i].display.redraw();
     }
     for (var j=0; j<node.outConnections.length; j++) {
-      node.outConnections[j]._redraw();
+      node.outConnections[j].display.redraw();
     }
   };
 
@@ -163,7 +163,8 @@ b3e.tree.NodeManager = function(editor, project, tree) {
   };
   this.remove = function(node) {
     project.history._beginBatch();
-    tree._nodes.removeChild(node);
+    tree._nodes.remove(node);
+    tree._nodesLayer.removeChild(node.display);
 
     var i;
     if (node.inConnections.length > 0) {
@@ -188,38 +189,6 @@ b3e.tree.NodeManager = function(editor, project, tree) {
 
     project.history._endBatch();
     editor.trigger('noderemoved', node);
-  };
-  this.cut = function(node) {
-    project.history._beginBatch();
-    tree._nodes.removeChild(node);
-
-    var i;
-    if (node.inConnections.length > 0) {
-      for (i=node.inConnections.length-1; i>=0; i--) {
-        if (!node.inConnections[i].inNode.display.isSelected) {
-          tree.connections.remove(node.inConnections[i]);
-        } else {
-          node.inConnections[i].display.visible = false;
-        }
-      }
-    }
-
-    if (node.outConnections.length > 0) {
-      for (i=node.outConnections.length-1; i>=0; i--) {
-        if (!node.outConnections[i].inNode.display.isSelected) {
-          tree.connections.remove(node.outConnections[i]);
-        } else {
-          node.outConnections[i].display.visible = false;
-        }
-      }
-    }
-
-    var _old = [this, this.add, [node, node.x, node.y]];
-    var _new = [this, this.remove, [node]];
-    project.history._add(new b3e.Command(_old, _new));
-
-    editor.trigger('noderemoved', node);
-    project.history._endBatch();
   };
   this.each = function(callback, thisarg) {
     tree._nodes.forEach(callback, thisarg);

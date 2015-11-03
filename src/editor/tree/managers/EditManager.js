@@ -37,18 +37,8 @@ b3e.tree.EditManager = function(editor, project, tree) {
 
   this.cut = function() {
     this._selectionToClipboard();
-
-    project.history._beginBatch();
-    for (var i=tree._selectedNodes.length-1; i>=0; i--) {
-      var node = tree._selectedNodes[i];
-
-      if (node.category != b3e.ROOT) {
-        tree.nodes.remove(tree._selectedNodes[i]);
-      }
-    }
-    project.history._endBatch();
-
-    tree._selectedNodes = [];
+    this.remove();
+    tree.selection.deselectAll();
   };
 
   this.paste = function() {
