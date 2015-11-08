@@ -5,7 +5,7 @@
     this.Container_constructor();
 
     // Variables
-    this._id = b3.createUUID();
+    this._id = b3e.createID();
     this._editor = editor;
     this._selectedTree = null;
     this._clipboard = null;

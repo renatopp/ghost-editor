@@ -2,7 +2,16 @@ b3e.tree.ConnectionManager = function(editor, project, tree) {
   'use strict';
 
   /** Needed to history manager */
-  this._remove = function(connection) {
+  this._remove = function(inNode, outNode) {
+    var connection;
+    for (var i=0; i<inNode.outConnections.length; i++) {
+      if (inNode.outConnections[i].outNode === outNode) {
+        connection = inNode.outConnections[i];
+        break;
+      }
+    }
+
+    if (!connection) return;
     project.history._lock();
     this.remove(connection);
     project.history._unlock();
@@ -34,9 +43,11 @@ b3e.tree.ConnectionManager = function(editor, project, tree) {
     }
 
     if (inNode && outNode) {
-      var _old = [this, this._remove, [connection]];
+      var _old = [this, this._remove, [inNode, outNode]];
       var _new = [this, this.add, [inNode, outNode]];
-      project.history._add(new b3e.Command(_old, _new));
+      project.history._add(new b3e.Command(_old, _new, 
+        'Add connection between '+inNode.id+' and '+outNode.id
+      ));
     }
 
     connection._applySettings(editor._settings);
@@ -48,25 +59,48 @@ b3e.tree.ConnectionManager = function(editor, project, tree) {
   };
 
   this.remove = function(connection) {
-    if (connection.inNode && connection.outNode) {
-      var _old = [this, this.add, [connection.inNode, connection.outNode]];
-      var _new = [this, this._remove, [connection]];
-      project.history._add(new b3e.Command(_old, _new));
+    var inNode = connection.inNode;
+    var outNode = connection.outNode;
+
+    if (inNode && outNode) {
+      var _old = [this, this.add, [inNode, outNode]];
+      var _new = [this, this._remove, [inNode, outNode]];
+      project.history._add(new b3e.Command(_old, _new,
+        'Remove connection between '+inNode.id+' and '+outNode.id
+      ));
     }
 
-    if (connection.inNode) {
-      connection.inNode.outConnections.remove(connection);
+    if (inNode) {
+      inNode.outConnections.remove(connection);
       connection.inNode = null;
     }
 
-    if (connection.outNode) {
-      connection.outNode.inConnections.remove(connection);
+    if (outNode) {
+      outNode.inConnections.remove(connection);
       connection.outNode = null;
     }
 
     tree._connectionsLayer.removeChild(connection.display);
     tree._connections.remove(connection);
     editor.trigger('connectionremoved', connection);
+  };
+  this.getUnderPoint = function(x, y) {
+    if (!x || !y) {
+      var point = tree.view.getLocalPoint();
+      x = point.x;
+      y = point.y;
+    }
+
+    // Get node under the mouse
+    var connections = this.getAll();
+    for (var i=connections.length-1; i>=0; i--) {
+      var connection = connections[i];
+
+      if (connection.display.hitTest(x, y)) return connection;
+    }
+  };
+  this.getAll = function() {
+    return tree._connections;
   };
   this.each = function(callback, thisarg) {
     tree._connections.forEach(callback, thisarg);

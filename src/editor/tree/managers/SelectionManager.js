@@ -2,7 +2,7 @@ b3e.tree.SelectionManager = function(editor, project, tree) {
   "use strict";
 
   this.select = function(node) {
-    if (node.display.isSelected) return;
+    if (!node || node.display.isSelected) return;
 
     node.display.select();
     tree._selectedNodes.push(node);

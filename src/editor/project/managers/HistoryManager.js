@@ -11,7 +11,7 @@ b3e.project.HistoryManager = function(editor, project) {
     queue = [];
     index = 0;
   };
-  this.undo = function() {
+  this.undo = function() {    
     this._lock();
     if (this.canUndo()) {
       index--;
@@ -38,6 +38,12 @@ b3e.project.HistoryManager = function(editor, project) {
   };
   this.canRedo = function() {
     return index<queue.length;
+  };
+
+  this.print = function(n) {
+    for (var i=0; i<queue.length; i++) {
+      queue[i].print(n||0);
+    }
   };
 
   /**

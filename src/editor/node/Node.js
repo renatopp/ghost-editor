@@ -18,7 +18,7 @@
    * @constructor
    */
   var Node = function() {
-    this.id = b3.createUUID();
+    this.id = b3e.createID();
     this.display = new b3e.node.DisplayComponent(this);
 
     this.properties = tine.merge({}, this.properties||{});
@@ -41,7 +41,7 @@
     var s = this.title || this.name;
 
     var self = this;
-    return s.replace(/(<\w+>)/g, function(match, key) {
+    var title = s.replace(/(<\w+>)/g, function(match, key) {
       var attr = key.substring(1, key.length-1);
       if (self.properties.hasOwnProperty(attr)) {
         return self.properties[attr];
@@ -49,17 +49,22 @@
         return match;
       }
     });
+
+    if (b3e.ENV === 'DEVELOPMENT') {
+      title += ' <'+this.id+'>';
+    }
+    return title;
   };
 
   p.traversal = function(callback, thisarg) {
-    var blocks = [this.node];
-    while (blocks.length > 0) {
-      var block = blocks.pop();
-      if (callback.call(thisarg, block) === false) return;
+    var nodes = [this];
+    while (nodes.length > 0) {
+      var node = nodes.pop();
+      if (callback.call(thisarg, node) === false) return;
 
-      for (var i=block.graph.outConnections.length-1; i>=0; i--) {
-        var c = block.graph.outConnections[i];
-        if (c._outBlock) blocks.push(c._outBlock);
+      for (var i=node.outConnections.length-1; i>=0; i--) {
+        var c = node.outConnections[i];
+        if (c.outNode) nodes.push(c.outNode);
       }
     }
   };

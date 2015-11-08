@@ -5,7 +5,7 @@
     this.Container_constructor();
 
     // Variables
-    this._id = b3.createUUID();
+    this._id = b3e.createID();
     this._editor = editor;
     this._project = project;
     this._selectedNodes = [];

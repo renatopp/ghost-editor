@@ -21,7 +21,7 @@
    * @param {Array} redo The redo specification.
    * @constructor
    */
-  b3e.Command = function(undo, redo) {
+  b3e.Command = function(undo, redo, description) {
 
     if (undo.length !== 3) throw 'Invalid undo command, must have [target, method, args]';
     if (redo.length !== 3) throw 'Invalid redo command, must have [target, method, args]';
@@ -30,6 +30,21 @@
       method.apply(target, args);
     }
 
+    /**
+     * The raw undo information (for debugging);
+     */
+    this._rawUndo = undo;
+
+    /**
+     * The raw redo information (for debugging);
+     */
+    this._rawRedo = redo;
+
+    /**
+     * Command description
+     */
+    this.description = description || '<no description>';
+    
     /**
      * The tree that is selected in the moment of command is added to the 
      * history manager. This is set by the manager.
@@ -55,6 +70,14 @@
     this.undo = function() {
       execute(undo[0], undo[1], undo[2]);
     };
+
+    /**
+     * @method print
+     */
+    this.print = function(n) {
+      var ident = (new Array(n||0)).join(' ');
+      console.log(ident + this.description);
+    };
   };
 
   /**
@@ -66,6 +89,11 @@
    * @constructor
    */
   b3e.Commands = function(commands) {
+
+    /**
+     * List of commands
+     */
+    this.commands = commands;
 
     /**
      * The tree that is selected in the moment of command is added to the 
@@ -81,8 +109,8 @@
      * @method redo
      */
     this.redo = function() {
-      for (var i=0; i<commands.length; i++) {
-        commands[i].redo();
+      for (var i=0; i<this.commands.length; i++) {
+        this.commands[i].redo();
       }
     };
     
@@ -92,8 +120,19 @@
      * @method undo
      */
     this.undo = function() {
-      for (var i=commands.length-1; i>=0; i--) {
-        commands[i].undo();
+      for (var i=this.commands.length-1; i>=0; i--) {
+        this.commands[i].undo();
+      }
+    };
+
+    /**
+     * @method print
+     */
+    this.print = function(n) {
+      var ident = (new Array(n||0)).join(' ');
+      console.log(ident + 'Command pack:');
+      for (var i=0; i<this.commands.length; i++) {
+        this.commands[i].print(n+2);
       }
     };
   };
