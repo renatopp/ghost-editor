@@ -1,5 +1,10 @@
 # CHANGES
 
+## 0.1.3-dev
+
+- Changing subtree selection to use SHIFT (SHIFT-CLICK to select subtree).
+- Nodes now accepts multiple input and output connections.
+
 ## 0.1.2-dev
 
 - New node structure finished (new Node and Connection classes).
