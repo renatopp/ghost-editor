@@ -18,6 +18,7 @@ var merge         = require('merge-stream');
 var project       = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 var build_version = project.version;
 var build_date    = (new Date()).toISOString().replace(/T.*/, '');
+var build_env     = 'DEVELOPMENT';
 
 // FILES ======================================================================
 var vendor_js = [
@@ -74,6 +75,11 @@ var app_entry = [
 
 var build_platforms = ['win32'];//, 'linux32', 'osx32'];
 
+// TASKS (BUILD) ==============================================================
+gulp.task('_build_config', function() {
+  build_env = 'PRODUCTION';
+});
+
 // TASKS (VENDOR) =============================================================
 gulp.task('_vendor_js', function() {
   return gulp.src(vendor_js)
@@ -125,6 +131,7 @@ gulp.task('_app_js_dev', function() {
              .pipe(concat('app.min.js'))
              .pipe(replace('[BUILD_VERSION]', build_version))
              .pipe(replace('[BUILD_DATE]', build_date))
+             .pipe(replace('[BUILD_ENV]', build_env))
              .pipe(gulp.dest('build/js'))
              .pipe(connect.reload())
 });
@@ -137,6 +144,7 @@ gulp.task('_app_js_build', function() {
              .pipe(concat('app.min.js'))
              .pipe(replace('[BUILD_VERSION]', build_version))
              .pipe(replace('[BUILD_DATE]', build_date))
+             .pipe(replace('[BUILD_ENV]', build_env))
              .pipe(gulp.dest('build/js'))
              .pipe(connect.reload())
 });
@@ -155,6 +163,7 @@ gulp.task('_app_html', function() {
              .pipe(minifyHTML({empty:true})) 
              .pipe(replace('[BUILD_VERSION]', build_version))
              .pipe(replace('[BUILD_DATE]', build_date))
+             .pipe(replace('[BUILD_ENV]', build_env))
              .pipe(templateCache('templates.min.js', {standalone:true}))
              .pipe(gulp.dest('build/js'))
              .pipe(connect.reload())
@@ -165,6 +174,7 @@ gulp.task('_app_entry', function() {
              .pipe(minifyHTML({empty:true})) 
              .pipe(replace('[BUILD_VERSION]', build_version))
              .pipe(replace('[BUILD_DATE]', build_date))
+             .pipe(replace('[BUILD_ENV]', build_env))
              .pipe(gulp.dest('build'))
              .pipe(connect.reload())
 });
@@ -203,7 +213,7 @@ gulp.task('_dist', ['build'], function() {
 
 
 // COMMANDS ===================================================================
-gulp.task('build', ['_vendor', '_preload', '_app_build']);
+gulp.task('build', ['_build_config', '_vendor', '_preload', '_app_build']);
 gulp.task('serve', ['_serve']);
 gulp.task('nw',    ['_nw']);
 gulp.task('dist',  ['_dist'])

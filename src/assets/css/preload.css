@@ -58,8 +58,17 @@ html, body {
   text-transform: uppercase;
 }
 .preloading-body-subtitle,
-.preloading-body-version {
+.preloading-body-build {
   font-size : 0.8em;
+  line-height: 5px;
+}
+.preloading-body-build-label {
+  display: inline-block !important;
+  font-style: italic;
+}
+.preloading-body-build-info {
+  display: inline-block !important;
+  text-transform: lowercase;
 }
 
 .preloading-body-loading {
