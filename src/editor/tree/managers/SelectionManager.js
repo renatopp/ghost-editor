@@ -4,6 +4,9 @@ b3e.tree.SelectionManager = function(editor, project, tree) {
   this.select = function(node) {
     if (!node || node.display.isSelected) return;
 
+    // Events
+    node.onSelect({});
+
     node.display.select();
     tree._selectedNodes.push(node);
 
@@ -12,6 +15,9 @@ b3e.tree.SelectionManager = function(editor, project, tree) {
 
   this.deselect = function(node) {
     if (!node.display.isSelected) return;
+
+    // Events
+    node.onDeselect({});
 
     node.display.deselect();
     tree._selectedNodes.remove(node);

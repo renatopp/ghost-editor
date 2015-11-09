@@ -1,18 +1,19 @@
 # CHANGES
 
-## 0.1.3-dev
+## 0.2.3-dev
 
 - Changing subtree selection to use SHIFT (SHIFT-CLICK to select subtree).
 - Nodes now accepts multiple input and output connections.
 - Classes now uses `b3e.createID` instead of `b3.createUUID`.
 - Connection callbacks added.
+- Selection callbacks added.
 
-## 0.1.2-dev
+## 0.2.2-dev
 
 - New node structure finished (new Node and Connection classes).
 - Node panel fixed.
 
-## 0.1.1-dev
+## 0.2.1-dev
 
 - New node structure (not fully working, needs connection).
   - No need of Behavior3JS nodes.
