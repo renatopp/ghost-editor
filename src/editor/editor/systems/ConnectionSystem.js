@@ -43,6 +43,10 @@ b3e.editor.ConnectionSystem = function(editor) {
     if (node) {
       // User left click on OUT anchor
       if (node.display.hitOutAnchor(x, y)) {
+        var max = node.maxOutConnections;
+        if (max >= 0 && node.outConnections.length >= max) {
+          return;
+        }
         var c = tree.connections.add(node, null);
         connections.push(c);
 
@@ -133,6 +137,14 @@ b3e.editor.ConnectionSystem = function(editor) {
       if (node === inNode) {
         // must return the original connection configuration in order to
         // register correctly on the history manager
+        this._reconnectionLastOutNode(connection);
+        tree.connections.remove(connection);
+        continue;
+      }
+
+      // Remove connection if node can't have more inputs
+      var max = node.maxInConnections;
+      if (max >= 0 && node.inConnections.length >= max) {
         this._reconnectionLastOutNode(connection);
         tree.connections.remove(connection);
         continue;

@@ -24,8 +24,6 @@
     this.properties = tine.merge({}, this.properties||{});
     this.inConnections = [];
     this.outConnections = [];
-    this.maxInConnections = 0;
-    this.maxOutConnections = 0;
   };
   var p = Node.prototype;
 
@@ -35,6 +33,8 @@
   p.description = null;
   p.title = null;
   p.properties = null;
+  p.maxInConnections = -1;
+  p.maxOutConnections = -1;
 
   // Methods
   p.getTitle = function() {

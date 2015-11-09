@@ -4,6 +4,7 @@
 
 - Changing subtree selection to use SHIFT (SHIFT-CLICK to select subtree).
 - Nodes now accepts multiple input and output connections.
+- Classes now uses `b3e.createID` instead of `b3.createUUID`.
 
 ## 0.1.2-dev
 
