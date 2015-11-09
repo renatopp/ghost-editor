@@ -12,6 +12,19 @@ b3e.tree.ConnectionManager = function(editor, project, tree) {
     }
 
     if (!connection) return;
+
+    // Events
+    var data = {
+      connection : connection,
+      inNode     : inNode,
+      outNode    : outNode,
+    };
+    inNode.onOutDisconnected(data);
+    inNode.onDisconnected(data);
+    outNode.onInDisconnected(data);
+    outNode.onDisconnected(data);
+
+    // History
     project.history._lock();
     this.remove(connection);
     project.history._unlock();
@@ -19,6 +32,26 @@ b3e.tree.ConnectionManager = function(editor, project, tree) {
 
   this.add = function(inNode, outNode) {
     var connection = new b3e.connection.Connection();
+
+    if (inNode && outNode) {
+      // Events
+      var data = {
+        connection : connection,
+        inNode     : inNode,
+        outNode    : outNode,
+      };
+      inNode.onOutConnected(data);
+      inNode.onConnected(data);
+      outNode.onInConnected(data);
+      outNode.onConnected(data);
+
+      // History
+      var _old = [this, this._remove, [inNode, outNode]];
+      var _new = [this, this.add, [inNode, outNode]];
+      project.history._add(new b3e.Command(_old, _new, 
+        'Add connection between '+inNode.id+' and '+outNode.id
+      ));
+    }
 
     if (inNode) {
       connection.inNode = inNode;
@@ -42,19 +75,11 @@ b3e.tree.ConnectionManager = function(editor, project, tree) {
       });
     }
 
-    if (inNode && outNode) {
-      var _old = [this, this._remove, [inNode, outNode]];
-      var _new = [this, this.add, [inNode, outNode]];
-      project.history._add(new b3e.Command(_old, _new, 
-        'Add connection between '+inNode.id+' and '+outNode.id
-      ));
-    }
-
     connection._applySettings(editor._settings);
     tree._connections.push(connection);
     tree._connectionsLayer.addChild(connection.display);
 
-    // editor.trigger('connectionadded', connection);
+    editor.trigger('connectionadded', connection);
     return connection;
   };
 
@@ -63,6 +88,18 @@ b3e.tree.ConnectionManager = function(editor, project, tree) {
     var outNode = connection.outNode;
 
     if (inNode && outNode) {
+      // Events
+      var data = {
+        connection : connection,
+        inNode     : inNode,
+        outNode    : outNode,
+      };
+      inNode.onOutDisconnected(data);
+      inNode.onDisconnected(data);
+      outNode.onInDisconnected(data);
+      outNode.onDisconnected(data);
+
+      // History
       var _old = [this, this.add, [inNode, outNode]];
       var _new = [this, this._remove, [inNode, outNode]];
       project.history._add(new b3e.Command(_old, _new,
