@@ -1,6 +1,6 @@
 # CHANGES
 
-## 0.2.3-dev
+## 0.2.2-dev
 
 - Changing subtree selection to use SHIFT (SHIFT-CLICK to select subtree).
 - Nodes now accepts multiple input and output connections.
@@ -8,12 +8,12 @@
 - Connection callbacks added.
 - Selection callbacks added.
 
-## 0.2.2-dev
+## 0.2.1-dev
 
 - New node structure finished (new Node and Connection classes).
 - Node panel fixed.
 
-## 0.2.1-dev
+## 0.2.0-dev
 
 - New node structure (not fully working, needs connection).
   - No need of Behavior3JS nodes.
