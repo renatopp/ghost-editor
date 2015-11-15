@@ -57,11 +57,9 @@ b3e.editor.ExportManager = function(editor) {
       root        : root.id,
       nodes       : [],
       display     : {
-        camera_x : tree.x,
-        camera_y : tree.y,
-        camera_z : tree.scaleX,
-        x        : root.x,
-        y        : root.y,
+        x : tree.x,
+        y : tree.y,
+        z : tree.scaleX
       },
     };
 

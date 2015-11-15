@@ -27,10 +27,10 @@ b3e.editor.ImportManager = function(editor) {
 
     // Tree data
     var display      = data.display||{};
-    tree.x           = display.camera_x || 0;
-    tree.y           = display.camera_y || 0;
-    tree.scaleX      = display.camera_z || 1;
-    tree.scaleY      = display.camera_z || 1;
+    tree.x           = display.x || 0;
+    tree.y           = display.y || 0;
+    tree.scaleX      = display.z || 1;
+    tree.scaleY      = display.z || 1;
 
     // Nodes
     var node;
