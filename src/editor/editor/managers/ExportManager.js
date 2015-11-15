@@ -43,6 +43,14 @@ b3e.editor.ExportManager = function(editor) {
   };
   
   this.treeToData = function(tree) {
+    var saveVersion = false;
+    if (!tree) {
+      var project = editor.project.get();
+      if (!project) return;
+      tree = project.trees.getSelected();
+      saveVersion = true;
+    }
+
     var root = tree.nodes.getRoot();
     var data = {
       id          : tree._id,
@@ -56,6 +64,10 @@ b3e.editor.ExportManager = function(editor) {
         y        : root.y,
       },
     };
+
+    if (saveVersion) {
+      data.version = b3e.VERSION;
+    }
 
     var self = this;
     tree.nodes.each(function(node) {
