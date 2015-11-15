@@ -1,5 +1,9 @@
 # CHANGES
 
+## 0.3.0-dev
+
+- Changing EXPORT to use new JSON format.
+
 ## 0.2.2-dev
 
 - Changing subtree selection to use SHIFT (SHIFT-CLICK to select subtree).
