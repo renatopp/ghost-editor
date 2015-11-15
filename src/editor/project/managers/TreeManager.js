@@ -84,7 +84,7 @@ b3e.project.TreeManager = function(editor, project) {
 
     var idx = project.children.indexOf(tree);
     project.removeChild(tree);
-    project.nodes.remove(tree._id);
+    // project.nodes.remove(tree._id);
     editor.trigger('treeremoved', tree);
 
     if (project.children.length === 0) {
