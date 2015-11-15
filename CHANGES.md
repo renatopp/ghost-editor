@@ -2,7 +2,8 @@
 
 ## 0.3.0-dev
 
-- Changing EXPORT to use new JSON format.
+- New JSON format and documentation.
+- Export and import use the new JSON format.
 
 ## 0.2.2-dev
 
