@@ -25,22 +25,25 @@
  * 
  */
 
-window.b3e            = {};
-window.b3e.editor     = {};
-window.b3e.project    = {};
-window.b3e.tree       = {};
-window.b3e.node       = {};
-window.b3e.connection = {};
-window.b3e.nodes      = {};
+window.b3e             = {};
+window.b3e.editor      = {};
+window.b3e.project     = {};
+window.b3e.tree        = {};
+window.b3e.node        = {};
+window.b3e.connection  = {};
+window.b3e.nodes       = {};
 
-window.b3e.VERSION    = '[BUILD_VERSION]';
-window.b3e.ENV        = '[BUILD_ENV]';
+window.b3e.VERSION     = '[BUILD_VERSION]';
+window.b3e.ENV         = '[BUILD_ENV]';
+window.b3e.DEVELOPMENT = 'development';
+window.b3e.PRODUCTION  = 'production';
 
-window.b3e.ROOT       = 'root';
-window.b3e.COMPOSITE  = 'composite';
-window.b3e.MODULATOR  = 'modulator';
-window.b3e.INPUT      = 'input';
-window.b3e.OUTPUT     = 'output';
+window.b3e.ROOT        = 'root';
+window.b3e.COMPOSITE   = 'composite';
+window.b3e.MODULATOR   = 'modulator';
+window.b3e.INPUT       = 'input';
+window.b3e.OUTPUT      = 'output';
+
 
 // Deprecated
-window.b3e.draw       = {};
+window.b3e.draw        = {};

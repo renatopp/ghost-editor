@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
 var config = require('./config');
+var config = require('./config');
 var helpers = require('./helpers');
 
 
@@ -29,7 +30,11 @@ _task('_preload_js', 'preload_js', 'js');
 _task('_preload_css', 'preload_css', 'css');
 _task('_jshint', 'app_js', 'jshint');
 
+gulp.task('_production', function() {
+  config.build_env = 'production';
+})
 gulp.task('_build', [
+  '_production',
   '_vendor_js',
   '_vendor_css',
   '_vendor_fonts',

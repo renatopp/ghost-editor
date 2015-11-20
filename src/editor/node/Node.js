@@ -50,7 +50,7 @@
       }
     });
 
-    if (b3e.ENV === 'DEVELOPMENT') {
+    if (b3e.ENV === b3e.DEVELOPMENT) {
       title += ' <'+this.id+'>';
     }
     return title;
