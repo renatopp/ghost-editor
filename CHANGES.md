@@ -1,5 +1,9 @@
 # CHANGES
 
+## 0.4.0-dev
+
+- Improvements to the building tasks.
+
 ## 0.3.0-dev
 
 - New JSON format and documentation.
