@@ -1,0 +1,79 @@
+{
+  "vendor_js": {
+    "input": [
+      "src/assets/libs/jsclass-4.0.5.min.js",
+      "src/assets/libs/createjs.min.js",
+      "src/assets/libs/creatine-1.0.0.min.js",
+      "src/assets/libs/behavior3js-0.1.0.min.js",
+      "src/assets/libs/mousetrap.min.js",
+      "bower_components/angular/angular.min.js",
+      "bower_components/angular-animate/angular-animate.min.js",
+      "bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
+      "bower_components/angular-ui-router/release/angular-ui-router.min.js",
+      "bower_components/sweetalert/dist/sweetalert.min.js"
+    ],
+    "output": "build/js/vendor.min.js"
+  },
+  "vendor_css": {
+    "input": [
+      "bower_components/bootstrap/dist/css/bootstrap.min.css",
+      "bower_components/sweetalert/dist/sweetalert.css"
+    ],
+    "output": "build/css/vendor.min.css"
+  },
+  "vendor_fonts": {
+    "input": [
+      "bower_components/font-awesome/fonts/*",
+      "src/assets/fonts/**/*"
+    ],
+    "output": "build/fonts"
+  },
+
+  "app_js": {
+    "input": [
+      "src/editor/namespaces.js",
+      "src/editor/node/**/*.js",
+      "src/editor/utils/**/*.js",
+      "src/editor/**/*.js",
+      "src/app/app.js",
+      "src/app/app.routes.js",
+      "src/app/app.controller.js",
+      "src/app/**/*.js",
+      "src/start.js"
+    ],
+    "output": "build/js/app.min.js"
+  },
+  "app_less": {
+    "input": [
+      "src/assets/less/index.less"
+    ],
+    "output": "build/css/app.min.css"
+  },
+  "app_templates": {
+    "input": [
+      "src/app/**/*.html"
+    ],
+    "output": "build/js/templates.min.js"
+  },
+  "app_html": {
+    "input": [
+      "src/index.html"
+    ],
+    "output": "build"
+  },
+
+  "preload_js": {
+    "input": [
+      "src/assets/js/preload.js"
+    ],
+    "output": "build/js/preload.min.js"
+  },
+  "preload_css": {
+    "input": [
+      "bower_components/font-awesome/css/font-awesome.min.css",
+      "src/assets/css/fonts.css",
+      "src/assets/css/preload.css"
+    ],
+    "output": "build/css/preload.min.css"
+  }
+}
