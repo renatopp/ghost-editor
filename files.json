@@ -1,7 +1,6 @@
 {
   "vendor_js": {
     "input": [
-      "src/assets/libs/jsclass-4.0.5.min.js",
       "src/assets/libs/createjs.min.js",
       "src/assets/libs/creatine-1.0.0.min.js",
       "src/assets/libs/behavior3js-0.1.0.min.js",
