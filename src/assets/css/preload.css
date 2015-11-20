@@ -5,6 +5,10 @@ html, body {
   line-height: 1.42857143;
 }
 
+p {
+  margin: 0px 0px 10px 0px;
+}
+
 .preloading {
   position    : absolute;
   top         : 0;
@@ -17,7 +21,7 @@ html, body {
   text-align  : center;
   font-size   : 16px !important;
   font-family : sans-serif !important;
-  font-weight: 300 !important;
+  font-weight : 300 !important;
 
   -webkit-transition : opacity .5s ease-in-out;
   -moz-transition    : opacity .5s ease-in-out;
