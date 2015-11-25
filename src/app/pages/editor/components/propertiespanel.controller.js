@@ -26,7 +26,7 @@
     function _activate() {
       var p = $window.editor.project.get();
       var t = p.trees.getSelected();
-      var s = t.blocks.getSelected();
+      var s = t.nodes.getSelected();
 
       if (s.length === 1) {
         vm.original = s[0];
@@ -45,16 +45,16 @@
       
     }
     function _create() {
-      $window.editor.on('blockselected', _event);
-      $window.editor.on('blockdeselected', _event);
-      $window.editor.on('blockremoved', _event);
+      $window.editor.on('nodeselected', _event);
+      $window.editor.on('nodedeselected', _event);
+      $window.editor.on('noderemoved', _event);
       $window.editor.on('treeselected', _event);
       $window.editor.on('nodechanged', _event);
     }
     function _destroy() {
-      $window.editor.off('blockselected', _event);
-      $window.editor.off('blockdeselected', _event);
-      $window.editor.off('blockremoved', _event);
+      $window.editor.off('nodeselected', _event);
+      $window.editor.off('nodedeselected', _event);
+      $window.editor.off('noderemoved', _event);
       $window.editor.off('treeselected', _event);
       $window.editor.off('nodechanged', _event);
     }
@@ -70,7 +70,7 @@
     function update() {
       var p = $window.editor.project.get();
       var t = p.trees.getSelected();
-      t.blocks.update(vm.original, vm.block);
+      t.nodes.update(vm.original, vm.block);
     }
   }
 })();
