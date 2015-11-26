@@ -17,88 +17,99 @@
    * @class Node
    * @constructor
    */
-  var Node = function() {
-    this.id = b3e.createID();
-    this.display = new b3e.node.DisplayComponent(this);
+  var Node = new JS.Class('Node', {
+    id: null,
+    display: null,
+    inConnections: null,
+    outConnections: null,
+    name: null,
+    category: null,
+    title: null,
+    description: null,
+    properties: null,
+    maxInConnections: -1,
+    maxOutConnections: -1,
 
-    this.properties = tine.merge({}, this.properties||{});
-    this.inConnections = [];
-    this.outConnections = [];
-  };
-  var p = Node.prototype;
+    onAdd: function(e) {},
+    onLoad: function(e) {},
+    onRemove: function(e) {},
+    onSelect: function(e) {},
+    onDeselect: function(e) {},
+    onConnected: function(e) {},
+    onInConnected: function(e) {},
+    onOutConnected: function(e) {},
+    onDisconnected: function(e) {},
+    onInDisconnected: function(e) {},
+    onOutDisconnected: function(e) {},
+    onPropertyChange: function(e) {},
 
-  // Attributes (are accessible on class)
-  p.name = null;
-  p.category = null;
-  p.description = null;
-  p.title = null;
-  p.properties = null;
-  p.maxInConnections = -1;
-  p.maxOutConnections = -1;
+    initialize: function() {
+      this.id = b3e.createID();
+      this.display = new b3e.node.DisplayComponent(this);
+      this.properties = b3e.deepCopy(this.properties||{});
+      this.inConnections = [];
+      this.outConnections = [];
+    },
 
-  // Methods
-  p.getTitle = function() {
-    var s = this.title || this.name;
+    getTitle: function() {
+      var s = this.title || this.name;
 
-    var self = this;
-    var title = s.replace(/(<\w+>)/g, function(match, key) {
-      var attr = key.substring(1, key.length-1);
-      if (self.properties.hasOwnProperty(attr)) {
-        return self.properties[attr];
-      } else {
-        return match;
+      var self = this;
+      var title = s.replace(/(<\w+>)/g, function(match, key) {
+        var attr = key.substring(1, key.length-1);
+        if (self.properties.hasOwnProperty(attr)) {
+          return self.properties[attr];
+        } else {
+          return match;
+        }
+      });
+
+      if (b3e.ENV === b3e.DEVELOPMENT) {
+        title += ' <'+this.id+'>';
       }
-    });
+      return title;
+    },
 
-    if (b3e.ENV === b3e.DEVELOPMENT) {
-      title += ' <'+this.id+'>';
-    }
-    return title;
-  };
+    traversal: function(callback, thisarg) {
+      var nodes = [this];
+      while (nodes.length > 0) {
+        var node = nodes.pop();
+        if (callback.call(thisarg, node) === false) return;
 
-  p.traversal = function(callback, thisarg) {
-    var nodes = [this];
-    while (nodes.length > 0) {
-      var node = nodes.pop();
-      if (callback.call(thisarg, node) === false) return;
-
-      for (var i=node.outConnections.length-1; i>=0; i--) {
-        var c = node.outConnections[i];
-        if (c.outNode) nodes.push(c.outNode);
+        for (var i=node.outConnections.length-1; i>=0; i--) {
+          var c = node.outConnections[i];
+          if (c.outNode) nodes.push(c.outNode);
+        }
       }
-    }
-  };
+    },
 
-  p.copy = function() {
-    var other = new this.constructor();
-    other._applySettings(this.display._settings);
+    copy: function() {
+      var other = new this.constructor();
+      other._applySettings(this.display._settings);
 
-    other.title = this.title;
-    other.description = this.description;
-    other.properties = tine.merge({}, this.properties);
-    other.display.x = this.display.x;
-    other.display.y = this.display.y;
+      other.title = this.title;
+      other.description = this.description;
+      other.properties = b3e.deepCopy(this.properties||{});
+      other.display.x = this.display.x;
+      other.display.y = this.display.y;
 
-    return other;
-  };
-  
-  // Callbacks
-  p.onAdd = function(e) {};
-  p.onLoad = function(e) {};
-  p.onRemove = function(e) {};
-  p.onSelect = function(e) {};
-  p.onDeselect = function(e) {};
-  p.onConnected = function(e) {};
-  p.onInConnected = function(e) {};
-  p.onOutConnected = function(e) {};
-  p.onDisconnected = function(e) {};
-  p.onInDisconnected = function(e) {};
-  p.onOutDisconnected = function(e) {};
-  p.onPropertyChange = function(e) {};
+      return other;
+    },
 
-  p._applySettings = function(settings) {
-    this.display._applySettings(settings);
-  };
+    _applySettings: function(settings) {
+      this.display._applySettings(settings);
+    },
+
+  });
+
+  Node.extend({
+    title: null,
+    category: null,
+    description: null,
+    properties: null,
+    maxInConnections: -1,
+    maxOutConnections: -1,
+  });
 
   b3e.node.Node = Node;
 })();

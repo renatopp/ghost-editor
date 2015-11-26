@@ -5,75 +5,65 @@
 
   b3e.node.create = function(name, category, kwargs) {
     kwargs = kwargs || {};
-    var cls = function() {
-      b3e.node.Node.call(this);
+
+    // Default
+    var title = kwargs.title || null;
+    var description = kwargs.description || null;
+    var properties = kwargs.properties || null;
+    var maxInConnections = -1;
+    var maxOutConnections = -1;
+
+    if (typeof kwargs.maxInConnections !== 'undefined')
+      maxInConnections = kwargs.maxInConnections;
+
+    if (typeof kwargs.maxOutConnections !== 'undefined')
+      maxOutConnections = kwargs.maxOutConnections;
+
+    // Properties
+    var p = {};
+    if (properties) {
+      for (var key in properties) {
+        var property = properties[key];
+        p[property.name] = property.default;
+      }
+    }
+
+    // Static
+    var _static = {
+      title: title,
+      category: category,
+      description: description,
+      properties: properties,
+      maxInConnections: maxInConnections,
+      maxOutConnections: maxOutConnections,
     };
 
-    cls.prototype = Object.create(b3e.node.Node.prototype);
-    cls.prototype.constructor = cls;
+    // Prototype
+    var _prototype = {
+      name: name,
+      title: title,
+      category: category,
+      description: p,
+      properties: properties,
+      maxInConnections: maxInConnections,
+      maxOutConnections: maxOutConnections,
+    };
 
-    cls.prototype.name = name;
-    cls.prototype.category = category;
-    cls.prototype.title = kwargs.title || null;
-    cls.prototype.description = kwargs.description || null;
-    cls.prototype.properties = kwargs.properties || null;
+    if (kwargs.onAdd) _prototype.onAdd = kwargs.onAdd;
+    if (kwargs.onLoad) _prototype.onLoad = kwargs.onLoad;
+    if (kwargs.onSelect) _prototype.onSelect = kwargs.onSelect;
+    if (kwargs.onDeselect) _prototype.onDeselect = kwargs.onDeselect;
+    if (kwargs.onConnected) _prototype.onConnected = kwargs.onConnected;
+    if (kwargs.onInConnected) _prototype.onInConnected = kwargs.onInConnected;
+    if (kwargs.onOutConnected) _prototype.onOutConnected = kwargs.onOutConnected;
+    if (kwargs.onDisconnected) _prototype.onDisconnected = kwargs.onDisconnected;
+    if (kwargs.onInDisconnected) _prototype.onInDisconnected = kwargs.onInDisconnected;
+    if (kwargs.onOutDisconnected) _prototype.onOutDisconnected = kwargs.onOutDisconnected;
+    if (kwargs.onPropertyChange) _prototype.onPropertyChange = kwargs.onPropertyChange;
+    if (kwargs.onRemove) _prototype.onRemove = kwargs.onRemove;
 
-    if (kwargs.maxInConnections) {
-      cls.prototype.maxInConnections = kwargs.maxInConnections;
-    }
-
-    if (kwargs.maxOutConnections) {
-      cls.prototype.maxOutConnections = kwargs.maxOutConnections;
-    }
-
-    if (kwargs.onAdd) {
-      cls.prototype.onAdd = kwargs.onAdd;
-    }
-
-    if (kwargs.onLoad) {
-      cls.prototype.onLoad = kwargs.onLoad;
-    }
-
-    if (kwargs.onSelect) {
-      cls.prototype.onSelect = kwargs.onSelect;
-    }
-
-    if (kwargs.onDeselect) {
-      cls.prototype.onDeselect = kwargs.onDeselect;
-    }
-
-    if (kwargs.onConnected) {
-      cls.prototype.onConnected = kwargs.onConnected;
-    }
-
-    if (kwargs.onInConnected) {
-      cls.prototype.onInConnected = kwargs.onInConnected;
-    }
-
-    if (kwargs.onOutConnected) {
-      cls.prototype.onOutConnected = kwargs.onOutConnected;
-    }
-
-    if (kwargs.onDisconnected) {
-      cls.prototype.onDisconnected = kwargs.onDisconnected;
-    }
-
-    if (kwargs.onInDisconnected) {
-      cls.prototype.onInDisconnected = kwargs.onInDisconnected;
-    }
-
-    if (kwargs.onOutDisconnected) {
-      cls.prototype.onOutDisconnected = kwargs.onOutDisconnected;
-    }
-
-    if (kwargs.onPropertyChange) {
-      cls.prototype.onPropertyChange = kwargs.onPropertyChange;
-    }
-
-    if (kwargs.onRemove) {
-      cls.prototype.onRemove = kwargs.onRemove;
-    }
-
-    return cls;
+    var Cls = new JS.Class(name, b3e.node.Node, _prototype);
+    Cls.extend(_static);
+    return Cls;
   };
 })();

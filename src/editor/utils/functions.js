@@ -10,6 +10,9 @@ b3e.createID = function () {
   return '' + Math.random().toString(36).substr(2, 12);
 };
 
+b3e.deepCopy = function(obj) {
+  return JSON3.parse(JSON3.stringify(obj));
+};
 
 /**
  * JSON
