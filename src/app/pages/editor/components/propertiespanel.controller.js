@@ -7,16 +7,16 @@
 
   PropertiespanelController.$inject = [
     '$scope',
-    '$window'
+    '$window',
+    '$sce'
   ];
 
-  function PropertiespanelController($scope,
-                                     $window) {
-    var vm = this;
-    vm.original = null;
-    vm.block = null;
-    vm.keydown = keydown;
-    vm.update = update;
+  function PropertiespanelController($scope, $window, $sce) {
+    var self = this;
+    self.node = null;
+    self.properties = [];
+    self.keydown = keydown;
+    self.update = update;
 
     _create();
     _activate();
@@ -29,15 +29,18 @@
       var s = t.nodes.getSelected();
 
       if (s.length === 1) {
-        vm.original = s[0];
-        vm.block = {
-          title       : vm.original.title,
-          description : vm.original.description,
-          properties  : tine.merge({}, vm.original.properties)
-        };
+        self.node = s[0];
+        self.properties = [];
+        Object.keys(self.node.properties).forEach(function(key) {
+          var p = self.node.properties[key];
+          self.properties.push({
+            name : key,
+            obj  : p,
+            html : _makeProperty(p)
+          });
+        });
       } else {
-        vm.original = false;
-        vm.block = false;
+        self.node = false;
       }
     }
     function _event(e) {
@@ -58,6 +61,15 @@
       $window.editor.off('treeselected', _event);
       $window.editor.off('nodechanged', _event);
     }
+    function _makeProperty(p) {
+      var elName = p.html();
+      var element = '<'+elName;
+      element += ' ng-model="p.obj"';
+
+      element += '></'+elName+'>';
+
+      return $sce.trustAsHtml(element);
+    }
 
     function keydown(e) {
       if (e.ctrlKey && e.keyCode == 90) {
@@ -70,7 +82,7 @@
     function update() {
       var p = $window.editor.project.get();
       var t = p.trees.getSelected();
-      t.nodes.update(vm.original, vm.block);
+      t.nodes.update(self.original, self.block);
     }
   }
 })();
