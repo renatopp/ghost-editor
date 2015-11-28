@@ -32,6 +32,8 @@
   "app_js": {
     "input": [
       "src/editor/namespaces.js",
+      "src/editor/property/**/*.js",
+      "src/editor/properties/**/*.js",
       "src/editor/node/**/*.js",
       "src/editor/utils/**/*.js",
       "src/editor/**/*.js",
@@ -46,6 +48,9 @@
   "app_less": {
     "input": [
       "src/assets/less/index.less"
+    ],
+    "input_all": [
+      "src/assets/less/**/*.less"
     ],
     "output": "build/css/app.min.css"
   },
