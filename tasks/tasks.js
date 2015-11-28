@@ -68,7 +68,7 @@ gulp.task('_watch', function() {
   gulp.watch(f.preload_js.input, ['_preload_js']);
   gulp.watch(f.preload_css.input, ['_preload_css']);
   gulp.watch(f.app_js.input, ['_jshint', '_app_js_dev']);
-  gulp.watch(f.app_less.input, ['_app_less']);
+  gulp.watch(f.app_less.input_all, ['_app_less']);
   gulp.watch(f.app_templates.input, ['_app_templates']);
   gulp.watch(f.app_html.input, ['_app_html']);
 });
