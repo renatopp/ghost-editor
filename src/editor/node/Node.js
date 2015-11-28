@@ -46,9 +46,21 @@
     initialize: function() {
       this.id = b3e.createID();
       this.display = new b3e.node.DisplayComponent(this);
-      this.properties = b3e.deepCopy(this.properties||{});
       this.inConnections = [];
       this.outConnections = [];
+
+      this.properties = {};
+      for (var i=0; i<this.constructor.properties.length; i++) {
+        var p = this.constructor.properties[i];
+        var name = p[0];
+        var Cls = p[1];
+        var params = p[2] || [];
+
+        /* jshint -W058 */
+        this.properties[name] = new (Function.prototype.bind.apply(Cls, params));
+        this.properties[name].name = name;
+
+      }
     },
 
     getTitle: function() {

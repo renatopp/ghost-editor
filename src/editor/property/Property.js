@@ -3,14 +3,40 @@
 (function () {
   "use strict";
 
-  b3e.property.create = function(name, html, title, description) {
-    var property = {};
+  var Property = new JS.Class('Property', {
+    name: null,
+    title: null,
+    category: null,
+    description: null,
 
-    property.name = name;
-    property.title = title || null;
-    property.description = description || null;
-    property.html = html || '';
+    initialize: function(title, description) {
+      this.title = title;
+      this.description = description;
+    },
 
-    return property;
+    getTitle: function() {
+      return (this.title? this.title : b3e.toTitleCase(this.name));
+    },
+
+    html: function() {
+      return 'prop-'+this.category.replace(/\s/g, '').toLowerCase(); 
+    },
+
+    fromJson: function(data) {
+
+    },
+
+    toJson: function() {
+
+    }
+  });
+  b3e.property.Property = Property;
+
+  b3e.property.create = function(name, kwargs) {
+    kwargs = kwargs || {};
+    kwargs.category = name;
+
+    var Cls = new JS.Class(name, Property, kwargs);
+    return Cls;
   };
 })();

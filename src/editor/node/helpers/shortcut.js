@@ -9,7 +9,7 @@
     // Default
     var title = kwargs.title || null;
     var description = kwargs.description || null;
-    var properties = kwargs.properties || null;
+    var properties = kwargs.properties || [];
     var maxInConnections = -1;
     var maxOutConnections = -1;
 
@@ -18,15 +18,6 @@
 
     if (typeof kwargs.maxOutConnections !== 'undefined')
       maxOutConnections = kwargs.maxOutConnections;
-
-    // Properties
-    var p = {};
-    if (properties) {
-      for (var key in properties) {
-        var property = properties[key];
-        p[property.name] = property.default;
-      }
-    }
 
     // Static
     var _static = {
@@ -43,8 +34,7 @@
       name: name,
       title: title,
       category: category,
-      description: p,
-      properties: properties,
+      description: description,
       maxInConnections: maxInConnections,
       maxOutConnections: maxOutConnections,
     };
