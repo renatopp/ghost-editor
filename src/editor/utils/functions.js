@@ -14,6 +14,10 @@ b3e.deepCopy = function(obj) {
   return JSON3.parse(JSON3.stringify(obj));
 };
 
+b3e.toTitleCase = function(str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+};
+
 /**
  * JSON
  */
