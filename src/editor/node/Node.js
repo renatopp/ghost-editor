@@ -99,14 +99,43 @@
       var other = new this.constructor();
       other._applySettings(this.display._settings);
 
-      other.title = this.title;
-      other.description = this.description;
-      other.properties = b3e.deepCopy(this.properties||{});
+      other.fromJson(this.toJson());
       other.display.x = this.display.x;
       other.display.y = this.display.y;
 
       return other;
     },
+
+    fromJson: function(data) {
+      data = data || {};
+      data.properties = data.properties || {};
+
+      this.name = data.name;
+      this.title = data.title;
+      this.category = data.category;
+      this.description = data.description;
+      var self = this;
+      Object.keys(data.properties).forEach(function(key) {
+        self.properties[key].fromJson(data.properties[key]);
+      });
+    },
+
+    toJson: function() {
+      var properties = {};
+      var self = this;
+      Object.keys(this.properties).forEach(function(key) {
+        properties[key] = self.properties[key].toJson();
+      });
+
+      return {
+        name        : this.name,
+        title       : this.title,
+        category    : this.category,
+        description : this.description,
+        properties  : properties,
+      };
+    },
+
 
     _applySettings: function(settings) {
       this.display._applySettings(settings);
