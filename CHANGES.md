@@ -6,6 +6,7 @@
 - Property base class implemented.
 - Simple String property implemented.
 - Sample node "Property" to demonstrate properties.
+- Exporting/Importing considers properties json serialization.
 
 ## 0.3.0-dev
 
