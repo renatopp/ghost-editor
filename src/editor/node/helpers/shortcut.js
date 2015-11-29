@@ -7,7 +7,7 @@
     kwargs = kwargs || {};
 
     // Default
-    var title = kwargs.title || null;
+    var title = kwargs.title || name;
     var description = kwargs.description || null;
     var properties = kwargs.properties || [];
     var maxInConnections = -1;
