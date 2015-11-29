@@ -22,7 +22,7 @@
                placeholder="Title"
                ng-model="propertiespanel.node.title"
                ng-keydown="propertiespanel.keydown($event)"
-               ng-change="propertiespanel.update()">
+               ng-change="propertiespanel.change()">
       </div>
     </div>
         
@@ -31,14 +31,6 @@
       <div class="form-group" ng-repeat="p in propertiespanel.properties">
         <label for="property-{{p.name}}">{{p.obj.getTitle()}}</label>
         <div bind-html-compile="p.html"></div>
-      </div>
-
-      <div class="form-group">
-        <!-- <b3-key-table heading="Properties" 
-                      ng-model="propertiespanel.block.properties"
-                      ng-change="propertiespanel.update()"
-                      class="no-border">
-        </b3-key-table> -->
       </div>
     </div>
   </form>

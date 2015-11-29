@@ -16,7 +16,7 @@
     self.node = null;
     self.properties = [];
     self.keydown = keydown;
-    self.update = update;
+    self.change = change;
 
     _create();
     _activate();
@@ -64,6 +64,7 @@
     function _makeProperty(p) {
       var elName = p.html();
       var element = '<'+elName;
+      element += ' ng-change="propertiespanel.change"';
       element += ' ng-model="p.obj"';
 
       element += '></'+elName+'>';
@@ -71,18 +72,15 @@
       return $sce.trustAsHtml(element);
     }
 
+    function change() {
+      self.node.display.redraw();
+    }
+
     function keydown(e) {
       if (e.ctrlKey && e.keyCode == 90) {
         e.preventDefault();
       }
-
       return false;
-    }
-    
-    function update() {
-      var p = $window.editor.project.get();
-      var t = p.trees.getSelected();
-      t.nodes.update(self.original, self.block);
     }
   }
 })();
