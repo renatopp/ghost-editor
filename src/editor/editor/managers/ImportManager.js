@@ -50,7 +50,11 @@ b3e.editor.ImportManager = function(editor) {
       node.id = spec.id;
       node.title = spec.title;
       node.description = spec.description;
-      node.properties = tine.merge({}, node.properties, spec.properties);
+
+      Object.keys(spec.properties).forEach(function(key) {
+        node.properties[key].fromJson(spec.properties[key]);
+      });
+      // node.properties = tine.merge({}, node.properties, spec.properties);
       node.display.redraw();
     }
 

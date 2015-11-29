@@ -76,13 +76,18 @@ b3e.editor.ExportManager = function(editor) {
   };
 
   this.nodeToData = function(node) {
+    var properties = {};
+    Object.keys(node.properties).forEach(function(key) {
+      properties[key] = node.properties[key].toJson();
+    });
+
     var data = {
       id          : node.id,
       name        : node.name,
       category    : node.category,
       title       : node.title,
       description : node.description,
-      properties  : node.properties,
+      properties  : properties,
       children    : getBlockChildrenIds(node),
       display: {
         x: node.display.x,
