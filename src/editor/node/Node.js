@@ -70,7 +70,7 @@
       var title = s.replace(/(<\w+>)/g, function(match, key) {
         var attr = key.substring(1, key.length-1);
         if (self.properties.hasOwnProperty(attr)) {
-          return self.properties[attr];
+          return self.properties[attr].toValue();
         } else {
           return match;
         }

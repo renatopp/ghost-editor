@@ -28,6 +28,10 @@
 
     toJson: function() {
 
+    },
+
+    toFive: function() {
+      return '';
     }
   });
   b3e.property.Property = Property;

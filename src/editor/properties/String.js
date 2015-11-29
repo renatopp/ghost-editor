@@ -10,6 +10,10 @@
 
     toJson: function() {
       return JSON3.stringify(this.value);
+    },
+
+    toValue: function() {
+      return this.value;
     }
   });
 })();
