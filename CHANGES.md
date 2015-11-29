@@ -3,6 +3,9 @@
 ## 0.4.0-dev
 
 - Improvements to the building tasks.
+- Property base class implemented.
+- Simple String property implemented.
+- Sample node "Property" to demonstrate properties.
 
 ## 0.3.0-dev
 
