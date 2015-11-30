@@ -8,6 +8,7 @@
 - Sample node "Property" to demonstrate properties.
 - Exporting/Importing considers properties json serialization.
 - Node getTitle templates considers the property value.
+- Property documentations.
 
 ## 0.3.0-dev
 
