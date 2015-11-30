@@ -62,9 +62,10 @@ The `create` function receives the node name and category as obligatory argument
     var MyNode = b3e.node.create('MyNode', b3e.COMPOSITE, {
       title: 'My custom node',
       description: 'You may use a long description here.',
-      properties: {
-        a: 'property'
-      },
+      properties: [
+        ['property name': b3e.properties.String],
+        ['other prop': b3e.properties.Sample, [param1, param2]],
+      ],
       maxInConnections: -1,
       maxOutConnections: 2,
       onAdd: function() {},
