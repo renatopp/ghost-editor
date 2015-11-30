@@ -12,6 +12,7 @@ This session describes how nodes in Ghost editor are organized and how they work
 - You can use the function `b3e.node.create` as shortcut to create custom nodes.
 
 
+--------------
 How node works
 --------------
 
@@ -48,6 +49,7 @@ Real-time callbacks (callbacks called during the editor usage):
 - **onPropertyChange**: called when the user changes the values of node properties.
 
 
+------------
 Custom nodes
 ------------
 
@@ -57,7 +59,7 @@ The editor provides a shortcut function to create new nodes, the `b3e.node.creat
 
 The `create` function receives the node name and category as obligatory arguments, and an optional object with attributes and callbacks. The example below shows the complete list of attributes and callbacks accepted by this object::
 
-    MyNode = b3e.node.create('MyNode', b3e.COMPOSITE, {
+    var MyNode = b3e.node.create('MyNode', b3e.COMPOSITE, {
       title: 'My custom node',
       description: 'You may use a long description here.',
       properties: {
