@@ -30,7 +30,7 @@
 
     },
 
-    toFive: function() {
+    toValue: function() {
       return '';
     }
   });
