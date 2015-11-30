@@ -15,5 +15,6 @@ Documentation for the Ghost behavior authoring tool.
 
    dev/building.rst
    dev/customnodes.rst
+   dev/customproperties.rst
    dev/format.rst
 

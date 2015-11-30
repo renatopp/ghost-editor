@@ -51,7 +51,7 @@ A tree have the following info:
 - **category**: the category of the node. May assume `'composite'`, `'modulator'`, `'input'`, `'output'` or `'root'`. 
 - **title**: the title of the node. This is a user friendly string used in the editor to provide a better identification of the node for the user.
 - **description**: a helper description of what that node does. 
-- **properties**: *this will be changed in the next release*.
+- **properties**: an object with properties. Each property defined its own format, but all values are strings with JSON-formatted values.
 - **children**: a list of strings with the ID of children nodes.
 - **display**: an object used for controlling the visual of the node. Only useful for the editor. It contains:
 
