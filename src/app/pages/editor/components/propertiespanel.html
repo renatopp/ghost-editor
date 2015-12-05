@@ -1,12 +1,12 @@
-<div ng-controller="PropertiespanelController as propertiespanel" class="full-height side-panel">
+<div ng-controller="PropertiespanelController as propertiespanel" class="full-height side-panel" ng-cloak>
 
-  <div ng-hide="propertiespanel.node" class="properties">
+  <div ng-hide="propertiespanel.node" class="properties" ng-cloak>
     <br><br><br>
     <p class="text-center">Select a <strong>single</strong> block to change its properties.</p>
     <p class="text-center"><em>NOTE: The root node represents a tree. Therefore, changes applied to this node will persist on the tree object.</em></p>
   </div>
   
-  <form ng-show="propertiespanel.node">
+  <form ng-show="propertiespanel.node" ng-cloak>
     <div class="title">Node Information</div>
     <div class="properties">
       <div class="form-group">
@@ -27,7 +27,7 @@
     </div>
         
     <div class="title">Properties</div>
-    <div ng-show="propertiespanel.node" class="properties">
+    <div ng-show="propertiespanel.node" class="properties" ng-cloak>
       <div class="form-group" ng-repeat="p in propertiespanel.properties">
         <label for="property-{{p.name}}">{{p.obj.getTitle()}}</label>
         <div bind-html-compile="p.html"></div>
