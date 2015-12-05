@@ -1,0 +1,15 @@
+
+<input id="property-{{model.name}}"
+       class="form-control"
+       ng-change="doChange()"
+       ng-model="value"
+       ng-keydown="onKeydown($event)"
+       ng-class="{'b3-invalid': hasError}"
+       type="number">
+       <!-- ng-keypress="onKeypress($event)" -->
+
+<small ng-messages="errors">
+  <span ng-message="invalid">{{errors.invalid}}</span>
+  <span ng-message="min">{{errors.min}}</span>
+  <span ng-message="max">{{errors.max}}</span>
+</small>
