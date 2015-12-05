@@ -2,7 +2,7 @@
   'use strict';
 
   b3e.properties.Integer = b3e.property.create('Integer', {
-    value: 0,
+    value: null,
     maxValue: null,
     minValue: null,
   });
