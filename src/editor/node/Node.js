@@ -54,12 +54,16 @@
         var p = this.constructor.properties[i];
         var name = p[0];
         var Cls = p[1];
-        var params = p[2] || [];
+        var params = p[2] || {};
 
         /* jshint -W058 */
-        this.properties[name] = new (Function.prototype.bind.apply(Cls, params));
-        this.properties[name].name = name;
-
+        var property = new (Function.prototype.bind.apply(Cls, [this]));
+        this.properties[name] = property;
+        property.name = name;
+        for (var key in params) {
+          property[key] = params[key];
+        }
+        property.onInitialize();
       }
     },
 

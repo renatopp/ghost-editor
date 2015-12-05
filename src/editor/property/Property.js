@@ -4,14 +4,15 @@
   "use strict";
 
   var Property = new JS.Class('Property', {
+    node: null,
     name: null,
     title: null,
     category: null,
     description: null,
+    value: null,
 
-    initialize: function(title, description) {
-      this.title = title;
-      this.description = description;
+    initialize: function(node) {
+      this.node = node;
     },
 
     getTitle: function() {
@@ -23,16 +24,18 @@
     },
 
     fromJson: function(data) {
-
+      this.value = data;
     },
 
     toJson: function() {
-
+      return this.value;
     },
 
     toValue: function() {
-      return '';
-    }
+      return this.value;
+    },
+
+    onInitialize: function() {}
   });
   b3e.property.Property = Property;
 
