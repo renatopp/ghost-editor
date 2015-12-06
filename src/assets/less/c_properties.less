@@ -10,10 +10,15 @@
   }
 
   label {
+    .font-base;
+
     display: block;
     text-transform: uppercase;
     color: @color-light3;
-    .font-base;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   textarea {
@@ -21,6 +26,7 @@
   }
 
   input {
+    color: @color-dark4;
     transition: 200ms ease all;
 
     &.b3-invalid {
@@ -39,25 +45,98 @@
         color: @color-dark4;
       }
     }
-    &+small {
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-      display: block;
-      font-size: 0.72em;
-      line-height: 0.9em;
-      padding: 5px 6px;
-      height: 20px;
-      transition: 200ms ease all;
-      transform-origin: top;
+  }
 
-      &.ng-active {
-        transform: rotateX(0deg);
-        transform: scaleY(1);
+  textarea+small,
+  input+small {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: block;
+    font-size: 0.72em;
+    line-height: 0.9em;
+    padding: 5px 6px;
+    height: 20px;
+    transition: 200ms ease all;
+    transform-origin: top;
+
+    &.ng-active {
+      transform: rotateX(0deg);
+      transform: scaleY(1);
+    }
+    &.ng-inactive {
+      transform: rotateX(-90deg);
+      transform: scaleY(0);
+    }
+  }
+
+  .property-boolean {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  
+    &-element {
+      background-color: @color-light1;
+      border: 1px solid @color-light3;
+      color: @color-dark4;
+      padding: 5px 5px;
+      border-radius: 5px;
+      height: 32px;
+      overflow: hidden;
+      transition: 200ms ease all;
+
+      &:hover {
+        -webkit-box-shadow: 0px 0px 5px 0px fadeout(@color-blue, 10%);
+        -moz-box-shadow: 0px 0px 5px 0px fadeout(@color-blue, 10%);
+        box-shadow: 0px 0px 5px 0px fadeout(@color-blue, 10%);
       }
-      &.ng-inactive {
-        transform: rotateX(-90deg);
-        transform: scaleY(0);
+    
+      span {
+        transition: 100ms ease all;
+
+        &.ng-hide-add {
+          position: absolute;
+          opacity: 1;
+          margin-top: 0;
+        }
+        &.ng-hide-add-active {
+          position: absolute;
+          opacity: 0;
+          margin-top: -30px;
+        }
+        &.ng-hide-remove {
+          position: absolute;
+          opacity: 0;
+          margin-top: 30px;
+        }
+        &.ng-hide-remove-active {
+          position: absolute;
+          opacity: 1;
+          margin-top: 0;
+        }
       }
+
+      &.checked:before {
+        background-color: @color-green;
+      }
+
+      &:before {
+        transition: 100ms ease all;
+        content: "";
+        display: inline-block;
+        border-radius: 5px;
+        float: left;
+        width: 21px;
+        height: 21px;
+        margin-right: 10px;
+        background-color: @color-light3;
+      }
+    }
+
+    input {
+      opacity: 0;
+      position: absolute;
     }
   }
 }
