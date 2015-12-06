@@ -1,5 +1,10 @@
 # CHANGES
 
+## 0.5.0-dev
+
+- Property now have node reference.
+- Properties implemented: Float, Integer, String, Text, Boolean and Choice.
+
 ## 0.4.0-dev
 
 - Improvements to the building tasks.
