@@ -4,6 +4,8 @@
 
 - Property now have node reference.
 - Properties implemented: Float, Integer, String, Text, Boolean and Choice.
+- Nodes implemented: Sequence, Parallel, Prallel Selector, Priority Selector,
+  Random Sequence, Selector, Selector Evaluator, Step Iterator and Switch.
 
 ## 0.4.0-dev
 
