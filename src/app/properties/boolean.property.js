@@ -30,9 +30,9 @@
       };
 
       // EVENTS ---------------------------------------------------------------
-      $scope.doChange = function() {
+      $scope.doChange = function(value) {
         // change value
-        model.value = $scope.value;
+        model.value = $scope.value = value;
         onChange();
       };
 

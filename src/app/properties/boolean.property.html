@@ -1,7 +1,7 @@
 <div class="property-boolean">
   <div
     class="property-boolean-element"
-    ng-click="value=!value"
+    ng-click="doChange(!value)"
     ng-class="{'checked':value}">
     <span ng-show="value">Yes</span>
     <span ng-hide="value">No</span>
@@ -10,7 +10,6 @@
   <input id="property-{{model.name}}"
          type="checkbox"
          class="onoffswitch-checkbox"
-         ng-model="value"
-         ng-change="doChange()">
+         ng-model="value">
   <small></small>
 </div>
