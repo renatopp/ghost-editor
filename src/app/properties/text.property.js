@@ -21,7 +21,8 @@
                         class="form-control" \
                         ng-change="doChange()" \
                         ng-model="value" \
-                        ng-keydown="onKeydown($event)"><small></small>';
+                        ng-keydown="onKeydown($event)"></textarea> \
+                        <small></small>';
     }
 
     function linkFunction($scope, $element, $attrs, $ctrl) {
