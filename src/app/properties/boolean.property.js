@@ -25,7 +25,6 @@
 
       // INITIALIZE -----------------------------------------------------------
       var initialize = function() {
-        console.log(model);
         $scope.model = model;
         $scope.value = model.value;
       };
