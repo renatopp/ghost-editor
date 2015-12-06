@@ -3,6 +3,6 @@
         ng-model="value"
         ng-change="doChange()"
         ng-options="opt.label for opt in options track by opt.id">
-  <option value=""></option>
+  <option value="" ng-if="model.allowNull"></option>
 </select>
 <small></small>
