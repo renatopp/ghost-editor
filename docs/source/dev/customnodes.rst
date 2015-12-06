@@ -64,7 +64,7 @@ The `create` function receives the node name and category as obligatory argument
       description: 'You may use a long description here.',
       properties: [
         ['property name': b3e.properties.String],
-        ['other prop': b3e.properties.Sample, [param1, param2]],
+        ['other prop': b3e.properties.Sample, {param1:value1, param2:value2}],
       ],
       maxInConnections: -1,
       maxOutConnections: 2,
