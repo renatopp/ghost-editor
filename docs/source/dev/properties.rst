@@ -47,6 +47,7 @@ Json example::
 
 
 
+-------
 Integer
 -------
 
@@ -75,6 +76,7 @@ Json example::
 
 
 
+-----
 Float
 -----
 
@@ -101,7 +103,69 @@ Json example::
     "my-float": 0.0
 
 
+------------
+IntegerRange
+------------
 
+This property represents an integer value but uses a range (slider) picker as widget.
+
+**Parameters**:
+
+- *value (integer)*: the property value. Default to `0`.
+- *minValue (integer)*: the minimum allowed value. Default to `0`.
+- *maxValue (integer)*: the maximum allowed value. Default to `10`.
+- *step (integer)*: the step value of the slider control. Default to `1`.
+- *enforceStep (boolean)*: wheter if the widget must enforce the value to be a multiple of the step. Default to `true`.
+
+Usage example::
+
+    ['my-integer-range', b3e.properties.IntegerRange, {
+      value: 0,
+      minValue: 0,
+      maxValue: 10,
+      step: 1,
+      enforceStep: true
+    }]
+
+**Json format**: <integer>
+
+Json example::
+
+    "my-integer-range": 0
+
+
+------------
+FloatRange
+------------
+
+This property represents an float value but uses a range (slider) picker as widget.
+
+**Parameters**:
+
+- *value (float)*: the property value. Default to `0.0`.
+- *minValue (float)*: the minimum allowed value. Default to `0.0`.
+- *maxValue (float)*: the maximum allowed value. Default to `1.0`.
+- *step (float)*: the step value of the slider control. Default to `0.1`.
+- *enforceStep (boolean)*: wheter if the widget must enforce the value to be a multiple of the step. Default to `true`.
+
+Usage example::
+
+    ['my-float-range', b3e.properties.FloatRange, {
+      value: 0.0,
+      minValue: 0.0,
+      maxValue: 1.0,
+      step: 0.1,
+      enforceStep: true
+    }]
+
+**Json format**: <float>
+
+Json example::
+
+    "my-float-range": 0.0
+
+
+-------
 Boolean
 -------
 
@@ -125,6 +189,7 @@ Json example::
 
 
 
+------
 Choice
 ------
 
