@@ -1,0 +1,29 @@
+<div ng-class="{'b3-invalid': hasError}">
+  <div class="c-8">
+    <input id="property-{{model.name}}-range"
+           class="form-control"
+           type="range"
+           min="{{minValue}}"
+           max="{{maxValue}}"
+           step="{{step}}"
+           ng-change="doChangeRange()"
+           ng-model="valueRange"
+           ng-class="{'b3-invalid': hasError}">
+  </div>
+  <div class="c-1">
+  </div>
+  <div class="c-3">
+    <input id="property-{{model.name}}"
+           class="form-control"
+           type="number"
+           ng-change="doChange()"
+           ng-model="value"
+           ng-keydown="onKeydown($event)">
+  </div>
+</div>
+<small ng-messages="errors">
+  <span ng-message="invalid">{{errors.invalid}}</span>
+  <span ng-message="min">{{errors.min}}</span>
+  <span ng-message="max">{{errors.max}}</span>
+  <span ng-message="step">{{errors.step}}</span>
+</small>
