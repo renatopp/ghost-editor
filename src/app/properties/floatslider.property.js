@@ -58,10 +58,6 @@
           errors.max = 'Number cannot be greater than '+model.maxValue+'.';
         }
 
-        if (model.maxValue !== null && v > model.maxValue) {
-          errors.max = 'Number cannot be greater than '+model.maxValue+'.';
-        }
-
         if (model.enforceStep) {
           var temp = (v/model.step).toFixed(2);
           if (parseInt(temp) !== parseFloat(temp)) {
