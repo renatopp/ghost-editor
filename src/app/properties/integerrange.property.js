@@ -20,21 +20,19 @@
       // The property model
       var model = $parse($attrs.ngModel)($scope);
 
-      // The property input
-      var input = $element.children()[0];
-
       // On change callback (from propertiespanel controller)
       var onChange = $parse($attrs.ngChange)($scope);
 
       // INITIALIZE -----------------------------------------------------------
       var initialize = function() {
-        $scope.model      = model;
-        $scope.value      = model.value;
-        $scope.valueRange = model.value;
-        $scope.minValue   = model.minValue;
-        $scope.maxValue   = model.maxValue;
-        $scope.step       = model.step;
-        $scope.errors     = {};
+        $scope.model        = model;
+        $scope.startValue    = model.startValue;
+        $scope.endValue      = model.endValue;
+        $scope.minStartValue = model.minStartValue;
+        $scope.maxStartValue = model.maxStartValue;
+        $scope.minEndValue   = model.minEndValue;
+        $scope.maxEndValue   = model.maxEndValue;
+        $scope.errors       = {};
         validate();
       };
 
@@ -43,29 +41,35 @@
         return v===null || (/^(-?)([0-9])*$/).test(''+v);
       };
       var validate = function() {
-        var v = $scope.value;
+        var sv = $scope.startValue;
+        var ev = $scope.endValue;
         var errors = {};
 
-        if (typeof v === 'undefined' || !isInt(v)) {
-          errors.invalid = 'Invalid value.';
+        if (typeof sv === 'undefined' || !isInt(sv)) {
+          errors.invalid = 'Invalid START value.';
+        }
+        if (typeof ev === 'undefined' || !isInt(ev)) {
+          errors.invalid = 'Invalid END value.';
         }
 
-        if (model.minValue !== null && v < model.minValue) {
-          errors.min = 'Number cannot be lesser than '+model.minValue+'.';
+        if (ev < sv) {
+          errors.order = 'END must be greater than START.';
         }
 
-        if (model.maxValue !== null && v > model.maxValue) {
-          errors.max = 'Number cannot be greater than '+model.maxValue+'.';
+        if (model.minStartValue !== null && sv < model.minStartValue) {
+          errors.minStart = 'START value cannot be lesser than '+model.minStartValue+'.';
         }
 
-        if (model.maxValue !== null && v > model.maxValue) {
-          errors.max = 'Number cannot be greater than '+model.maxValue+'.';
+        if (model.maxStartValue !== null && sv > model.maxStartValue) {
+          errors.maxStart = 'START value cannot be greater than '+model.maxStartValue+'.';
         }
 
-        if (model.enforceStep) {
-          if (v%model.step !== 0) {
-            errors.step = 'Number must respect the step of '+model.step+'.';
-          }
+        if (model.minEndValue !== null && ev < model.minEndValue) {
+          errors.minEnd = 'END value cannot be lesser than '+model.minEndValue+'.';
+        }
+
+        if (model.maxEndValue !== null && ev > model.maxEndValue) {
+          errors.maxEnd = 'END value cannot be greater than '+model.maxEndValue+'.';
         }
 
         $scope.errors = errors;
@@ -79,17 +83,8 @@
         if (!validate()) return;
         
         // change value
-        model.value = $scope.value;
-        $scope.valueRange = parseInt($scope.value);
-        onChange();
-      };
-      $scope.doChangeRange = function() {
-        // validate
-        if (!validate()) return;
-
-        // change value
-        model.value = parseInt($scope.valueRange);
-        $scope.value = parseInt($scope.valueRange);
+        model.startValue = $scope.startValue;
+        model.endValue = $scope.endValue;
         onChange();
       };
       $scope.onKeydown = function(e) {
