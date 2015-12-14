@@ -103,11 +103,11 @@ Json example::
     "my-float": 0.0
 
 
-------------
-IntegerRange
-------------
+-------------
+IntegerSlider
+-------------
 
-This property represents an integer value but uses a range (slider) picker as widget.
+This property represents an integer value but uses a slider picker as widget.
 
 **Parameters**:
 
@@ -119,7 +119,7 @@ This property represents an integer value but uses a range (slider) picker as wi
 
 Usage example::
 
-    ['my-integer-range', b3e.properties.IntegerRange, {
+    ['my-integer-slider', b3e.properties.IntegerSlider, {
       value: 0,
       minValue: 0,
       maxValue: 10,
@@ -131,14 +131,14 @@ Usage example::
 
 Json example::
 
-    "my-integer-range": 0
+    "my-integer-slider": 0
 
 
-------------
-FloatRange
-------------
+-----------
+FloatSlider
+-----------
 
-This property represents an float value but uses a range (slider) picker as widget.
+This property represents an float value but uses a slider picker as widget.
 
 **Parameters**:
 
@@ -150,7 +150,7 @@ This property represents an float value but uses a range (slider) picker as widg
 
 Usage example::
 
-    ['my-float-range', b3e.properties.FloatRange, {
+    ['my-float-slider', b3e.properties.FloatSlider, {
       value: 0.0,
       minValue: 0.0,
       maxValue: 1.0,
@@ -163,6 +163,72 @@ Usage example::
 Json example::
 
     "my-float-range": 0.0
+
+
+------------
+IntegerRange
+------------
+
+This property is used to represent a range `[start, end]` of integers.
+
+**Parameters**:
+
+- *startValue (integer)*: initial value of the range. Default to `0`.
+- *endValue (integer)*: final value of the range. Default to `1`.
+- *minStartValue (integer)*: minimum of the initial range value. Default to `null`.
+- *maxStartValue (integer)*: maximum of the initial range value. Default to `null`.
+- *minEndValue (integer)*: minimum of the final range value. Default to `null`.
+- *maxEndValue (integer)*: maximum of the final range value. Default to `null`.
+
+Usage example::
+
+    ['my-integer-range', b3e.properties.IntegerRange, {
+      startValue    : -100,
+      endValue      : 100,
+      minStartValue : -1000,
+      maxStartValue : 0,
+      minEndValue   : 0,
+      maxEndValue   : 1000
+    }]
+
+**Json format**: [<start:integer>, <start:integer>]
+
+Json example::
+
+  'my-integer-range': [-100, 100]
+
+
+----------
+FloatRange
+----------
+
+This property is used to represent a range `[start, end]` of floats.
+
+**Parameters**:
+
+- *startValue (float)*: initial value of the range. Default to `0`.
+- *endValue (float)*: final value of the range. Default to `1`.
+- *minStartValue (float)*: minimum of the initial range value. Default to `null`.
+- *maxStartValue (float)*: maximum of the initial range value. Default to `null`.
+- *minEndValue (float)*: minimum of the final range value. Default to `null`.
+- *maxEndValue (float)*: maximum of the final range value. Default to `null`.
+
+Usage example::
+
+    ['my-float-range', b3e.properties.FloatRange, {
+      startValue    : -100,
+      endValue      : 100,
+      minStartValue : -1000,
+      maxStartValue : 0,
+      minEndValue   : 0,
+      maxEndValue   : 1000
+    }]
+
+**Json format**: [<start:float>, <start:float>]
+
+Json example::
+
+  'my-float-range': [-100, 100]
 
 
 -------
