@@ -1,5 +1,10 @@
 # CHANGES
 
+## 0.6.0-dev
+
+- New properties: IntegerSlider, FloatSlider, IntegerRange and FloatRange.
+- New nodes: And, Or, Noise, Remap, ReturnFailure, ReturnSuccess, Timer, UntilFailure, UntilSuccess, Wait.
+
 ## 0.5.0-dev
 
 - Property now have node reference.
