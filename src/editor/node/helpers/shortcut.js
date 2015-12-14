@@ -7,7 +7,7 @@
     kwargs = kwargs || {};
 
     // Default
-    var title = kwargs.title || name;
+    var title = kwargs.title;
     var description = kwargs.description || null;
     var properties = kwargs.properties || [];
     var maxInConnections = -1;
@@ -51,6 +51,7 @@
     if (kwargs.onOutDisconnected) _prototype.onOutDisconnected = kwargs.onOutDisconnected;
     if (kwargs.onPropertyChange) _prototype.onPropertyChange = kwargs.onPropertyChange;
     if (kwargs.onRemove) _prototype.onRemove = kwargs.onRemove;
+    if (kwargs.getTitle) _prototype.getTitle = kwargs.getTitle;
 
     var Cls = new JS.Class(name, b3e.node.Node, _prototype);
     Cls.extend(_static);
