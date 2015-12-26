@@ -4,6 +4,7 @@
 
 - New images for the following nodes: Action, And, Filter, Fuzz, HasReceivedMessage, Idle, Noise, Or, remap, Repeater, RestartBehaviorTree, ReturnFailure, ReturnSuccess, StartBehaviorTree, StopBehaviorTree, TaskGuard, Timer, Timeout, Timer, UntilFailure, UntilSuccess, and Wait.
 - New properties: Vector2, Vector3, and Vector4.
+- Hiding properties fieldset if selected node does not have any property.
 
 
 ## 0.6.0-dev
