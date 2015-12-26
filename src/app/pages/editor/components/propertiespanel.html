@@ -26,11 +26,12 @@
       </div>
     </div>
         
-    <div class="title">Properties</div>
-    <div ng-show="propertiespanel.node" class="properties" ng-cloak>
-      <div class="form-group" ng-repeat="p in propertiespanel.properties">
-        <label for="property-{{p.name}}" title="{{p.name}}">{{p.obj.getTitle()}}</label>
-        <div bind-html-compile="p.html"></div>
+    <div ng-show="propertiespanel.properties.length" class="title">Properties</div>
+      <div ng-show="propertiespanel.node" class="properties" ng-cloak>
+        <div class="form-group" ng-repeat="p in propertiespanel.properties">
+          <label for="property-{{p.name}}" title="{{p.name}}">{{p.obj.getTitle()}}</label>
+          <div bind-html-compile="p.html"></div>
+        </div>
       </div>
     </div>
   </form>
