@@ -1,0 +1,25 @@
+<div ng-class="{'b3-invalid': hasError}">
+  <div class="c-6">
+    <label for="property-{{model.name}}-x" class="b3-inline-label">x</label>
+    <input id="property-{{model.name}}-x"
+           class="form-control"
+           type="number"
+           ng-change="doChange()"
+           ng-model="x"
+           ng-keydown="onKeydown($event)">
+  </div>
+  <div class="c-6">
+    <label for="property-to-{{model.name}}-y" class="b3-inline-label">y</label>
+    <input id="property-to-{{model.name}}-y"
+           class="form-control"
+           type="number"
+           ng-change="doChange()"
+           ng-model="y"
+           ng-keydown="onKeydown($event)">
+  </div>
+</div>
+
+<small ng-messages="errors">
+  <span ng-message="invalid_x">{{errors.invalid_x}}</span>
+  <span ng-message="invalid_y">{{errors.invalid_y}}</span>
+</small>
