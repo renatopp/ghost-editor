@@ -1,5 +1,10 @@
 # CHANGES
 
+## 0.7.0-dev
+
+- New images for the following nodes: Action, And, Filter, Fuzz, HasReceivedMessage, Idle, Noise, Or, remap, Repeater, RestartBehaviorTree, ReturnFailure, ReturnSuccess, StartBehaviorTree, StopBehaviorTree, TaskGuard, Timer, Timeout, Timer, UntilFailure, UntilSuccess, Wait.
+
+
 ## 0.6.0-dev
 
 - New properties: IntegerSlider, FloatSlider, IntegerRange and FloatRange.
