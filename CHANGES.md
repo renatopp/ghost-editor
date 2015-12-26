@@ -2,13 +2,14 @@
 
 ## 0.7.0-dev
 
-- New images for the following nodes: Action, And, Filter, Fuzz, HasReceivedMessage, Idle, Noise, Or, remap, Repeater, RestartBehaviorTree, ReturnFailure, ReturnSuccess, StartBehaviorTree, StopBehaviorTree, TaskGuard, Timer, Timeout, Timer, UntilFailure, UntilSuccess, Wait.
+- New images for the following nodes: Action, And, Filter, Fuzz, HasReceivedMessage, Idle, Noise, Or, remap, Repeater, RestartBehaviorTree, ReturnFailure, ReturnSuccess, StartBehaviorTree, StopBehaviorTree, TaskGuard, Timer, Timeout, Timer, UntilFailure, UntilSuccess, and Wait.
+- New properties: Vector2, Vector3, and Vector4.
 
 
 ## 0.6.0-dev
 
 - New properties: IntegerSlider, FloatSlider, IntegerRange and FloatRange.
-- New nodes: And, Or, Noise, Remap, ReturnFailure, ReturnSuccess, Timer, UntilFailure, UntilSuccess, Wait.
+- New nodes: And, Or, Noise, Remap, ReturnFailure, ReturnSuccess, Timer, UntilFailure, UntilSuccess, and Wait.
 
 ## 0.5.0-dev
 
