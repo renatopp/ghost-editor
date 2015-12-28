@@ -3,6 +3,7 @@
 ## 0.7.0-dev
 
 - New images for the following nodes: Action, And, Filter, Fuzz, HasReceivedMessage, Idle, Noise, Or, remap, Repeater, RestartBehaviorTree, ReturnFailure, ReturnSuccess, StartBehaviorTree, StopBehaviorTree, TaskGuard, Timer, Timeout, Timer, UntilFailure, UntilSuccess, and Wait.
+- New nodes: GetFieldValue, GetPropertyValue, InvokeMethod, SetFieldValue, SetPropertyValue, Idle, HasReceivedEvent, StopBehaviorTree, StartBehaviorTree, RestartBehaviorTree, SetSharedBool, SetSharedColor, SetSharedFloat, SetSharedInt, SetSharedObject, SetSharedRect, SetSharedString, SetSharedVector2, SetSharedVector3, SetSharedVector4, BoolFlip, BoolOperator, FloatAbsolute, FloatClamp, FloatOperator, IntegerAbsolute, IntegerClamp, IntegerOperator, Lerp, LerpAngle, RandomBool, RandomFloat, and RandomInteger.
 - New properties: Vector2, Vector3, and Vector4.
 - Hiding properties fieldset if selected node does not have any property.
 
