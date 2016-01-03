@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="32mm"
+   height="32mm"
+   viewBox="0 0 113.38583 113.38583"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="Vector3.svg">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Send"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4158"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="18.354006"
+     inkscape:cy="73.55669"
+     inkscape:document-units="px"
+     inkscape:current-layer="g4144"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-938.9764)">
+    <g
+       id="g4144"
+       transform="translate(-0.30056714,3.7144676)">
+      <g
+         id="g4218"
+         transform="translate(9.5498795e-7,-3.3000345)">
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:6.00000048;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Send)"
+           d="m 10.962019,975.51756 84.575619,0.0762"
+           id="path4190"
+           inkscape:connector-curvature="0"
+           inkscape:transform-center-x="44.077586"
+           inkscape:transform-center-y="-0.032441731"
+           sodipodi:nodetypes="cc" />
+        <g
+           id="text4777"
+           style="font-style:normal;font-weight:normal;font-size:34.57740021px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1">
+          <path
+             id="path4208"
+             style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro Heavy'"
+             d="m 3.2477759,1012.9723 16.3205331,6.2239 0,-4.8408 -5.601539,-1.7289 -4.7025265,-1.5906 0,-0.1383 4.7025265,-1.5905 5.601539,-1.7289 0,-4.8408 -16.3205331,6.2239 0,4.011 z"
+             inkscape:connector-curvature="0" />
+          <path
+             id="path4210"
+             style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro Heavy'"
+             d="m 21.057298,1022.4465 6.362241,0 1.659716,-4.011 c 0.484083,-1.1756 0.968167,-2.3513 1.45225,-3.7344 l 0.13831,0 c 0.553238,1.3831 1.037322,2.5588 1.59056,3.7344 l 1.798025,4.011 6.638861,0 -6.085622,-11.2723 5.739848,-11.20304 -6.362242,0 -1.313941,3.66524 c -0.414929,1.0373 -0.899012,2.2821 -1.383096,3.7343 l -0.138309,0 c -0.622394,-1.4522 -1.106477,-2.697 -1.590561,-3.7343 l -1.521405,-3.66524 -6.638861,0 5.739848,10.92644 -6.085622,11.5489 z"
+             inkscape:connector-curvature="0" />
+          <path
+             id="path4212"
+             style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro Heavy'"
+             d="m 54.764321,1022.4465 5.947313,0 0,-7.7454 6.77717,-14.72994 -6.223932,0 -1.659715,4.70254 c -0.587816,1.6943 -1.175632,3.2503 -1.763447,5.0137 l -0.13831,0 c -0.587816,-1.7634 -1.141054,-3.3194 -1.694293,-5.0137 l -1.659715,-4.70254 -6.362241,0 6.77717,14.72994 0,7.7454 z"
+             inkscape:connector-curvature="0" />
+          <path
+             id="path4214"
+             style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro Heavy'"
+             d="m 75.575052,1022.4465 16.597152,0 0,-4.9792 -9.266743,0 9.197588,-13.9001 0,-3.59604 -15.628985,0 0,4.97914 8.298577,0 -9.197589,13.9001 0,3.5961 z"
+             inkscape:connector-curvature="0" />
+          <path
+             id="path4216"
+             style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro Heavy'"
+             d="m 110.73919,1008.9613 -16.320531,-6.2239 0,4.8408 5.601541,1.7289 4.70252,1.5905 0,0.1383 -4.70252,1.5906 -5.601541,1.7289 0,4.8408 16.320531,-6.2239 0,-4.011 z"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
