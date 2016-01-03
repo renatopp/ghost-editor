@@ -1,5 +1,10 @@
 # CHANGES
 
+## 0.7.1-dev
+
+- New images for Vector2 and Vector3 nodes.
+- New nodes: Vector2ClampMagnitude, Vector2Distance, Vector2Dot, Vector2GetMagnitude, Vector2GetRightVector, Vector2GetSquaredMagnitude, Vector2GetUpVector, Vector2GetVector3, Vector2GetXY, Vector2Lerp, Vector2MoveTowards, Vector2Multiply, Vector2Normalize, Vector2Operator, Vector2SetValue, Vector2SetXY, Vector3Angle, Vector3ClampMagnitude, Vector3Distance, Vector3Dot, Vector3ForwardVector, Vector3GetMagnitude, Vector3GetRightVector, Vector3GetSquaredMagnitude, Vector3GetUpVector, Vector3GetVector2, Vector3GetXYZ, Vector3Lerp, Vector3MoveTowards, Vector3Multiply, Vector3Normalize, Vector3Operator, Vector3RotateTowards, Vector3SetValue, and Vector3SetXYZ.
+
 ## 0.7.0-dev
 
 - New images for the following nodes: Action, And, Filter, Fuzz, HasReceivedMessage, Idle, Noise, Or, remap, Repeater, RestartBehaviorTree, ReturnFailure, ReturnSuccess, StartBehaviorTree, StopBehaviorTree, TaskGuard, Timer, Timeout, Timer, UntilFailure, UntilSuccess, and Wait.
