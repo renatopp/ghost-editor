@@ -3,6 +3,7 @@
 
   b3e.nodes.Vector2GetMagnitude = b3e.node.create('Vector2GetMagnitude',
                                                   b3e.MODULATOR, {
+    group: 'vector2',
     title: '(Vector2) Get Magnitude',
   });
 })();
