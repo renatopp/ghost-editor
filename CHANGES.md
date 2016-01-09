@@ -1,9 +1,16 @@
 # CHANGES
 
+## 0.8.0-dev
+
+- New input nodes: People, Objects, SoundEvent, SalienceEvent, GestureEvent, SalienceEvent, ArrivalEvent, DepartureEvent, Emotion, BlenderControl, WebUiControl, RawPerception, NLP, ROSInput and ROSSignal.
+- New output nodes: ROSOutput, PlayAnimation, PlayQueuedAnimation, BlendAnimation, CrossFadeAnimation, CrossFadeQueuedAnimation, LookAtAnimation, StopAnimation, PlayAudio and TTSPlay.
+
+
 ## 0.7.1-dev
 
 - New images for Vector2 and Vector3 nodes.
 - New nodes: Vector2ClampMagnitude, Vector2Distance, Vector2Dot, Vector2GetMagnitude, Vector2GetRightVector, Vector2GetSquaredMagnitude, Vector2GetUpVector, Vector2GetVector3, Vector2GetXY, Vector2Lerp, Vector2MoveTowards, Vector2Multiply, Vector2Normalize, Vector2Operator, Vector2SetValue, Vector2SetXY, Vector3Angle, Vector3ClampMagnitude, Vector3Distance, Vector3Dot, Vector3ForwardVector, Vector3GetMagnitude, Vector3GetRightVector, Vector3GetSquaredMagnitude, Vector3GetUpVector, Vector3GetVector2, Vector3GetXYZ, Vector3Lerp, Vector3MoveTowards, Vector3Multiply, Vector3Normalize, Vector3Operator, Vector3RotateTowards, Vector3SetValue, and Vector3SetXYZ.
+
 
 ## 0.7.0-dev
 
@@ -18,12 +25,14 @@
 - New properties: IntegerSlider, FloatSlider, IntegerRange and FloatRange.
 - New nodes: And, Or, Noise, Remap, ReturnFailure, ReturnSuccess, Timer, UntilFailure, UntilSuccess, and Wait.
 
+
 ## 0.5.0-dev
 
 - Property now have node reference.
 - Properties implemented: Float, Integer, String, Text, Boolean and Choice.
 - Nodes implemented: Sequence, Parallel, Prallel Selector, Priority Selector,
   Random Sequence, Selector, Selector Evaluator, Step Iterator and Switch.
+
 
 ## 0.4.0-dev
 
@@ -37,6 +46,7 @@
 
 ## 0.3.0-dev
 
+
 - New JSON format and documentation.
 - Export and import use the new JSON format.
 
@@ -48,10 +58,12 @@
 - Connection callbacks added.
 - Selection callbacks added.
 
+
 ## 0.2.1-dev
 
 - New node structure finished (new Node and Connection classes).
 - Node panel fixed.
+
 
 ## 0.2.0-dev
 
@@ -63,6 +75,7 @@
 - New build version control (updates automatically with building).
 - Small visual changes to the loading screen.
 - General restructure and improved building system.
+
 
 ## 0.1.0 (Initial Release)
 
