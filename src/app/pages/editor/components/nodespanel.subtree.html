@@ -1,0 +1,19 @@
+<a class="node-list-group"
+   ng-class="{'expanded':!group.collapsed,
+              'collapsed':group.collapsed}"
+   ng-click="nodespanel.collapseGroup(group);">
+  {{groupName}}
+</a>
+<ul ng-show="!group.collapsed">
+  <li ng-repeat="(groupName, group) in group.groups"
+      ng-include="'pages/editor/components/nodespanel.subtree.html'"></li>
+
+  <li ng-repeat="node in group.nodes">
+    <a class="no-select"
+       data-name="{{node}}"
+       b3-drag-node>
+
+       {{node}}
+    </a>
+  </li>
+</ul>

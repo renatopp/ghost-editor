@@ -9,13 +9,15 @@
     '$scope',
     '$window',
     'dialogService',
-    'notificationService'
+    'notificationService',
+    'localStorageService'
   ];
 
   function NodespanelController($scope, 
                                 $window,
                                 dialogService,
-                                notificationService) {
+                                notificationService,
+                                localStorageService) {
     
     // HEAD //
     var vm = this;
@@ -23,29 +25,80 @@
     vm.newTree = newTree;
     vm.select  = select;
     vm.remove  = remove;
+    vm.collapseGroup = collapseGroup;
     
     _create();
     _activate();
     $scope.$on('$destroy', _destroy);
 
     // BODY //
-    function _activate() {
+    function _getGroupState(fullName) {
+      var state = localStorageService.load('b3groups.'+fullName);
+      if (!state) {
+        state = {
+          collapsed: false
+        };
+      }
+
+      return state;
+    }
+    function _saveGroupState(fullName, state) {
+      localStorageService.save('b3groups.'+fullName, state);
+    }
+
+    function _createGroup(groupName, fullName) {
+      fullName = groupName;
+      return {
+        groups    : {},
+        nodes     : [],
+        collapsed : _getGroupState(fullName).collapsed,
+        name      : groupName,
+        fullName  : fullName
+      };
+    }
+    function _insertToGroup(node, groupName, groups, fullName) {
+      if (!groupName) return;
+
+      var i = groupName.indexOf('.');
+      var nextGroup = '';
+      if (i >= 0) {
+        nextGroup = groupName.substring(i+1);
+        groupName = groupName.substring(0, i);
+      }
+
+      // We use this to get the collapsed status from localStorage 
+      if (!fullName) {
+        fullName = groupName;
+      } else {
+        fullName = fullName+'.'+groupName;
+      }
+
+      if (!groups[groupName]) {
+        groups[groupName] = _createGroup(groupName, fullName);
+      }
+      var group = groups[groupName];
+
+      if (nextGroup) {
+        _insertToGroup(node, nextGroup, group.groups, fullName);
+      } else {
+        group.nodes.push(node.prototype.name);
+      }
+    }
+    
+    function _activate() {  
       vm.trees = [];
       vm.nodes = {
-        composite : [],
-        modulator : [],
-        input     : [],
-        output    : [],
+        'composites' : _createGroup('composites'),
+        'inputs'     : _createGroup('inputs'),
+        'modulators' : _createGroup('modulators'),
+        'outputs'    : _createGroup('outputs'),
       };
 
       for (var key in b3e.nodes) {
         var node = b3e.nodes[key];
-        if (node.prototype.category === b3e.ROOT) continue;
+        if (node.category === b3e.ROOT) continue;
 
-        var list = vm.nodes[node.prototype.category];
-        if (!list) continue;
-
-        list.push(node.prototype.name);
+        _insertToGroup(node, node.category+'s.'+node.group, vm.nodes);
       }
 
       var project = $window.editor.project.get();
@@ -65,7 +118,7 @@
     }
 
     function _create() {
-      $window.editor.on('nodechanged', _event);
+      // $window.editor.on('nodechanged', _event);
       $window.editor.on('treeadded', _event);
       $window.editor.on('treeselected', _event);
       $window.editor.on('treeremoved', _event);
@@ -74,7 +127,7 @@
 
     function _destroy() {
       $window.editor.off('treeadded', _event);
-      $window.editor.off('nodechanged', _event);
+      // $window.editor.off('nodechanged', _event);
       $window.editor.off('treeselected', _event);
       $window.editor.off('treeremoved', _event);
       $window.editor.off('treeimported', _event);
@@ -83,6 +136,16 @@
     function newTree() {
       var p = $window.editor.project.get();
       p.trees.add();
+    }
+
+    function collapseGroup(group) {
+      console.log(group);
+
+      var state = _getGroupState(group.fullName);
+      state.collapsed = !state.collapsed;
+      _saveGroupState(group.fullName, state);
+
+      group.collapsed = state.collapsed;
     }
 
     function select(id) {

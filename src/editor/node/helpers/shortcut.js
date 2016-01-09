@@ -10,6 +10,7 @@
     var title = kwargs.title;
     var description = kwargs.description || null;
     var properties = kwargs.properties || [];
+    var group = kwargs.group || '';
     var maxInConnections = -1;
     var maxOutConnections = -1;
 
@@ -22,6 +23,7 @@
     // Static
     var _static = {
       title: title,
+      group: group,
       category: category,
       description: description,
       properties: properties,
@@ -32,6 +34,7 @@
     // Prototype
     var _prototype = {
       name: name,
+      group: group,
       title: title,
       category: category,
       description: description,

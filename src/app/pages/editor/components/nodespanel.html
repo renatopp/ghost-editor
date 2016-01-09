@@ -1,16 +1,4 @@
 <div ng-controller="NodespanelController as nodespanel" class="full-height side-panel">
-<!--   
-  <nav class="panel-operations">
-    <div class="panel-operations-content">
-      <ul>
-        <li><a class="btn-success" ng-click="nodespanel.newTree();"><i class="fa fa-plus"></i> New tree</a></li>
-        <li><a class="btn-success" ui-sref="editor.editnode"><i class="fa fa-plus"></i> New node</a></li>
-      </ul>
-    </div>
-  </nav>
- -->
-  
-
   <div class="node-list">
     <div class="title">
       <a class="new btn btn-link btn-xs" 
@@ -52,24 +40,12 @@
     <div class="title">Nodes</div>
 
     <div class="node-list-content">
-      <div ng-repeat="(category, nodes) in nodespanel.nodes" class="node-list-category">
-        <div ng-click="" class="node-list-title">{{category}}s</div>
-        <ul>
-          <li ng-repeat="node in nodes">
-            <a class="no-select"
-               data-name="{{node}}"
-               b3-drag-node>
-
-               {{node}}
-            </a>
-          </li>
-        </ul>
-        <ul class="empty" ng-hide="nodes.length">
-          <li>empty</li>
-        </ul>
-      </div>
-      
+      <ul>
+        <li ng-repeat="(groupName, group) in nodespanel.nodes" ng-include="'pages/editor/components/nodespanel.subtree.html'"></li>
+      </ul>
     </div>
   </div>
   
 </div>
+
+

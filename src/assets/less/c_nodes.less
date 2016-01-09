@@ -6,7 +6,57 @@
 
   &-content {
     padding: 0px @padding-small;
+
+    ul {
+      margin: 0 0 10px 0;
+      padding: 0;
+
+      ul {
+        margin: 0 0 3px 0;
+      }
+    }
+
+    li {
+      list-style: none;
+      padding-left: 15px;
+
+
+      li {
+        padding-left: 10px;
+
+        a {
+          padding: 2px @padding-small;
+          display: block;
+          color: @color-light1;
+          &:hover {
+            color: @color-blue;
+          }
+        }
+      }
+    }
   }
+
+  &-group {
+    font-weight: bold;
+    display: block;
+    color: @color-light1;
+    text-transform: capitalize;
+    &:hover {
+      color: lighten(@color-blue, 20%);
+    }
+
+    &.expanded:before {
+      content: "-";
+      position: absolute;
+      margin-left: -15px;
+    }
+    &.collapsed:before {
+      content: "+";
+      position: absolute;
+      margin-left: -15px;
+    }
+  }
+
 
   &-title {
     cursor: pointer;
