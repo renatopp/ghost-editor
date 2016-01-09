@@ -4,6 +4,7 @@
 
 - New input nodes: People, Objects, SoundEvent, SalienceEvent, GestureEvent, SalienceEvent, ArrivalEvent, DepartureEvent, Emotion, BlenderControl, WebUiControl, RawPerception, NLP, ROSInput and ROSSignal.
 - New output nodes: ROSOutput, PlayAnimation, PlayQueuedAnimation, BlendAnimation, CrossFadeAnimation, CrossFadeQueuedAnimation, LookAtAnimation, StopAnimation, PlayAudio and TTSPlay.
+- Nodes panel have collapsable groups (beyond node category). The group can be defined in node specification.
 
 
 ## 0.7.1-dev
