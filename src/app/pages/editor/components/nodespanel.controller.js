@@ -139,8 +139,6 @@
     }
 
     function collapseGroup(group) {
-      console.log(group);
-
       var state = _getGroupState(group.fullName);
       state.collapsed = !state.collapsed;
       _saveGroupState(group.fullName, state);
