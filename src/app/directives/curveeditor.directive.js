@@ -18,6 +18,17 @@
       var _selectedPointer = null;
       var _focus = null;
 
+      // Scope
+      $scope.controls = {
+        type: 'linear',
+        x0: 0,
+        x1: 1,
+        y0: 0,
+        y1: 1
+      };
+      $scope._doChangeControls = _doChangeControls;
+      $scope._doChangeCurve = _doChangeCurve;
+
       // D3 variables
       var d3;
       var svg;
@@ -25,7 +36,8 @@
       var data;
       var xScale;
       var yScale;
-      var xDomain = [-20, 5];
+      var curveType = 'linear';
+      var xDomain = [0, 1];
       var yDomain = [0, 1];
       var xAxisTicks;
       var yAxisTicks;
@@ -99,37 +111,51 @@
 
         g = svg.append('g');
 
-        g.append('path')
-          .classed('curve', true);
+        g.append('path').classed('guide', true);
+        g.append('path').classed('curve', true);
       }
 
       function _initializeDraw() {
         var _lastDatum = null;
         var _invalid = null;
+        var baseX = function(d, i) {
+          _invalid = !_isValidPosition(d, i);
+
+          if (_invalid) {
+            return xScale(_lastDatum.x);
+          }
+          _lastDatum = d;
+          return xScale(d.x);
+        };
+        var baseY = function(d, i) {
+          if (_invalid) {
+            return yScale(_lastDatum.y);
+          }
+          return yScale(d.y);
+        };
 
         functions = {
           linear: d3.svg.line()
-            .x(function(d, i) {
-              _invalid = !_isValidPosition(d, i);
-
-              if (_invalid) {
-                return xScale(_lastDatum.x);
-              }
-              _lastDatum = d;
-              return xScale(d.x);
-            })
-            .y(function(d, i) {
-              if (_invalid) {
-                return yScale(_lastDatum.y);
-              }
-              return yScale(d.y);
-            })
+            .x(baseX)
+            .y(baseY)
             .interpolate('linear'),
+
+          step: d3.svg.line()
+            .x(baseX)
+            .y(baseY)
+            .interpolate('step'),
+
+          smooth: d3.svg.line()
+            .x(baseX)
+            .y(baseY)
+            .interpolate('monotone'),
+
+          spline: d3.svg.line()
+            .x(baseX)
+            .y(baseY)
+            .interpolate('basis'),
         };
       }
-
-
-
 
 
 
@@ -154,7 +180,16 @@
 
       function _drawCurve() {
         var curve = g.selectAll('.curve')
-          .attr('d', functions.linear(data));
+          .attr('d', functions[curveType](data));
+
+        var guide = g.selectAll('.guide');
+        if (curveType === 'spline') {
+          guide
+            .attr('d', functions.linear(data))
+            .classed('hide', false);
+        } else {
+          guide.classed('hide', true);
+        }
       }
 
       function _drawAxes() {
@@ -385,12 +420,60 @@
         var pageX = d3.event.pageX||d3.event.clientX;
         return pageX-rect.left;
       }
+
       function _getMouseY() {
         var rect = svg[0][0].getBoundingClientRect();
         var pageY = d3.event.pageY||d3.event.clientY;
         return pageY-rect.top;
       }
 
+      function _rescale(x, y) {
+        var xF = xDomain[0];
+        var yF = yDomain[0];
+        var xT = x[0];
+        var yT = y[0];
+        var dFx = Math.abs(xDomain[0] - xDomain[1]);
+        var dFy = Math.abs(yDomain[0] - yDomain[1]);
+        var dTx = Math.abs(x[0] - x[1]);
+        var dTy = Math.abs(y[0] - y[1]);
+
+        for (var i=0; i<data.length; i++) {
+          var d = data[i];
+
+          d.x = ( (d.x-xF)/dFx )*dTx + xT;
+          d.y = ( (d.y-yF)/dFy )*dTy + yT;
+        }
+      }
+
+      function _isNumber(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+      }
+
+      // ======================================================================
+      // EVENTS
+      // ======================================================================
+      function _doChangeControls() {
+        var x0 = parseInt($scope.controls.x0);
+        var x1 = parseInt($scope.controls.x1);
+        var y0 = parseInt($scope.controls.y0);
+        var y1 = parseInt($scope.controls.y1);
+
+        if (!_isNumber(x0) || !_isNumber(x1) ||
+            !_isNumber(y0) || !_isNumber(y1)) {
+          return;
+        }
+        _rescale([x0, x1], [y0, y1]);
+        xDomain[0] = x0;
+        xDomain[1] = x1;
+        yDomain[0] = y0;
+        yDomain[1] = y1;
+
+        _draw();
+      }
+      function _doChangeCurve() {
+        curveType = $scope.controls.type;
+        _drawCurve();
+      }
     }
   }
 }());
