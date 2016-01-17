@@ -9,13 +9,14 @@
   function curveEditorDirective($window) {
     var directive = {
       restrict : 'E',
-      template : '<svg></svg>',
+      templateUrl : 'directives/curveeditor.html',
       link     : link,
     };
     return directive;
 
     function link($scope, $element, $attrs) {
       var _selectedPointer = null;
+      var _focus = null;
 
       // D3 variables
       var d3;
@@ -24,8 +25,10 @@
       var data;
       var xScale;
       var yScale;
-      var xDomain = [0, 1];
+      var xDomain = [-20, 5];
       var yDomain = [0, 1];
+      var xAxisTicks;
+      var yAxisTicks;
       var functions;
       var behaviors;
 
@@ -37,7 +40,14 @@
       var height = rawHeight - margins.top - margins.bottom;
 
       _initialize();
+
+
+      // ======================================================================
+      // INITIALIZATION
+      // ======================================================================
       function _initialize() {
+        _focus = $element.children()[1];
+
         d3 = $window.d3;
         if (!d3) {
           console.error('d3 has not been loaded.');
@@ -45,9 +55,8 @@
         }
 
         data = [
-          {x:0, y:0},
-          {x:0.5, y:0.5},
-          {x:1, y:1},
+          {x:xDomain[0], y:yDomain[0]},
+          {x:xDomain[1], y:yDomain[1]},
         ];
 
         _initializeSVG();
@@ -60,36 +69,32 @@
         svg = d3.select($element.children()[0])
           .attr('width', rawWidth)
           .attr('height', rawHeight)
-          .attr('tabindex', 1)
           .attr('viewBox', '0 0 '+rawWidth+' '+rawHeight)
           .attr('preserveAspectRatio', 'xMidYMid')
           .classed('curve-editor', true)
-          .on('keydown', _onSVGKeydown)
           .on('mousemove', _onSVGMouseMove)
           .on('mousedown', _onSVGMouseDown)
           .on('mouseup', _onSVGMouseUp);
 
+        d3.select(_focus)
+          .on('keydown', _onSVGKeydown);
+
         svg.append('g')
           .attr('transform', 'translate(0, '+(height+margins.top)+')')
           .classed('x-axis', true)
-          .classed('axis', true)
-          .classed('minor', true);
-        svg.append('g')
-          .attr('transform', 'translate(0, '+(height+margins.top)+')')
-          .classed('x-axis', true)
-          .classed('axis', true)
-          .classed('major', true);
+          .classed('axis', true);
 
         svg.append('g')
           .attr('transform', 'translate('+margins.left+', 0)')
           .classed('y-axis', true)
-          .classed('axis', true)
-          .classed('minor', true);
-        svg.append('g')
-          .attr('transform', 'translate('+margins.left+', 0)')
-          .classed('y-axis', true)
-          .classed('axis', true)
-          .classed('major', true);
+          .classed('axis', true);
+
+        svg.append('rect')
+          .attr('x', margins.left)
+          .attr('y', margins.top)
+          .attr('width', width)
+          .attr('height', height)
+          .classed('frame', true);
 
         g = svg.append('g');
 
@@ -127,6 +132,9 @@
 
 
 
+      // ======================================================================
+      // DRAW LOOP
+      // ======================================================================
       function _draw() {
         xScale = d3.scale.linear()
           .domain(xDomain)
@@ -149,41 +157,39 @@
       }
 
       function _drawAxes() {
-        var xAxisMajor = d3.svg.axis()
-          .scale(xScale)
-          .ticks(5)
-          .innerTickSize(-height)
-          .orient('bottom');
-        var xAxisMinor = d3.svg.axis()
+        var xAxis = d3.svg.axis()
           .scale(xScale)
           .ticks(10)
           .innerTickSize(-height)
+          .outerTickSize(0)
           .orient('bottom');
-
-        var yAxisMajor = d3.svg.axis()
-          .scale(yScale)
-          .ticks(5)
-          .innerTickSize(-width)
-          .orient('left');
-        var yAxisMinor = d3.svg.axis()
+        var yAxis = d3.svg.axis()
           .scale(yScale)
           .ticks(10)
           .innerTickSize(-width)
+          .outerTickSize(0)
           .orient('left');
 
-        svg.selectAll('.x-axis.major')
-          .call(xAxisMajor)
-          .selectAll('text')
-            .attr('dy', '1em');
+        var axis;
+        axis = svg.selectAll('.x-axis')
+          .call(xAxis);
+        axis.selectAll('.tick')
+          .classed('major', function(d, i) { return i%2===0; })
+          .classed('minor', function(d, i) { return i%2!==0; });
+        axis.selectAll('text')
+          .attr('dy', '1em');
 
-        svg.selectAll('.x-axis.minor').call(xAxisMinor);
-        
-        svg.selectAll('.y-axis.major')
-          .call(yAxisMajor)
-          .selectAll('text')
-            .attr('x', -7);
+        axis = svg.selectAll('.y-axis')
+          .call(yAxis);
+        axis.selectAll('.tick')
+          .classed('major', function(d, i) { return i%2===0; })
+          .classed('minor', function(d, i) { return i%2!==0; });
+        axis.selectAll('text')
+          .attr('x', -7);
 
-        svg.selectAll('.y-axis.minor').call(yAxisMinor);
+
+        xAxisTicks = xAxis.scale().ticks(xAxis.ticks()[0]);
+        yAxisTicks = yAxis.scale().ticks(yAxis.ticks()[0]);
       }
 
       function _drawPointers() {
@@ -213,29 +219,15 @@
 
         pointers.exit()
           .remove();
-
       }
 
-      function _isValidPosition(d, i) {
-        if (!_selectedPointer || _selectedPointer.attr('data-i')!==(''+i))
-          return true;
-        
-        if (i > 0 && d.x < data[i-1].x)
-          return false;
 
-        if (i < data.length-1 && d.x > data[i+1].x)
-          return false;
 
-        return true;
-      }
-      function _stopPropagation() {
-        d3.event.stopPropagation();
-        d3.event.preventDefault();
-        d3.event.stopImmediatePropagation();
-      }
-
+      // ======================================================================
+      // EVENTS
+      // ======================================================================
       function _onPointerMouseDown() {
-        svg[0][0].focus();
+        _focus.focus();
         _stopPropagation();
 
         // Deselect previous selecter pointer
@@ -256,9 +248,10 @@
         d3.select(d3.event.target).classed('over', false);
       }
       function _onSVGMouseDown() {
+        _focus.focus();
         // Insert a new pointer
-        var x = xScale.invert(d3.event.pageX-svg[0][0].offsetLeft);
-        var y = yScale.invert(d3.event.pageY-svg[0][0].offsetTop);
+        var x = xScale.invert(_getMouseX());
+        var y = yScale.invert(_getMouseY());
         var last = data[data.length-1];
 
         var i;
@@ -283,17 +276,19 @@
           .classed('dragging', true);
       }
       function _onSVGMouseMove() {
-        var button = d3.event.which;
+        var button = (typeof d3.event.buttons !== 'undefined')?d3.event.buttons:d3.event.which;
 
         // Drag pointer if button is pressed
         if (button && _selectedPointer) {
           var i = parseInt(_selectedPointer.attr('data-i'));
           var d = data[i];
-          
+            
           if (i !== 0 && i !== data.length-1) {
-            d.x = xScale.invert(d3.event.pageX-svg[0][0].offsetLeft);
+            d.x = xScale.invert(_getMouseX());
+            d.x = _snap(d.x, xAxisTicks, Math.abs(xDomain[0]-xDomain[1])/100);
           }
-          d.y = yScale.invert(d3.event.pageY-svg[0][0].offsetTop);
+          d.y = yScale.invert(_getMouseY());
+          d.y = _snap(d.y, yAxisTicks, Math.abs(yDomain[0]-yDomain[1])/100);
 
           _draw();
 
@@ -304,6 +299,7 @@
         }
       }
       function _onSVGMouseUp() {
+        _focus.focus();
         if (_selectedPointer) {
           if (_selectedPointer.classed('dragging')) {
             var i = parseInt(_selectedPointer.attr('data-i'));
@@ -325,7 +321,6 @@
       function _onSVGKeydown() {
         var key = d3.event.which;
 
-        console.log('Pointer:', _selectedPointer);
         if (key === 46 && _selectedPointer) {
           var i = parseInt(_selectedPointer.attr('data-i'));
 
@@ -336,6 +331,63 @@
             _draw();
           }
         }
+      }
+
+
+
+      // ======================================================================
+      // HELPERS
+      // ======================================================================
+      /**
+       * Snap a value `v` fot some value in `list` if distance is lesser than
+       * `factor`.
+       */
+      function _snap(v, list, factor) {
+        for (var i=0; i<list.length; i++) {
+          var z = list[i];
+          if (Math.abs(v-z) < factor) {
+            return z;
+          }
+        }
+
+        return v;
+      }
+
+      /**
+       * Tells if wether a position `d` if valid or not (this is attached to
+       * the _selectedPointer).
+       */
+      function _isValidPosition(d, i) {
+        if (!_selectedPointer || _selectedPointer.attr('data-i')!==(''+i))
+          return true;
+        
+        if (i > 0 && d.x < data[i-1].x)
+          return false;
+
+        if (i < data.length-1 && d.x > data[i+1].x)
+          return false;
+
+        return true;
+      }
+
+      /**
+       * Stop the propagation of the current event.
+       */
+      function _stopPropagation() {
+        d3.event.stopPropagation();
+        d3.event.preventDefault();
+        d3.event.stopImmediatePropagation();
+      }
+
+      function _getMouseX() {
+        var rect = svg[0][0].getBoundingClientRect();
+        var pageX = d3.event.pageX||d3.event.clientX;
+        return pageX-rect.left;
+      }
+      function _getMouseY() {
+        var rect = svg[0][0].getBoundingClientRect();
+        var pageY = d3.event.pageY||d3.event.clientY;
+        return pageY-rect.top;
       }
 
     }

@@ -20,9 +20,7 @@
     &.selected {
       fill: #F26A45;
     }
-    &.dragging {
-      cursor: move;
-    }
+    &.dragging,
     &.over {
       cursor: move;
     }
@@ -38,23 +36,21 @@
     text {
       fill: #545454;
     }
-  }
 
-  .axis.major {
-    .tick {
-      line {
-        opacity: 0.5;
-      }
+    .major line {
+      opacity: 0.5;
     }
-  }
-  .axis.minor {
-    text {
+    .minor line {
+      opacity: 0.2;
+    }
+    .minor text {
       opacity: 0;
     }
-    .tick {
-      line {
-        opacity: 0.3;
-      }
-    }
+  }
+
+  .frame {
+    fill: none;
+    stroke: #333;
+
   }
 }
