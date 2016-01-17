@@ -1,53 +1,70 @@
+<form>
+  <div class="row" style="width:740px; margin: 0 auto; padding: 0 40px">
+    <div class="col-xs-4">
+      <label>Curve type</label>
+      <select class="form-control"
+              ng-model="controls.type"
+              ng-change="_doChangeCurve()">
+        <option value="linear" ng-show="_isCurveEnabled('linear')">
+          Linear
+        </option>
+        <option value="step" ng-show="_isCurveEnabled('step')">
+          Step
+        </option>
+        <option value="smooth" ng-show="_isCurveEnabled('smooth')">
+          Smooth
+        </option>
+        <option value="spline" ng-show="_isCurveEnabled('spline')">
+          Spline
+        </option>
+      </select>
+    </div>
 
-<div class="row" style="width:740px; margin: 0 auto; padding: 0 40px">
-  <div class="col-xs-4">
-    <label>Curve type</label>
-    <select class="form-control"
-            ng-model="controls.type"
-            ng-change="_doChangeCurve()">
-      <option value="linear">Linear</option>
-      <option value="step">Step</option>
-      <option value="smooth">Smooth</option>
-      <option value="spline">Spline</option>
-    </select>
-  </div>
-
-  <div class="col-xs-4 form-group">
-    <label>X Axis</label>
-    <div class="row">
-      <div class="col-xs-6" style="padding-right:2px;">
-        <input type="number"
-               class="form-control"
-               ng-model="controls.x0"
-               ng-change="_doChangeControls()"/>
+    <div class="col-xs-4 form-group">
+      <label>X Axis</label>
+      <div class="row">
+        <div class="col-xs-6" style="padding-right:2px;">
+          <input type="number"
+                 name="xDomain"
+                 class="form-control"
+                 ng-model="controls.x0"
+                 ng-disabled="params.lockXDomain"
+                 ng-change="_doChangeControls()"/>
+        </div>
+        <div class="col-xs-6" style="padding-left:2px;">
+          <input type="number"
+                 name="xDomain"
+                 class="form-control"
+                 ng-model="controls.x1"
+                 ng-disabled="params.lockXDomain"
+                 ng-change="_doChangeControls()"/>
+        </div>
       </div>
-      <div class="col-xs-6" style="padding-left:2px;">
-        <input type="number"
-               class="form-control"
-               ng-model="controls.x1"
-               ng-change="_doChangeControls()"/>
+    </div>
+
+    <div class="col-xs-4 form-group">
+      <label>Y Axis</label>
+      <div class="row">
+        <div class="col-xs-6" style="padding-right:2px;">
+          <input type="text"
+                 name="yDomain"
+                 class="form-control"
+                 ng-model="controls.y0"
+                 ng-disabled="params.lockYDomain"
+                 ng-change="_doChangeControls()"/>
+        </div>
+        <div class="col-xs-6" style="padding-left:2px;">
+          <input type="number"
+                 name="yDomain"
+                 class="form-control"
+                 ng-model="controls.y1"
+                 ng-disabled="params.lockYDomain"
+                 ng-change="_doChangeControls()"/>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="col-xs-4 form-group">
-    <label>Y Axis</label>
-    <div class="row">
-      <div class="col-xs-6" style="padding-right:2px;">
-        <input type="number"
-               class="form-control"
-               ng-model="controls.y0"
-               ng-change="_doChangeControls()"/>
-      </div>
-      <div class="col-xs-6" style="padding-left:2px;">
-        <input type="number"
-               class="form-control"
-               ng-model="controls.y1"
-               ng-change="_doChangeControls()"/>
-      </div>
-    </div>
-  </div>
-</div>
+</form>
 
 <div>
   <svg></svg>

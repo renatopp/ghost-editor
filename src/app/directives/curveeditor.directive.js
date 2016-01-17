@@ -5,51 +5,76 @@
     .module('app')
     .directive('curveEditor', curveEditorDirective);
 
-  curveEditorDirective.$inject = ['$window'];
-  function curveEditorDirective($window) {
+  curveEditorDirective.$inject = ['$window', '$parse'];
+  function curveEditorDirective($window, $parse) {
     var directive = {
-      restrict : 'E',
+      restrict    : 'E',
       templateUrl : 'directives/curveeditor.html',
-      link     : link,
+      link        : link,
+      scope       : {
+        ngModel   : '='
+      }
     };
     return directive;
 
-    function link($scope, $element, $attrs) {
+    function link($scope, $element, $attrs, $ctrl) {
       var _selectedPointer = null;
       var _focus = null;
-
-      // Scope
-      $scope.controls = {
-        type: 'linear',
-        x0: 0,
-        x1: 1,
-        y0: 0,
-        y1: 1
-      };
-      $scope._doChangeControls = _doChangeControls;
-      $scope._doChangeCurve = _doChangeCurve;
+      var _model = $scope.ngModel || {};
 
       // D3 variables
       var d3;
       var svg;
       var g;
-      var data;
       var xScale;
       var yScale;
-      var curveType = 'linear';
-      var xDomain = [0, 1];
-      var yDomain = [0, 1];
       var xAxisTicks;
       var yAxisTicks;
       var functions;
       var behaviors;
+      var curveType = _model.type || 'linear';
+      var xDomain   = JSON.parse(JSON.stringify(_model.xDomain || [0, 1]));
+      var yDomain   = JSON.parse(JSON.stringify(_model.yDomain || [0, 1]));
+      var data      = [
+        {x:xDomain[0], y:yDomain[0]},
+        {x:xDomain[1], y:yDomain[1]},
+      ];
+      data = JSON.parse(JSON.stringify((_model.data || data)));
 
       // Parameters
-      var margins = {top:10, right:40, bottom:35, left:40};
-      var rawWidth = 720;
+      var margins   = {top:10, right:40, bottom:35, left:40};
+      var rawWidth  = 720;
       var rawHeight = 405;
-      var width = rawWidth - margins.left - margins.right;
-      var height = rawHeight - margins.top - margins.bottom;
+      var width     = rawWidth - margins.left - margins.right;
+      var height    = rawHeight - margins.top - margins.bottom;
+      var params    = {
+        lockXDomain    : $attrs.lockXDomain === 'true',
+        lockYDomain    : $attrs.lockYDomain === 'true',
+        lockXAxis      : $attrs.lockXAxis === 'true',
+        lockYAxis      : $attrs.lockYAxis === 'true',
+        disabledTypes  : $attrs.disabledTypes? 
+                            $parse($attrs.disabledTypes)($scope): [],
+        disableNew     : $attrs.disableNew === 'true',
+        disableEdition : $attrs.disableEdition === 'true',
+        disableSnap    : $attrs.disableSnap === 'true',
+        hidePointers   : $attrs.hidePointers === 'true',
+      };
+
+      // Scope
+      $scope.controls = {
+        type: curveType,
+        x0: xDomain[0],
+        x1: xDomain[1],
+        y0: yDomain[0],
+        y1: yDomain[1]
+      };
+      $scope._doChangeControls = _doChangeControls;
+      $scope._doChangeCurve = _doChangeCurve;
+      $scope._isCurveEnabled = function(curve) {
+        return params.disabledTypes.indexOf(curve) < 0;
+      };
+
+      $scope.params = params;
 
       _initialize();
 
@@ -67,15 +92,11 @@
           return;
         }
 
-        data = [
-          {x:xDomain[0], y:yDomain[0]},
-          {x:xDomain[1], y:yDomain[1]},
-        ];
-
         _initializeSVG();
         _initializeDraw();
 
         _draw();
+        _updateModel();
       }
 
       function _initializeSVG() {
@@ -229,6 +250,8 @@
       }
 
       function _drawPointers() {
+        if (params.hidePointers) return;
+
         var pointers = g.selectAll('.pointer')
           .data(data);
         
@@ -285,6 +308,11 @@
       }
       function _onSVGMouseDown() {
         _focus.focus();
+
+        if (params.disableNew || params.disableEdition || params.hidePointers) {
+          return;
+        }
+
         // Insert a new pointer
         var x = xScale.invert(_getMouseX());
         var y = yScale.invert(_getMouseY());
@@ -310,23 +338,37 @@
         _selectedPointer = d3.select('[data-i="'+i+'"]')
           .classed('selected', true)
           .classed('dragging', true);
+
+        $scope.$apply(function() {
+          _updateModel();
+        });
       }
       function _onSVGMouseMove() {
         var button = (typeof d3.event.buttons !== 'undefined')?d3.event.buttons:d3.event.which;
 
         // Drag pointer if button is pressed
-        if (button && _selectedPointer) {
+        if (button && _selectedPointer && !params.disableEdition && !params.hidePointers) {
           var i = parseInt(_selectedPointer.attr('data-i'));
           var d = data[i];
             
-          if (i !== 0 && i !== data.length-1) {
+          if (i !== 0 && i !== data.length-1 && !params.lockXAxis) {
             d.x = xScale.invert(_getMouseX());
-            d.x = _snap(d.x, xAxisTicks, Math.abs(xDomain[0]-xDomain[1])/90);
+            if (!params.disableSnap) {
+              d.x = _snap(d.x, xAxisTicks, Math.abs(xDomain[0]-xDomain[1])/90);
+            }
           }
-          d.y = yScale.invert(_getMouseY());
-          d.y = _snap(d.y, yAxisTicks, Math.abs(yDomain[0]-yDomain[1])/90);
+          if (!params.lockYAxis) {
+            d.y = yScale.invert(_getMouseY());
+            if (!params.disableSnap) {
+              d.y = _snap(d.y, yAxisTicks, Math.abs(yDomain[0]-yDomain[1])/90);
+            }
+          }
 
           _draw();
+
+          $scope.$apply(function() {
+            _updateModel();
+          });
 
         // Disable drag if no button is pressed
         } else if (_selectedPointer) {
@@ -351,7 +393,6 @@
           else {
             _selectedPointer.classed('dragging', false);
           }
-
         }
       }
       function _onSVGKeydown() {
@@ -367,6 +408,10 @@
             _draw();
           }
         }
+
+        $scope.$apply(function() {
+          _updateModel();
+        });
       }
 
 
@@ -449,6 +494,13 @@
         return !isNaN(parseFloat(n)) && isFinite(n);
       }
 
+      function _updateModel() {
+        _model.xDomain = JSON.parse(JSON.stringify(xDomain));
+        _model.yDomain = JSON.parse(JSON.stringify(yDomain));
+        _model.data = JSON.parse(JSON.stringify(data));
+        _model.type = curveType;
+      }
+
       // ======================================================================
       // EVENTS
       // ======================================================================
@@ -473,6 +525,7 @@
       function _doChangeCurve() {
         curveType = $scope.controls.type;
         _drawCurve();
+        _updateModel();
       }
     }
   }
