@@ -13,7 +13,9 @@
     "sweetalert": "~1.1.3",
     "font-awesome": "~4.5.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "d3": "~3.5.12"
+  },
   "old": {
     "angular": "~1.4",
     "bootstrap": "~3.1.1",

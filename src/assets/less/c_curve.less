@@ -1,0 +1,60 @@
+.curve-editor {
+  // background-color: #D9D7F3;
+  margin: 30px;
+  cursor: crosshair;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+
+  .curve {
+    fill: none;
+    stroke: #333333;
+    stroke-width: 1px;
+  }
+
+  .pointer {
+    fill: #010101;
+    stroke: rgba(0, 0, 0, 0);
+    stroke-width: 20px;
+
+    &.selected {
+      fill: #F26A45;
+    }
+    &.dragging {
+      cursor: move;
+    }
+    &.over {
+      cursor: move;
+    }
+  }
+
+  .axis {
+    line, path {
+      fill: none;
+      stroke: #ADADAD;
+      stroke-width: 1;
+    }
+
+    text {
+      fill: #545454;
+    }
+  }
+
+  .axis.major {
+    .tick {
+      line {
+        opacity: 0.5;
+      }
+    }
+  }
+  .axis.minor {
+    text {
+      opacity: 0;
+    }
+    .tick {
+      line {
+        opacity: 0.3;
+      }
+    }
+  }
+}
