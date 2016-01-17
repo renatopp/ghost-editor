@@ -512,8 +512,7 @@
 
         if (!_isNumber(x0) || !_isNumber(x1) ||
             !_isNumber(y0) || !_isNumber(y1) ||
-            (x0 === 0 && x1===0) ||
-            (y0 === 0 && y1===0)) {
+            (x0 === x1) || (y0 === y1)) {
           return;
         }
         _rescale([x0, x1], [y0, y1]);
