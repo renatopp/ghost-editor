@@ -26,7 +26,7 @@ angular.module('app', [
                    projectModel) {
 
     // reset path
-    $location.path('/');
+    // $location.path('/');
 
     // add drop to canvas
     angular

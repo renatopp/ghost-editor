@@ -31,6 +31,12 @@ angular.module('app')
         controller: 'SettingsController',
         controllerAs: 'settings',
       })
+      .state('test', {
+        url: '/test',
+        templateUrl: 'pages/test/test.html',
+        controller: 'TestController',
+        controllerAs: 'test',
+      })
 
       // Editor
       .state('editor', {
