@@ -33,7 +33,7 @@
       var behaviors;
 
       // Parameters
-      var margins = {top:40, right:40, bottom:40, left:40};
+      var margins = {top:10, right:40, bottom:35, left:40};
       var rawWidth = 720;
       var rawHeight = 405;
       var width = rawWidth - margins.left - margins.right;
@@ -46,7 +46,8 @@
       // INITIALIZATION
       // ======================================================================
       function _initialize() {
-        _focus = $element.children()[1];
+        _focus = $element.find('input');
+        _focus = _focus[_focus.length-1];
 
         d3 = $window.d3;
         if (!d3) {
@@ -66,7 +67,7 @@
       }
 
       function _initializeSVG() {
-        svg = d3.select($element.children()[0])
+        svg = d3.select($element.find('svg')[0])
           .attr('width', rawWidth)
           .attr('height', rawHeight)
           .attr('viewBox', '0 0 '+rawWidth+' '+rawHeight)
@@ -285,10 +286,10 @@
             
           if (i !== 0 && i !== data.length-1) {
             d.x = xScale.invert(_getMouseX());
-            d.x = _snap(d.x, xAxisTicks, Math.abs(xDomain[0]-xDomain[1])/100);
+            d.x = _snap(d.x, xAxisTicks, Math.abs(xDomain[0]-xDomain[1])/90);
           }
           d.y = yScale.invert(_getMouseY());
-          d.y = _snap(d.y, yAxisTicks, Math.abs(yDomain[0]-yDomain[1])/100);
+          d.y = _snap(d.y, yAxisTicks, Math.abs(yDomain[0]-yDomain[1])/90);
 
           _draw();
 
