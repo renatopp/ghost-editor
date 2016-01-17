@@ -1,5 +1,10 @@
 # CHANGES
 
+## 0.9.0-dev
+
+- Adding curve editor.
+
+
 ## 0.8.0-dev
 
 - New input nodes: People, Objects, SoundEvent, SalienceEvent, GestureEvent, SalienceEvent, ArrivalEvent, DepartureEvent, Emotion, BlenderControl, WebUiControl, RawPerception, NLP, ROSInput and ROSSignal.
