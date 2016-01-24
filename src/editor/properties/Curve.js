@@ -7,7 +7,7 @@
     xDomain        : [0, 1],
     yDomain        : [0, 1],
     lockXDomain    : false,
-    lockYDomain    : true,
+    lockYDomain    : false,
     lockXAxis      : false,
     lockYAxis      : false,
     disabledTypes  : null,
