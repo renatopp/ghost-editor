@@ -12,7 +12,15 @@
       templateUrl : 'directives/curveeditor.html',
       link        : link,
       scope       : {
-        ngModel   : '='
+        ngModel        : '=',
+        lockYDomain    : '=',
+        lockXAxis      : '=',
+        lockYAxis      : '=',
+        disabledTypes  : '=',
+        disableNew     : '=',
+        disableEdition : '=',
+        disableSnap    : '=',
+        hidePointers   : '=',
       }
     };
     return directive;
@@ -51,16 +59,15 @@
       var width     = rawWidth - margins.left - margins.right;
       var height    = rawHeight - margins.top - margins.bottom;
       var params    = {
-        lockXDomain    : $attrs.lockXDomain === 'true',
-        lockYDomain    : $attrs.lockYDomain === 'true',
-        lockXAxis      : $attrs.lockXAxis === 'true',
-        lockYAxis      : $attrs.lockYAxis === 'true',
-        disabledTypes  : $attrs.disabledTypes? 
-                            $parse($attrs.disabledTypes)($scope): [],
-        disableNew     : $attrs.disableNew === 'true',
-        disableEdition : $attrs.disableEdition === 'true',
-        disableSnap    : $attrs.disableSnap === 'true',
-        hidePointers   : $attrs.hidePointers === 'true',
+        lockXDomain    : $scope.lockXDomain || false,
+        lockYDomain    : $scope.lockYDomain || false,
+        lockXAxis      : $scope.lockXAxis || false,
+        lockYAxis      : $scope.lockYAxis || false,
+        disabledTypes  : $scope.disabledTypes || [],
+        disableNew     : $scope.disableNew || false,
+        disableEdition : $scope.disableEdition || false,
+        disableSnap    : $scope.disableSnap || false,
+        hidePointers   : $scope.hidePointers || false,
       };
 
       // Scope
