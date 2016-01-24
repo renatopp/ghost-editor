@@ -39,7 +39,10 @@
         {x:xDomain[0], y:yDomain[0]},
         {x:xDomain[1], y:yDomain[1]},
       ];
-      data = JSON.parse(JSON.stringify((_model.data || data)));
+      var _data = JSON.parse(JSON.stringify((_model.data || [])));
+      if (_data.length >= 2) {
+        data = _data;
+      }
 
       // Parameters
       var margins   = {top:10, right:40, bottom:35, left:40};
@@ -71,7 +74,10 @@
       $scope._doChangeControls = _doChangeControls;
       $scope._doChangeCurve = _doChangeCurve;
       $scope._isCurveEnabled = function(curve) {
-        return params.disabledTypes.indexOf(curve) < 0;
+        if (params.disabledTypes)
+          return params.disabledTypes.indexOf(curve) < 0;
+        else
+          return true;
       };
 
       $scope.params = params;
@@ -522,6 +528,7 @@
         yDomain[1] = y1;
 
         _draw();
+        _updateModel();
       }
       function _doChangeCurve() {
         curveType = $scope.controls.type;
