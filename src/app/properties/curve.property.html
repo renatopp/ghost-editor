@@ -1,0 +1,35 @@
+<a href=""
+   class="btn btn-success btn-block"
+   ng-click="openEditor();">
+  Open editor
+</a>
+
+<modal>
+  <div class="b3modal">
+    <div class="b3modal-background" ng-click="closeEditor()"></div>
+    <div class="b3modal-window large">
+      <div class="b3modal-wrap">
+        <!-- <h1 class="b3modal-title">node</h1> -->
+        <div class="b3modal-content text-center">
+          <curve-editor
+            ng-model="tempData"
+            lock-x-domain="modal.lockXDomain"
+            lock-y-domain="modal.lockYDomain"
+            lock-x-axis="modal.lockXAxis"
+            lock-y-axis="modal.lockYAxis"
+            disabled-types="modal.disabledTypes"
+            disable-new="modal.disableNew"
+            disable-edition="modal.disableEdition"
+            disable-snap="modal.disableSnap"
+            hide-pointers="modal.hidePointers"
+          ></curve-editor>
+        </div>
+      </div>
+
+      <div class="b3modal-buttons">
+        <input type="button" class="btn btn-default btn-lg" ng-click="closeEditor()" value="Cancel">
+        <button type="submit" class="btn btn-success btn-lg" ng-click="saveEditor()">Save</button>
+      </div>
+    </div>
+  </div>
+</modal>
