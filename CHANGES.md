@@ -1,5 +1,13 @@
 # CHANGES
 
+
+## 0.9.1-dev
+
+- Integrating curve editor into the editor as property.
+- New curve property.
+- New Fuzz and Curve nodes.
+
+
 ## 0.9.0-dev
 
 - Adding curve editor.
