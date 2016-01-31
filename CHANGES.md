@@ -1,6 +1,11 @@
 # CHANGES
 
 
+## 0.9.2-dev
+
+- Curve editor now has Bell curves.
+
+
 ## 0.9.1-dev
 
 - Integrating curve editor into the editor as property.

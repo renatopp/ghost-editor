@@ -12,7 +12,8 @@
     var self = this;
     self.data = {
       xDomain : [-1, 1],
-      data    : [{x:-1, y:0}, {x:0, y:1}, {x:1, y:0}],
+      type: 'bell',
+      // data    : [{x:-1, y:0}, {x:0, y:1}, {x:1, y:0}],
     };
     _activate();
 

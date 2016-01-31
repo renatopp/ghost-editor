@@ -63,6 +63,25 @@
   .frame {
     fill: none;
     stroke: #333;
+  }
 
+  .bell-controls {
+    &-anchor {
+      fill: '#D4C72A';
+    }
+    &-path {
+      fill: none;
+      stroke: #09641F;
+      stroke-width: 1px;
+      stroke-dasharray: 5, 5;
+      opacity: 0.5;
+    }
+    &-handler {
+      fill: #F26A45;
+
+      &:hover {
+        cursor: move;
+      }
+    }
   }
 }

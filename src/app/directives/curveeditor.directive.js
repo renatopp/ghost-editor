@@ -47,9 +47,19 @@
         {x:xDomain[0], y:yDomain[0]},
         {x:xDomain[1], y:yDomain[1]},
       ];
-      var _data = JSON.parse(JSON.stringify((_model.data || [])));
-      if (_data.length >= 2) {
-        data = _data;
+      var bell = {y:yDomain[1], std:0.1};
+      
+      var _data;
+      if (curveType === 'bell') {
+        _data = JSON.parse(JSON.stringify((_model.data || {})));
+        if (typeof _data.y !== 'undefined') bell.y = _data.y;
+        if (typeof _data.std !== 'undefined') bell.std = _data.std;
+
+      } else {
+        _data = JSON.parse(JSON.stringify((_model.data || [])));
+        if (_data.length >= 2) {
+          data = _data;
+        }
       }
 
       // Parameters
@@ -147,6 +157,18 @@
 
         g.append('path').classed('guide', true);
         g.append('path').classed('curve', true);
+        
+        var controls = g.append('g');
+        controls.classed('bell-controls', true);
+        controls.append('circle')
+          .attr('r', 2)
+          .classed('bell-controls-anchor', true);
+        controls.append('path')
+          .classed('bell-controls-path', true);
+        controls.append('circle')
+          .attr('r', 4)
+          .classed('bell-controls-handler', true)
+          .on('mousedown', _onPointerMouseDown);
       }
 
       function _initializeDraw() {
@@ -188,6 +210,10 @@
             .x(baseX)
             .y(baseY)
             .interpolate('basis'),
+
+          bell: d3.svg.line()
+            .x(function(d) { return xScale(d.x); })
+            .y(function(d) { return yScale(d.y); }),
         };
       }
 
@@ -210,11 +236,14 @@
         _drawAxes();
         _drawCurve();
         _drawPointers();
+        _drawBellControls();
       }
 
       function _drawCurve() {
+        var d = (curveType==='bell'?_computeBellData():data);
+
         var curve = g.selectAll('.curve')
-          .attr('d', functions[curveType](data));
+          .attr('d', functions[curveType](d));
 
         var guide = g.selectAll('.guide');
         if (curveType === 'spline') {
@@ -267,7 +296,12 @@
 
         var pointers = g.selectAll('.pointer')
           .data(data);
-        
+
+        if (curveType === 'bell') {
+          pointers.style('opacity', 0);
+          return;
+        }
+
         pointers.enter()
           .append('circle')
             // .call(behaviors.drag)
@@ -293,6 +327,37 @@
           .remove();
       }
 
+      function _drawBellControls() {
+        if (params.hidePointers) return;
+
+        if (curveType !== 'bell') {
+          g.selectAll('.bell-controls')
+            .style('opacity', 0);
+          return;
+        }
+
+        var anchorX = (xDomain[1]+xDomain[0])/2;
+        var anchorY = (yDomain[1]+yDomain[0])/2;
+        var handlerX = anchorX + bell.std*(xDomain[1]-xDomain[0])/2;
+        var handlerY = anchorY;
+        var handlerHeight = anchorY/5;
+
+        g.selectAll('.bell-controls')
+          .style('opacity', 1);
+
+        g.selectAll('.bell-controls-anchor')
+          .attr('cx', xScale(anchorX))
+          .attr('cy', yScale(anchorY));
+
+        g.selectAll('.bell-controls-path')
+          .attr('d', functions.linear([{x:anchorX, y:anchorY},
+                                       {x:handlerX, y:handlerY}]));
+
+        g.selectAll('.bell-controls-handler')
+          .attr('cx', xScale(handlerX))
+          .attr('cy', yScale(handlerY));
+      }
+
 
 
       // ======================================================================
@@ -301,6 +366,12 @@
       function _onPointerMouseDown() {
         _focus.focus();
         _stopPropagation();
+
+        if (curveType === 'bell') {
+          g.select('.bell-controls-handler')
+            .classed('dragging', true);
+          return;
+        }
 
         // Deselect previous selecter pointer
         if (_selectedPointer) {
@@ -321,6 +392,10 @@
       }
       function _onSVGMouseDown() {
         _focus.focus();
+
+        if (curveType === 'bell') {
+          return;
+        }
 
         if (params.disableNew || params.disableEdition || params.hidePointers) {
           return;
@@ -359,6 +434,25 @@
       function _onSVGMouseMove() {
         var button = (typeof d3.event.buttons !== 'undefined')?d3.event.buttons:d3.event.which;
 
+        if (curveType === 'bell') {
+          var handler = g.select('.bell-controls-handler');
+
+          if (button && handler.classed('dragging') && !params.disableEdition && !params.hidePointers) {
+            var x = xScale.invert(_getMouseX());
+            var meanX = (xDomain[1]+xDomain[0])/2;
+            x = Math.abs(x - meanX);
+            x = 2*x/(xDomain[1]-xDomain[0]);
+            bell.std = Math.max(0.01, x);
+          }
+
+          _draw();
+          $scope.$apply(function() {
+            _updateModel();
+          });
+
+          return;
+        }
+
         // Drag pointer if button is pressed
         if (button && _selectedPointer && !params.disableEdition && !params.hidePointers) {
           var i = parseInt(_selectedPointer.attr('data-i'));
@@ -391,6 +485,12 @@
       }
       function _onSVGMouseUp() {
         _focus.focus();
+        if (curveType === 'bell') {
+          g.select('.bell-controls-handler')
+            .classed('dragging', false);
+          return;
+        }
+
         if (_selectedPointer) {
           if (_selectedPointer.classed('dragging')) {
             var i = parseInt(_selectedPointer.attr('data-i'));
@@ -510,8 +610,41 @@
       function _updateModel() {
         _model.xDomain = JSON.parse(JSON.stringify(xDomain));
         _model.yDomain = JSON.parse(JSON.stringify(yDomain));
-        _model.data = JSON.parse(JSON.stringify(data));
         _model.type = curveType;
+        if (curveType === 'bell') {
+          _model.data = {std: bell.std};
+        } else {
+          _model.data = JSON.parse(JSON.stringify(data));
+        }
+      }
+
+      function _computeBellData() {
+        var x0 = xDomain[0];
+        var x1 = xDomain[1];
+        var step = (x1-x0)/500;
+        var results = [];
+
+        var meanX = (x1+x0)/2;
+        var std = bell.std;
+
+        var c1 = 1/(std*Math.sqrt(2*Math.PI));
+        var c2 = 2*std*std;
+
+        var minY = _gaussian(x0, meanX, c1, c2);
+        var maxY = _gaussian(meanX, meanX, c1, c2);
+
+        for (var x=x0; x<=(x1+step); x+=step) {
+          var y = _gaussian(x, meanX, c1, c2);
+          y = (y)/maxY;
+          results.push({x:x, y:y});
+        }
+
+        return results;
+      }
+
+      function _gaussian(x, mean, c1, c2) {
+        var d = (x-mean);
+        return c1*Math.exp(-(d*d)/c2);
       }
 
       // ======================================================================
@@ -539,7 +672,7 @@
       }
       function _doChangeCurve() {
         curveType = $scope.controls.type;
-        _drawCurve();
+        _draw();
         _updateModel();
       }
     }
