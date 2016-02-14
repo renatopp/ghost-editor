@@ -1,6 +1,16 @@
 # CHANGES
 
 
+## 0.10.0-dev
+
+- New node style showing title, name, icon, and properties.
+- Using category-based colors on nodes.
+- General color adjusts.
+- Fixing a bug that was allowing nodes to connect on inputs.
+- Adding icon image for Root.
+- Settings now uses version to reload itself.
+
+
 ## 0.9.2-dev
 
 - Curve editor now has Bell curves.
