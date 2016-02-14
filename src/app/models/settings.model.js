@@ -40,7 +40,8 @@
           } catch (e) {}
 
           // Create if storage file does not exist
-          if (!data) {
+          var version = editorService.getVersion();
+          if (!data || version !== data.version || b3e.ENV === 'development') {
             data = defaultData;
             storageService.save(settingsPath, data);
           }

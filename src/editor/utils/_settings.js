@@ -9,6 +9,8 @@
   "use strict";
 
   var DEFAULT_SETTINGS = {
+    version      : '[BUILD_VERSION]',
+
     // CAMERA
     zoom_initial : 1.0,
     zoom_min     : 0.25,
@@ -31,19 +33,18 @@
     anchor_background_color : '#EFEFEF',
 
     connection_color        : '#6D6D6D',
-    root_color              : '#FFFFFF',
-    decorator_color         : '#FFFFFF',
-    composite_color         : '#FFFFFF',
-    tree_color              : '#FFFFFF',
-    action_color            : '#FFFFFF',
-    condition_color         : '#FFFFFF',
+    root_color              : '#E5D599',
+    modulator_color         : '#029DAF',
+    composite_color         : '#FFC219',
+    output_color            : '#E32551',
+    input_color             : '#F07C19',
 
     // CONNECTION
     connection_width       : 2,
     
     // ANCHOR
     anchor_border_width    : 2,
-    anchor_radius          : 7,
+    anchor_radius          : 10,
     anchor_offset_x        : 4,
     anchor_offset_y        : 0,
     

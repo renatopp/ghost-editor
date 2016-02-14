@@ -12,8 +12,13 @@ function editorService($window) {
     openProject        : openProject,
     closeProject       : closeProject,
     exportProject      : exportProject,
+    getVersion         : getVersion,
   };
   return service;
+
+  function getVersion() {
+    return $window.b3e.VERSION;
+  }
 
   function getDefaultSettings() {
     return $window.b3e.DEFAULT_SETTINGS;
