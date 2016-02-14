@@ -28,11 +28,11 @@
     // COLORS
     background_color        : '#171717',
     selection_color         : '#4BB2FD',
-    block_border_color      : '#6D6D6D',
+    block_border_color      : '#C1C1C1',
     block_symbol_color      : '#333333',
     anchor_background_color : '#EFEFEF',
 
-    connection_color        : '#6D6D6D',
+    connection_color        : '#FFFFFF',
     root_color              : '#332A36',
     composite_color         : '#5A6BB8',
     modulator_color         : '#AB9749',
