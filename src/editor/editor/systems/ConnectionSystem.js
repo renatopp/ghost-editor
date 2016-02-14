@@ -142,6 +142,15 @@ b3e.editor.ConnectionSystem = function(editor) {
         continue;
       }
 
+      // Remove connection if target node is an input
+      if (node.category === 'input') {
+        // must return the original connection configuration in order to
+        // register correctly on the history manager
+        this._reconnectionLastOutNode(connection);
+        tree.connections.remove(connection);
+        continue;
+      }
+
       // Remove connection if node can't have more inputs
       var max = node.maxInConnections;
       if (max >= 0 && node.inConnections.length >= max) {
