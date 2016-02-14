@@ -29,6 +29,7 @@
     properties: null,
     maxInConnections: -1,
     maxOutConnections: -1,
+    image: null,
 
     onAdd: function(e) {},
     onLoad: function(e) {},

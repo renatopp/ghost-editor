@@ -13,6 +13,7 @@
     var group = kwargs.group || '';
     var maxInConnections = -1;
     var maxOutConnections = -1;
+    var image = kwargs.image || null;
 
     if (typeof kwargs.maxInConnections !== 'undefined')
       maxInConnections = kwargs.maxInConnections;
@@ -29,6 +30,7 @@
       properties: properties,
       maxInConnections: maxInConnections,
       maxOutConnections: maxOutConnections,
+      image: image,
     };
 
     // Prototype
@@ -40,6 +42,7 @@
       description: description,
       maxInConnections: maxInConnections,
       maxOutConnections: maxOutConnections,
+      image: image,
     };
 
     if (kwargs.onAdd) _prototype.onAdd = kwargs.onAdd;

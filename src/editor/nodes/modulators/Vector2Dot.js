@@ -4,6 +4,7 @@
   b3e.nodes.Vector2Dot = b3e.node.create('Vector2Dot',
                                          b3e.MODULATOR, {
     group: 'vector2',
-    title: '(Vector2) Dot',
+    title: 'Dot',
+    image: 'modulators/Vector2',
   });
 })();
