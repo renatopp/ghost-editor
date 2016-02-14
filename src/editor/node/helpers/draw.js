@@ -8,17 +8,18 @@
    */
   b3e.node.draw = function(node, settings) {
     var symbol = _makeSymbol(node, settings);
-
     var bounds = symbol.getBounds();
     var w = Math.max(bounds.width+15, node.display.width);
     var h = Math.max(bounds.height+15, node.display.height);
     node.display.width = 300;
     node.display.height = symbol.$height;
 
+    var image = _makeImage(node, settings);
     var shape = _makeShape(node, settings, symbol);
 
     node.display.addChild(shape);
     node.display.addChild(symbol);
+    node.display.addChild(image);
 
     node.display.shape = shape;
   };
@@ -63,6 +64,25 @@
     container.x = -w/2+10;
     container.y = -y/2+10;
     return container;
+  }
+
+  function _makeImage(node, settings) {
+    var w = node.display.width;
+    var h = node.display.height;
+
+    var path = 'imgs/nodes_svg/'+node.category+'s/'+node.name+'.svg';
+    if (node.image) {
+      path = 'imgs/nodes_svg/'+node.image+'.svg';
+    }
+    var bitmap = new createjs.Bitmap(path);
+    bitmap.scaleX = 0.5;
+    bitmap.scaleY = 0.5;
+    bitmap.regX = 121;
+    bitmap.x = w/2-10;
+    bitmap.y = -h/2+5;
+    bitmap.alpha = 0.7;
+    
+    return bitmap;
   }
 
   function _makeShape(node, settings, symbol) {
