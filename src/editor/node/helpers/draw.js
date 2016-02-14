@@ -12,10 +12,10 @@
     var bounds = symbol.getBounds();
     var w = Math.max(bounds.width+15, node.display.width);
     var h = Math.max(bounds.height+15, node.display.height);
-    node.display.width = w;
-    node.display.height = h;
+    node.display.width = 300;
+    node.display.height = symbol.$height;
 
-    var shape = _makeShape(node, settings);
+    var shape = _makeShape(node, settings, symbol);
 
     node.display.addChild(shape);
     node.display.addChild(symbol);
@@ -24,14 +24,48 @@
   };
 
   function _makeSymbol(node, settings) {
-    var title = node.getTitle();
-    var symbolColor = settings.get('block_symbol_color');
-    var symbol = _makeText(title, symbolColor);
+    var w = 300;//node.display.width;
+    var h = 150;//node.display.height;
 
-    return symbol;
+    var title = node.getTitle();
+    var name = node.name;
+    var color = settings.get('block_symbol_color');
+    var x = 0;
+    var y = 0;
+
+    var txtTitle = _makeText(title, x, y, '22px', color);
+    var txtName = _makeText(name, x, y+30, '18px', color);
+
+    var container = new createjs.Container();
+    container.addChild(txtTitle);
+    container.addChild(txtName);
+    y += 70;
+
+    var hasProperties = false;
+    var properties = node.properties;
+    Object.keys(properties).forEach(function(key) {
+      hasProperties = true;
+      var property = properties[key];
+      var txtKey = _makeText(property.name, x, y, '18px');
+      var txtValue = _makeText(property.toValue(), w-20, y, '16px', color, 'right');
+      container.addChild(txtKey);
+      container.addChild(txtValue);
+      y += txtKey.getBounds().height + 10;
+    });
+    
+    if (hasProperties) {
+      y += 10;
+    }
+    // container.regY = -container.$height/2;
+    container.$height = y;
+    container.$hasProperty = hasProperties;
+
+    container.x = -w/2+10;
+    container.y = -y/2+10;
+    return container;
   }
 
-  function _makeShape(node, settings) {
+  function _makeShape(node, settings, symbol) {
     // settings
     var anchorOffsetX = settings.get('anchor_offset_x');
     var anchorRadius = settings.get('anchor_radius');
@@ -44,7 +78,7 @@
     // variables
     var category = node.category;
 
-    var w = node.display.width;
+    var w = 300;//node.display.width;
     var h = node.display.height;
     var hasInAnchor = (category==='composite')||
                       (category==='output')||
@@ -78,18 +112,39 @@
                   anchorBorderWidth,
                   borderColor);
     }
-    _drawRect(shape, w, h, 15, nodeColor, nodeBorderWidth, borderColor);
+
+
+    // body
+    _drawRect(shape, 0, 0, w, h, 10, nodeColor, nodeBorderWidth, borderColor);
+
+    // header
+    if (symbol.$hasProperty) {
+      _drawRect(shape, 0, -h/2+35, w, 70, [10, 10, 0, 0], nodeColor, nodeBorderWidth, borderColor);
+    } else {
+      _drawRect(shape, 0, -h/2+35, w, 70, 10, nodeColor, nodeBorderWidth, borderColor);
+    }
 
     return shape;
   }
 
-  function _makeText(s, color) {
-    var text = new createjs.Text(s, '18px Arial', color);
-    text.textAlign = 'center';
+  // function _makeText(s, color) {
+  //   var text = new createjs.Text(s, '18px Arial', color);
+  //   text.textAlign = 'center';
 
-    var bounds = text.getBounds();
-    text.regY = bounds.height/2;
+  //   var bounds = text.getBounds();
+  //   text.regY = bounds.height/2;
 
+  //   return text;
+  // }
+
+  function _makeText(s, x, y, size, color, align) {
+    var text = new createjs.Text(s, (size||'18px')+' Arial', color||'#333');
+    text.x = x;
+    text.y = y;
+    text.textAlign = align||'left';
+
+    // var bounds = text.getBounds();
+    // text.regY = bounds.height/2;
     return text;
   }
 
@@ -102,11 +157,24 @@
     shape.graphics.endFill();
   }
 
-  function _drawRect(shape, w, h, radius, bg_color, border_width, border_color) {
+  function _drawRect(shape, x, y, w, h, radius, bg_color, border_width, border_color) {
     shape.graphics.beginFill(bg_color);
     shape.graphics.setStrokeStyle(border_width, 'round');
     shape.graphics.beginStroke(border_color);
-    shape.graphics.drawRoundRect(-w/2, -h/2, w, h, radius);
+    if (Array.isArray(radius)) {
+      shape.graphics.drawRoundRectComplex(
+        x-w/2,
+        y-h/2,
+        w,
+        h,
+        radius[0],
+        radius[1],
+        radius[2],
+        radius[3]
+      );
+    } else {
+      shape.graphics.drawRoundRect(x-w/2, y-h/2, w, h, radius);
+    }
     shape.graphics.endStroke();
     shape.graphics.endFill();
   }
