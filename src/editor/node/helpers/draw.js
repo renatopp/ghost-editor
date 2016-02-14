@@ -92,7 +92,7 @@
     var anchorBg = settings.get('anchor_background_color');
     var anchorBorderWidth = settings.get('anchor_border_width');
     var borderColor = settings.get('block_border_color');
-    var nodeColor = settings.get('composite_color');
+    var nodeColor = settings.get(node.category+'_color');
     var nodeBorderWidth = settings.get('block_border_width');
 
     // variables
@@ -135,7 +135,7 @@
 
 
     // body
-    _drawRect(shape, 0, 0, w, h, 10, nodeColor, nodeBorderWidth, borderColor);
+    _drawRect(shape, 0, 0, w, h, 10, '#fff', nodeBorderWidth, borderColor);
 
     // header
     if (symbol.$hasProperty) {
@@ -183,7 +183,11 @@
   }
 
   function _drawRect(shape, x, y, w, h, radius, bg_color, border_width, border_color) {
-    shape.graphics.beginFill(bg_color);
+    shape.graphics.beginLinearGradientFill(
+      [bg_color, '#FFFFFF'],
+      [0, 1],
+      0, y-140, 0, y+70
+    );
     shape.graphics.setStrokeStyle(border_width, 'round');
     shape.graphics.beginStroke(border_color);
     if (Array.isArray(radius)) {
