@@ -33,11 +33,11 @@
     anchor_background_color : '#EFEFEF',
 
     connection_color        : '#6D6D6D',
-    root_color              : '#E5D599',
-    modulator_color         : '#029DAF',
-    composite_color         : '#FFC219',
-    output_color            : '#E32551',
-    input_color             : '#F07C19',
+    root_color              : '#332A36',
+    composite_color         : '#5A6BB8',
+    modulator_color         : '#AB9749',
+    output_color            : '#AB4949',
+    input_color             : '#6AAB49',
 
     // CONNECTION
     connection_width       : 2,
