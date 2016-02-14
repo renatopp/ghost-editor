@@ -41,7 +41,7 @@
     this._settings = settings;
 
     var color = this._settings.get('selection_color');
-    this._shadow = new createjs.Shadow(color, 0, 0, 5);
+    this._shadow = new createjs.Shadow(color, 0, 0, 10);
     this.redraw();
   };
 
