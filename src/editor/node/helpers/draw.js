@@ -33,8 +33,8 @@
     var x = 0;
     var y = 0;
 
-    var txtTitle = _makeText(title, x, y, '22px', color);
-    var txtName = _makeText(name, x, y+30, '18px', color);
+    var txtTitle = _makeText(title, x, y, '22px', color, null, 20);
+    var txtName = _makeText(name, x, y+30, '18px', color, null, 25);
 
     var container = new createjs.Container();
     container.addChild(txtTitle);
@@ -137,7 +137,12 @@
   //   return text;
   // }
 
-  function _makeText(s, x, y, size, color, align) {
+  function _makeText(s, x, y, size, color, align, limit) {
+    limit = limit || 15;
+    if (s.length > limit) {
+      s = s.substring(0, limit-2) + '...';
+    }
+
     var text = new createjs.Text(s, (size||'18px')+' Arial', color||'#333');
     text.x = x;
     text.y = y;
