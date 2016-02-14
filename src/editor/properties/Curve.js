@@ -33,7 +33,7 @@
     },
 
     toValue: function() {
-      return '<Curve "'+this.type+'">';
+      return '<'+this.type+'>';
     },
   });
 })();
