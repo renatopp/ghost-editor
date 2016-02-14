@@ -20,10 +20,6 @@
         title = 'N'+title;
       }
 
-      if (b3e.ENV === b3e.DEVELOPMENT) {
-        title += ' <'+this.id+'>';
-      }
-
       return title;
     },
   });
