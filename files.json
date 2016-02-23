@@ -47,6 +47,12 @@
     ],
     "output": "build/js/app.min.js"
   },
+  "app_images": {
+    "input": [
+      "src/assets/imgs/**/*"
+    ],
+    "output": "build/imgs"
+  },
   "app_less": {
     "input": [
       "src/assets/less/index.less"

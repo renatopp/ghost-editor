@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="32mm"
+   height="32mm"
+   viewBox="0 0 113.38583 113.38583"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="BlenderControl.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="71.465054"
+     inkscape:cy="58.489411"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1239"
+     inkscape:window-height="808"
+     inkscape:window-x="399"
+     inkscape:window-y="113"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-938.9764)">
+    <g
+       id="g4139"
+       transform="translate(0.01993182,-0.04950085)">
+      <path
+         sodipodi:nodetypes="cccccccccszc"
+         inkscape:connector-curvature="0"
+         id="path4183"
+         d="m 40.118805,1003.7696 -18.571428,14.8214 c -4.107143,3.5714 -11.071429,-3.9286 -6.071429,-8.2143 l 32.857143,-24.99995 -17.142857,-0.17858 c -7.321429,0.35714 -7.323781,-9.64251 -0.357143,-9.82142 l 36.071429,0.89285 -9.285714,-9.10714 c -4.285715,-4.64285 2.321428,-11.60714 8.571428,-6.07143 l 24.107142,21.60715 c 14.572134,13.06096 11.167054,34.60852 -3.214285,44.82142 -14.381346,10.2129 -47.321429,4.2857 -46.964286,-23.75 z"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:8.00000095;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
+      <circle
+         r="15.535714"
+         cy="1003.591"
+         cx="70.475945"
+         id="path4185"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:8.00000095;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+  </g>
+</svg>

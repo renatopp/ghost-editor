@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="32mm"
+   height="32mm"
+   viewBox="0 0 113.38583 113.38583"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="WebUIControl.svg">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Send"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Send"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path4158"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.2) rotate(180) translate(6,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Lend"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path4164"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(1.1) rotate(180) translate(1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path4146"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.6"
+     inkscape:cx="70.257713"
+     inkscape:cy="60.975434"
+     inkscape:document-units="px"
+     inkscape:current-layer="g4745"
+     showgrid="false"
+     inkscape:window-width="1262"
+     inkscape:window-height="808"
+     inkscape:window-x="679"
+     inkscape:window-y="154"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-938.9764)">
+    <g
+       id="g4144"
+       transform="translate(-0.30056714,3.7144676)">
+      <g
+         id="g4745"
+         transform="translate(0,-1.009121)">
+        <path
+           style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           d="M 53.410156 15.804688 A 41.037443 41.037443 0 0 0 33.921875 22.587891 L 33.921875 27.357422 L 53.410156 27.357422 L 53.410156 15.804688 z M 59.976562 15.820312 L 59.976562 27.357422 L 79.464844 27.357422 L 79.464844 22.578125 A 41.037443 41.037443 0 0 0 59.976562 15.820312 z M 22.578125 33.921875 A 41.037443 41.037443 0 0 0 15.820312 53.410156 L 27.357422 53.410156 L 27.357422 33.921875 L 22.578125 33.921875 z M 33.921875 33.921875 L 33.921875 53.410156 L 53.410156 53.410156 L 53.410156 33.921875 L 33.921875 33.921875 z M 59.976562 33.921875 L 59.976562 53.410156 L 79.464844 53.410156 L 79.464844 33.921875 L 59.976562 33.921875 z M 86.029297 33.921875 L 86.029297 53.410156 L 97.580078 53.410156 A 41.037443 41.037443 0 0 0 90.796875 33.921875 L 86.029297 33.921875 z M 15.804688 59.976562 A 41.037443 41.037443 0 0 0 22.589844 79.464844 L 27.357422 79.464844 L 27.357422 59.976562 L 15.804688 59.976562 z M 33.921875 59.976562 L 33.921875 79.464844 L 53.410156 79.464844 L 53.410156 59.976562 L 33.921875 59.976562 z M 59.976562 59.976562 L 59.976562 79.464844 L 79.464844 79.464844 L 79.464844 59.976562 L 59.976562 59.976562 z M 86.029297 59.976562 L 86.029297 79.464844 L 90.808594 79.464844 A 41.037443 41.037443 0 0 0 97.566406 59.976562 L 86.029297 59.976562 z M 33.921875 86.029297 L 33.921875 90.808594 A 41.037443 41.037443 0 0 0 53.410156 97.566406 L 53.410156 86.029297 L 33.921875 86.029297 z M 59.976562 86.029297 L 59.976562 97.580078 A 41.037443 41.037443 0 0 0 79.464844 90.794922 L 79.464844 86.029297 L 59.976562 86.029297 z "
+           transform="translate(0.30056714,936.27105)"
+           id="path4183" />
+      </g>
+    </g>
+  </g>
+</svg>
