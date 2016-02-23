@@ -1,5 +1,9 @@
 # CHANGES
 
+## 0.11.0-dev
+
+- Massive number of icons
+
 
 ## 0.10.0-dev
 
