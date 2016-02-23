@@ -26,6 +26,7 @@ _task('_app_js_build', 'app_js', 'js');
 _task('_app_less', 'app_less', 'less');
 _task('_app_templates', 'app_templates', 'templates');
 _task('_app_html', 'app_html', 'html');
+_task('_app_images', 'app_images', 'copy');
 _task('_preload_js', 'preload_js', 'js');
 _task('_preload_css', 'preload_css', 'css');
 _task('_jshint', 'app_js', 'jshint');
@@ -42,6 +43,7 @@ gulp.task('_build', [
   '_preload_css',
   '_app_js_build',
   '_app_less',
+  '_app_images',
   '_app_templates',
   '_app_html',
 ]);
@@ -53,6 +55,7 @@ gulp.task('_dev', [
   '_preload_css',
   '_app_js_dev',
   '_app_less',
+  '_app_images',
   '_app_templates',
   '_app_html',
 ]);
@@ -69,6 +72,7 @@ gulp.task('_watch', function() {
   gulp.watch(f.preload_css.input, ['_preload_css']);
   gulp.watch(f.app_js.input, ['_jshint', '_app_js_dev']);
   gulp.watch(f.app_less.input_all, ['_app_less']);
+  gulp.watch(f.app_images.input, ['_app_images']);
   gulp.watch(f.app_templates.input, ['_app_templates']);
   gulp.watch(f.app_html.input, ['_app_html']);
 });

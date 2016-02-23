@@ -69,7 +69,7 @@ module.exports = {
       .src(input)
       .pipe(jshint())
       .pipe(jshint.reporter(stylish));
-},
+  },
 
   less: function(input, output, options) {
     options = options||{};
@@ -89,6 +89,13 @@ module.exports = {
     return gulp
       .src(input)
       .pipe(gulp.dest(output));
+  },
+
+
+  copy: function(input, output, options) {
+    return gulp
+      .src(input)
+      .pipe(gulp.dest(output))
   },
 
   templates: function(input, output, options) {
