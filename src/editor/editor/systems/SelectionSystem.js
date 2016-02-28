@@ -30,10 +30,10 @@ b3e.editor.SelectionSystem = function(editor) {
     var node = tree.nodes.getUnderPoint(x, y);
     var connection = tree.connections.getUnderPoint(x, y);
 
-    if (connection) return;
+    if (connection || shift) return;
 
     if (node && node.display.isSelected && ctrl) {
-      if (shift) {
+      if (alt) {
         tree.selection.deselectSubtree(node);
       } else {
         tree.selection.deselect(node);
@@ -42,14 +42,14 @@ b3e.editor.SelectionSystem = function(editor) {
 
     else if (node && !node.display.isSelected && node.display.hitBody(x, y)) {
       if (!ctrl) tree.selection.deselectAll();
-      if (shift) {
+      if (alt) {
         tree.selection.selectSubtree(node);
       } else {
         tree.selection.select(node);
       }
     }
     else if (node && node.display.hitBody(x, y)) {
-      if (shift) {
+      if (alt) {
         tree.selection.selectSubtree(node);
       }
     }

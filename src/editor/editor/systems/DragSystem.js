@@ -4,6 +4,9 @@ b3e.editor.DragSystem = function(editor) {
   var isDragging = false;
   var dragX0 = 0;
   var dragY0 = 0;
+  var ctrl = false;
+  var shift = false;
+  var alt = false;
 
   this.update = function(delta) {};
 
@@ -11,6 +14,10 @@ b3e.editor.DragSystem = function(editor) {
     if (e.nativeEvent.which !== 1 || 
         e.nativeEvent.ctrlKey || 
         isDragging) return;
+
+    ctrl = e.nativeEvent.ctrlKey;
+    shift = e.nativeEvent.shiftKey;
+    alt = e.nativeEvent.altKey;
 
     var project = editor.project.get();
     if (!project) return;
@@ -28,6 +35,9 @@ b3e.editor.DragSystem = function(editor) {
 
     // if no node selected
     if (!node.display.isSelected) return;
+
+    // if mouse in anchor
+    if (shift) return;
 
     // if mouse in anchor
     if (!node.display.hitBody(x, y)) return;

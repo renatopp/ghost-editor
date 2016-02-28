@@ -42,7 +42,7 @@ b3e.editor.ConnectionSystem = function(editor) {
     // User clicked on the node
     if (node) {
       // User left click on OUT anchor
-      if (node.display.hitOutAnchor(x, y)) {
+      if (node.display.hitOutAnchor(x, y) || shift) {
         var max = node.maxOutConnections;
         if (max >= 0 && node.outConnections.length >= max) {
           return;
