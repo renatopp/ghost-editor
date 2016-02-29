@@ -156,6 +156,15 @@ b3e.editor.ConnectionSystem = function(editor) {
 
     editor.setCursor('none');
 
+    // Remove all red connections
+    if (redConnections.length) {
+      for (i=0; i<redConnections.length; i++) {
+        redConnections[i].display.markToRemove = false;
+        redConnections[i].display.redraw();
+      }
+      redConnections = [];
+    }
+
     //
     project.history._beginBatch();
 
