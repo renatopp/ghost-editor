@@ -57,12 +57,21 @@ b3e.editor.ConnectionSystem = function(editor) {
       // User left click on OUT anchor
       if (node.display.hitOutAnchor(x, y) || shift) {
         editor.setCursor('connecting');
-        var max = node.maxOutConnections;
-        if (max >= 0 && node.outConnections.length >= max) {
-          return;
+
+        var availableNodes = [node];
+        if (shift && ctrl) {
+          availableNodes = tree._selectedNodes.slice();
         }
-        var c = tree.connections.add(node, null);
-        connections.push(c);
+
+        for (var j=0; j<availableNodes.length; j++) {
+          var _n = availableNodes[j];
+          var max = _n.maxOutConnections;
+          if (max >= 0 && _n.outConnections.length >= max) {
+            continue;
+          }
+          var c = tree.connections.add(_n, null);
+          connections.push(c);
+        }
 
       // User left click on IN anchor
       } else if (node.display.hitInAnchor(x, y)) {
