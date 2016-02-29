@@ -47,7 +47,7 @@ b3e.editor.CameraSystem = function(editor) {
     var tree = project.trees.getSelected();
     if (!tree) return;
 
-    editor._game.canvas.className += " grabbing";
+    editor.setCursor('grabbing');
 
     isDragging = true;
     offsetX = editor._game.mouse.x - tree.x;
@@ -74,7 +74,7 @@ b3e.editor.CameraSystem = function(editor) {
     var tree = project.trees.getSelected();
     if (!tree) return;
 
-    editor._game.canvas.className = editor._game.canvas.className.replace(/(?:^|\s)grabbing(?!\S)/g, '');
+    editor.setCursor('none');
 
     isDragging = false;
     offsetX = 0;

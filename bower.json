@@ -14,7 +14,8 @@
     "font-awesome": "~4.5.0"
   },
   "dependencies": {
-    "d3": "~3.5.12"
+    "d3": "~3.5.12",
+    "keymaster": "~1.6.3"
   },
   "old": {
     "angular": "~1.4",

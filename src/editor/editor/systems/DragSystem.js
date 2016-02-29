@@ -47,6 +47,8 @@ b3e.editor.DragSystem = function(editor) {
     dragX0 = x;
     dragY0 = y;
 
+    editor.setCursor('dragging');
+
     for (var i=0; i<tree._selectedNodes.length; i++) {
       node = tree._selectedNodes[i];
       node.display.isDragging = true;
@@ -103,6 +105,7 @@ b3e.editor.DragSystem = function(editor) {
     var x = point.x;
     var y = point.y;
 
+    editor.setCursor('none');
 
     project.history._beginBatch();
     for (var i=0; i<tree._selectedNodes.length; i++) {

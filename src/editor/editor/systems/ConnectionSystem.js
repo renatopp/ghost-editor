@@ -7,7 +7,19 @@ b3e.editor.ConnectionSystem = function(editor) {
   var connections = [];
   var lastOutNode = null;
 
-  this.update = function(delta) {};
+  this.update = function(delta) {
+    var _class = editor._game.canvas.className;
+
+    if (key.shift) {
+      if ( _class.indexOf('cursor') < 0) {
+        editor.setCursor('connecting');
+      }
+    } else {
+      if (_class.indexOf('cursor-connecting') >= 0 && !connections.length) {
+        editor.setCursor('none');
+      }
+    }
+  };
 
   this._reconnectionLastOutNode = function(connection) {
     if (!lastOutNode) return;
@@ -43,6 +55,7 @@ b3e.editor.ConnectionSystem = function(editor) {
     if (node) {
       // User left click on OUT anchor
       if (node.display.hitOutAnchor(x, y) || shift) {
+        editor.setCursor('connecting');
         var max = node.maxOutConnections;
         if (max >= 0 && node.outConnections.length >= max) {
           return;
@@ -116,6 +129,8 @@ b3e.editor.ConnectionSystem = function(editor) {
     var x = point.x;
     var y = point.y;
     var node = tree.nodes.getUnderPoint(x, y);
+
+    editor.setCursor('none');
 
     //
     project.history._beginBatch();

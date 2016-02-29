@@ -89,6 +89,24 @@
     this.dispatchEvent(event);
   };
 
+  p.setCursor = function(type) {
+    var types = {
+      'grabbing'   : ' cursor-grabbing',
+      'connecting' : ' cursor-connecting',
+      'dragging'   : ' cursor-dragging',
+      'erasing'    : ' cursor-erasing'
+    };
+    editor._game.canvas.className = editor
+                                      ._game
+                                      .canvas
+                                      .className
+                                      .replace(/(?:^|\s)cursor-.*(?!\S)/g, '');
+    
+    if (type && type !== 'none') {
+      this._game.canvas.className = types[type];
+    }
+  };
+
   p.applySettings = function(settings) {
     if (settings === 'default') {
       settings = b3e.DEFAULT_SETTINGS;

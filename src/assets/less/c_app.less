@@ -13,10 +13,21 @@ html, body {
   .font-base;
 }
 
-.grabbing {
-  cursor: url(../imgs/closedhand.cur);
-  cursor: url(../imgs/closedhand.cur) 8 8, move;
+.cursor-grabbing {
+  cursor: url(../imgs/cursor-grabbing.cur);
+  cursor: url(../imgs/cursor-grabbing.cur) 8 8, move;
 }
+.cursor-connecting {
+  cursor: copy;
+}
+.cursor-dragging {
+  cursor: all-scroll;
+}
+.cursor-erasing {
+  cursor: url(../imgs/cursor-erasing.png);
+  cursor: url(../imgs/cursor-erasing.png) 15 15, crosshair;
+}
+
 .no-margin { margin: 0px; }
 .no-padding { padding: 0px; }
 .sweet-alert input { color: @color-dark1; }
