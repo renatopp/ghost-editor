@@ -128,15 +128,18 @@ b3e.editor.ConnectionSystem = function(editor) {
       redConnections = [];
     }
 
-    // Verify if node has input limit
+    // Verify if node has input limit and mark connections to be removed
     var node = tree.nodes.getUnderPoint(x, y);
     if (node) {
       var max = node.maxInConnections;
+      var pool = node.inConnections.concat(connections);
       if (max >= 0 && node.inConnections.length >= max) {
-        var connection = node.inConnections[0];
-        redConnections.push(connection);
-        connection.display.markToRemove = true;
-        connection.display.redraw();
+        for (var k=0; k<(pool.length-max); k++) {
+          var connection = pool[k];
+          redConnections.push(connection);
+          connection.display.markToRemove = true;
+          connection.display.redraw();
+        }
       }
     }
 
