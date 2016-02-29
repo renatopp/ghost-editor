@@ -45,6 +45,9 @@
     var diff       = s.get('anchor_radius') + s.get('anchor_border_width');
     var arrowWidth = s.get('anchor_radius')/2;
     var layout     = s.get('layout');
+    if (this.markToRemove) {
+      color = 'red';
+    }
 
     var dx=0; var dy=0; var angle=0; var ax=0; var ay=0;
     // var inAnchor = outNode._getInAnchorPosition();

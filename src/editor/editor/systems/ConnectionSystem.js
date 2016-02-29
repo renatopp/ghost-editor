@@ -5,6 +5,7 @@ b3e.editor.ConnectionSystem = function(editor) {
   var shift = false;
   var alt = false;
   var connections = [];
+  var redConnections = [];
   var lastOutNode = null;
 
   this.update = function(delta) {
@@ -21,7 +22,7 @@ b3e.editor.ConnectionSystem = function(editor) {
     }
   };
 
-  this._reconnectionLastOutNode = function(connection) {
+  this._reconnectLastOutNode = function(connection) {
     if (!lastOutNode) return;
     connection.outNode = lastOutNode;
     lastOutNode.inConnections.push(connection);
@@ -102,11 +103,34 @@ b3e.editor.ConnectionSystem = function(editor) {
     var point = tree.view.getLocalPoint();
     var x = point.x;
     var y = point.y;
+    var i;
 
     // Redraw all dragging connections
-    for (var i=0; i<connections.length; i++) {
+    for (i=0; i<connections.length; i++) {
       connections[i].display.redraw(null, null, x, y);
     }
+
+    // Remove all red connections
+    if (redConnections.length) {
+      for (i=0; i<redConnections.length; i++) {
+        redConnections[i].display.markToRemove = false;
+        redConnections[i].display.redraw();
+      }
+      redConnections = [];
+    }
+
+    // Verify if node has input limit
+    var node = tree.nodes.getUnderPoint(x, y);
+    if (node) {
+      var max = node.maxInConnections;
+      if (max >= 0 && node.inConnections.length >= max) {
+        var connection = node.inConnections[0];
+        redConnections.push(connection);
+        connection.display.markToRemove = true;
+        connection.display.redraw();
+      }
+    }
+
   };
 
   this.onMouseUp = function(e) {
@@ -143,7 +167,7 @@ b3e.editor.ConnectionSystem = function(editor) {
       if (!node) {
         // must return the original connection configuration in order to
         // register correctly on the history manager
-        this._reconnectionLastOutNode(connection); 
+        this._reconnectLastOutNode(connection); 
         tree.connections.remove(connection);
         continue;
       }
@@ -152,7 +176,7 @@ b3e.editor.ConnectionSystem = function(editor) {
       if (node === inNode) {
         // must return the original connection configuration in order to
         // register correctly on the history manager
-        this._reconnectionLastOutNode(connection);
+        this._reconnectLastOutNode(connection);
         tree.connections.remove(connection);
         continue;
       }
@@ -161,15 +185,7 @@ b3e.editor.ConnectionSystem = function(editor) {
       if (node.category === 'input') {
         // must return the original connection configuration in order to
         // register correctly on the history manager
-        this._reconnectionLastOutNode(connection);
-        tree.connections.remove(connection);
-        continue;
-      }
-
-      // Remove connection if node can't have more inputs
-      var max = node.maxInConnections;
-      if (max >= 0 && node.inConnections.length >= max) {
-        this._reconnectionLastOutNode(connection);
+        this._reconnectLastOutNode(connection);
         tree.connections.remove(connection);
         continue;
       }
@@ -179,21 +195,26 @@ b3e.editor.ConnectionSystem = function(editor) {
       for (var j=0; j<inNode.outConnections.length; j++) {
         var outNode = inNode.outConnections[j].outNode;
         if (outNode === node) {
-          this._reconnectionLastOutNode(connection);
+          this._reconnectLastOutNode(connection);
           tree.connections.remove(connection);
           doubleConnection = true;
           break;
         }
       }
-
       if (doubleConnection) {
         continue;
+      }
+
+      // Remove connection if node can't have more inputs
+      var max = node.maxInConnections;
+      if (max >= 0 && node.inConnections.length >= max) {
+        tree.connections.remove(node.inConnections[0]);
       }
 
       // Do the connection
       // but before return the original connection configuration in order to
       // register the correctly the action on the history manager
-      this._reconnectionLastOutNode(connection);
+      this._reconnectLastOutNode(connection);
       tree.connections.remove(connection);
       tree.connections.add(inNode, node);
       
