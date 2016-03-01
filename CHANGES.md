@@ -2,8 +2,15 @@
 
 ## 0.11.0-dev
 
-- Massive number of icons
-
+- Massive number of icons.
+- Using SHIFT+drag to create a single connection (similar to dragging an out 
+  anchor).
+- Using SHIFT+CTRL+drag to create multiple connections (from all selected 
+  nodes).
+- Removing old connections when adding more connections than the node limit.
+- Showing a visual feedback (red connection) when the old connections will be
+  removed.
+- Changing cursor for each action.
 
 ## 0.10.0-dev
 
