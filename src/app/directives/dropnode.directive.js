@@ -36,7 +36,15 @@
         var project = $window.editor.project.get();
         var tree = project.trees.getSelected();
         var point = tree.view.getLocalPoint(e.clientX, e.clientY);
-        tree.nodes.add(name, point.x, point.y);
+
+        var Cls = b3e.nodes[name];
+        var node = tree.nodes.getUnderPoint(point.x, point.y);
+        if (node && node.category !== b3e.OUTPUT && Cls.category !== b3e.INPUT) {
+          var newNode = tree.nodes.add(name, node.display.x+500, node.display.y);
+          tree.connections.add(node, newNode);
+        } else {
+          tree.nodes.add(name, point.x, point.y);
+        }
 
         $window.editor._game.canvas.focus();
       });
