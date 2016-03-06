@@ -108,8 +108,8 @@ b3e.tree.EditManager = function(editor, project, tree) {
 
       var j;
       if (node.inConnections.length > 0) {
-        for (j=node.outConnections.length-1; j>=0; j--) {
-          tree.connections.remove(node.outConnections[j]);
+        for (j=node.inConnections.length-1; j>=0; j--) {
+          tree.connections.remove(node.inConnections[j]);
         }
       }
 
@@ -128,8 +128,8 @@ b3e.tree.EditManager = function(editor, project, tree) {
       var node = tree._selectedNodes[i];
 
       if (node.inConnections.length > 0) {
-        for (var j=node.outConnections.length-1; j>=0; j--) {
-          tree.connections.remove(node.outConnections[j]);
+        for (var j=node.inConnections.length-1; j>=0; j--) {
+          tree.connections.remove(node.inConnections[j]);
         }
       }
     }

@@ -42,6 +42,7 @@ b3e.editor.ConnectionSystem = function(editor) {
         var step = Math.PI/40;
         var radius = tree._cutCircle.radius;
         for (var theta=0; theta<Math.PI*2; theta+=step) {
+          // Check for all points in a circle
           var _x = x + radius*Math.cos(theta);
           var _y = y + radius*Math.sin(theta);
           
