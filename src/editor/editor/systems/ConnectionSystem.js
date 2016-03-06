@@ -9,14 +9,54 @@ b3e.editor.ConnectionSystem = function(editor) {
   var lastOutNode = null;
 
   this.update = function(delta) {
-    var _class = editor._game.canvas.className;
+    var project = editor.project.get();
+    if (!project) return;
 
+    var tree = project.trees.getSelected();
+    if (!tree) return;
+
+    // Update cut circle position
+    var point = tree.view.getLocalPoint();
+    var x = tree._cutCircle.x = point.x;
+    var y = tree._cutCircle.y = point.y;
+
+    // Verify shift creation
+    var _class = editor._game.canvas.className;
     if (key.shift) {
       if ( _class.indexOf('cursor') < 0) {
         editor.setCursor('connecting');
       }
     } else {
       if (_class.indexOf('cursor-connecting') >= 0 && !connections.length) {
+        editor.setCursor('none');
+      }
+    }
+
+    // Verify cut tool
+    if (key.isPressed('c') && !key.shift && !key.ctrl && !key.alt) {
+      if (_class.indexOf('cursor') < 0) {
+        editor.setCursor('erasing');
+        tree._cutCircle.visible = true;
+      } else if (_class.indexOf('cursor-erasing') >= 0) {
+        // Verify collision and remove connections
+        var step = Math.PI/40;
+        var radius = tree._cutCircle.radius;
+        for (var theta=0; theta<Math.PI*2; theta+=step) {
+          var _x = x + radius*Math.cos(theta);
+          var _y = y + radius*Math.sin(theta);
+          
+          var _connections = tree.connections.getAll().slice();
+          for (var i=0; i<_connections.length; i++) {
+            var shape = _connections[i].display;
+            if (shape.hitTest(_x, _y)) {
+              tree.connections.remove(_connections[i]);
+            }
+          }
+        }
+      }
+    } else {
+      if (_class.indexOf('cursor-erasing') >= 0) {
+        tree._cutCircle.visible = false;
         editor.setCursor('none');
       }
     }

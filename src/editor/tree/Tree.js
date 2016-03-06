@@ -10,6 +10,7 @@
     this._project = project;
     this._selectedNodes = [];
     this._selectionBox = null;
+    this._cutCircle = null;
     this._root = null;
 
     this._nodes = [];
@@ -45,7 +46,9 @@
     this.addChild(this._overlayLayer);
 
     this._selectionBox = new b3e.SelectionBox();
+    this._cutCircle = new b3e.CutCircle();
     this._overlayLayer.addChild(this._selectionBox);
+    this._overlayLayer.addChild(this._cutCircle);
 
     this._root = this.nodes.add('Root', 0, 0);
     this._applySettings(this._editor._settings);
@@ -55,6 +58,7 @@
 
   p._applySettings = function(settings) {
     this._selectionBox._applySettings(settings);
+    this._cutCircle._applySettings(settings);
 
     this.nodes._applySettings(settings);
     this.connections._applySettings(settings);
