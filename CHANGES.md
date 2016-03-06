@@ -11,6 +11,8 @@
 - Showing a visual feedback (red connection) when the old connections will be
   removed.
 - Changing cursor for each action.
+- Using C to use the CUT tool (to remove connections).
+- Fixing bug on "Remove All Connections" and "Remove All In Connections".
 
 ## 0.10.0-dev
 
