@@ -107,6 +107,10 @@ b3e.editor.ConnectionSystem = function(editor) {
         for (var j=0; j<availableNodes.length; j++) {
           var _n = availableNodes[j];
           var max = _n.maxOutConnections;
+          if (_n.category === b3e.OUTPUT) {
+            continue;
+          }
+
           if (max >= 0 && _n.outConnections.length >= max) {
             continue;
           }
