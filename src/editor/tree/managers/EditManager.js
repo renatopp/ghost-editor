@@ -150,5 +150,54 @@ b3e.tree.EditManager = function(editor, project, tree) {
     project.history._endBatch();
   };
 
+  this.enable = function() {
+    project.history._beginBatch();
+    for (var i=0; i<tree._selectedNodes.length; i++) {
+      var node = tree._selectedNodes[i];
+      var d = node.display;
+
+      if (d.isEnabled) continue;
+      d.enable();
+
+      // History
+      var _old = [d, d.disable, []];
+      var _new = [d, d.enable, []];
+      project.history._add(new b3e.Command(_old, _new, 'Enable node'));
+    }
+    project.history._endBatch();
+  };
+
+  this.disable = function() {
+    project.history._beginBatch();
+    for (var i=0; i<tree._selectedNodes.length; i++) {
+      var node = tree._selectedNodes[i];
+      var d = node.display;
+
+      if (!d.isEnabled) continue;
+      d.disable();
+
+      // History
+      var _old = [d, d.enable, []];
+      var _new = [d, d.disable, []];
+      project.history._add(new b3e.Command(_old, _new, 'Disable node'));
+    }
+    project.history._endBatch();
+  };
+
+  this.invertEnabled = function() {
+    project.history._beginBatch();
+    for (var i=0; i<tree._selectedNodes.length; i++) {
+      var node = tree._selectedNodes[i];
+      var d = node.display;
+      d.invertEnabled();
+
+      // History
+      var _old = [d, d.invertEnabled, []];
+      var _new = [d, d.invertEnabled, []];
+      project.history._add(new b3e.Command(_old, _new, 'Toggle enabled node'));
+    }
+    project.history._endBatch();
+  };
+
   this._applySettings = function(settings) {};
 };

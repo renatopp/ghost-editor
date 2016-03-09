@@ -38,3 +38,4 @@ src/vendor
 cache
 teste.py
 todo
+ignore*

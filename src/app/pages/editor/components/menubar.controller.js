@@ -46,6 +46,9 @@
     vm.onSelectAll         = onSelectAll;
     vm.onDeselectAll       = onDeselectAll;
     vm.onInvertSelection   = onInvertSelection;
+    vm.onEnable            = onEnable;
+    vm.onDisable           = onDisable;
+    vm.onInvertEnabled     = onInvertEnabled;
 
     _create();
     _activate();
@@ -253,6 +256,18 @@
       var tree = _getTree();
       tree.selection.invertSelection();
       return false;
+    }
+    function onEnable() {
+      var tree = _getTree();
+      tree.edit.enable();
+    }
+    function onDisable() {
+      var tree = _getTree();
+      tree.edit.disable();
+    }
+    function onInvertEnabled() {
+      var tree = _getTree();
+      tree.edit.invertEnabled();
     }
   }
 })();

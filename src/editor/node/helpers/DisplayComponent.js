@@ -20,6 +20,7 @@
     this.width = null;
     this.height = null;
 
+    this.isEnabled = true;
     this.isSelected = null;
     this.isDragging = null;
     this.dragOffsetX = null;
@@ -27,6 +28,7 @@
 
     this.shape = null;
     this._shadow = null;
+    this._disabledOverlay = null;
   };
   var p = createjs.extend(DisplayComponent, createjs.Container);
 
@@ -42,7 +44,9 @@
 
     var color = this._settings.get('selection_color');
     this._shadow = new createjs.Shadow(color, 0, 0, 10);
+    this._disabledOverlay = new createjs.Shape();
     this.redraw();
+
   };
 
   /**
@@ -57,6 +61,18 @@
     this.width = this._settings.get('block_action_width');
     this.height = this._settings.get('block_action_height');
     b3e.node.draw(this.node, this._settings);
+
+
+    this._disabledOverlay.alpha = 0.6;
+    this._disabledOverlay.visible = false;
+    var g = this._disabledOverlay.graphics;
+    g.beginFill('#414141');
+    g.drawRoundRect(
+      -this.width/2, -this.height/2,
+      this.width, this.height,
+      10
+    );
+    this.addChild(this._disabledOverlay);
   };
 
   /**
@@ -76,6 +92,22 @@
 
     this.x -= dx;
     this.y -= dy;
+  };
+
+  /**
+   * Enable/disable node
+   */
+  p.invertEnabled = function() {
+    this.isEnabled = !this.isEnabled;
+    this._disabledOverlay.visible = !this.isEnabled;
+  };
+  p.enable = function() {
+    this.isEnabled = true;
+    this._disabledOverlay.visible = false;
+  };
+  p.disable = function() {
+    this.isEnabled = false;
+    this._disabledOverlay.visible = true;
   };
 
   /**

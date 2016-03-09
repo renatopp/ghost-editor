@@ -56,9 +56,9 @@
           <li><a ng-click="menubar.onNewTree()">
             New tree<span class="shortcut">{{key_new_tree}}</span>
           </a></li>
-          <li><a ui-sref="editor.editnode">
+          <!-- <li><a ui-sref="editor.editnode">
             New node<span class="shortcut">{{key_new_node}}</span>
-          </a></li>
+          </a></li> -->
         </ul>
       </li>
 
@@ -96,25 +96,28 @@
             <span class="shortcut">delete</span>
           </a></li>
           <li class="divider"></li>
-          <li><a ng-click="menubar.onRemoveAllConns()">
-            Remove all conns
+          <li><a ng-click="menubar.onEnable()">
+            Enable
+            <span class="shortcut">e</span>
           </a></li>
-          <li><a ng-click="menubar.onRemoveInConns()">
-            Remove all in-conns
+          <li><a ng-click="menubar.onDisable()">
+            Disable
+            <span class="shortcut">d</span>
           </a></li>
-          <li><a ng-click="menubar.onRemoveOutConns()">
-            Remove all out-conns
+          <li><a ng-click="menubar.onInvertEnabled()">
+            Invert Enable
+            <span class="shortcut">w</span>
           </a></li>
         </ul>
       </li>
 
       <li><a>View</a>
         <ul>
-          <li><a ng-click="menubar.onAutoOrganize()">
+          <!-- <li><a ng-click="menubar.onAutoOrganize()">
             Auto organize
             <span class="shortcut">a</span>
           </a></li>
-          <li class="divider"></li>
+          <li class="divider"></li> -->
           <li><a ng-click="menubar.onZoomIn()">
             Zoom in
             <span class="shortcut">ctrl+up</span>
@@ -143,6 +146,20 @@
           <li class="disabled"><a>
             Select subtree
             <span class="shortcut">shift+click</span>
+          </a></li>
+        </ul>
+      </li>
+
+      <li><a>Connection</a>
+        <ul>
+          <li><a ng-click="menubar.onRemoveAllConns()">
+            Remove all conns
+          </a></li>
+          <li><a ng-click="menubar.onRemoveInConns()">
+            Remove all in-conns
+          </a></li>
+          <li><a ng-click="menubar.onRemoveOutConns()">
+            Remove all out-conns
           </a></li>
         </ul>
       </li>
