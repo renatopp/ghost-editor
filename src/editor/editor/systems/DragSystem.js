@@ -47,8 +47,6 @@ b3e.editor.DragSystem = function(editor) {
     dragX0 = x;
     dragY0 = y;
 
-    editor.setCursor('dragging');
-
     for (var i=0; i<tree._selectedNodes.length; i++) {
       node = tree._selectedNodes[i];
       node.display.isDragging = true;
@@ -69,6 +67,10 @@ b3e.editor.DragSystem = function(editor) {
     var point = tree.view.getLocalPoint();
     var x = point.x;
     var y = point.y;
+
+    if (Math.abs(dragX0-x) > 2 || Math.abs(dragY0-y)) {
+      editor.setCursor('dragging');
+    }
 
     for (var i=0; i<tree._selectedNodes.length; i++) {
       var node = tree._selectedNodes[i];
