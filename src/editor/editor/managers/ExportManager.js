@@ -23,6 +23,10 @@ b3e.editor.ExportManager = function(editor) {
     return nodes;
   }
 
+  this.parametersToData = function() {
+    return {oi:"=)"};
+  }
+
   this.projectToData = function() {
     var project = editor.project.get();
     if (!project) return;

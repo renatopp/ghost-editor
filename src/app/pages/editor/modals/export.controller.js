@@ -49,8 +49,8 @@
       else if (vm.type === 'tree' && vm.format === 'json') {
         _createJson(e.treeToData());
       }
-      else if (vm.type === 'nodes' && vm.format === 'json') {
-        _createJson(e.nodesToData());
+      else if (vm.type === 'parameters' && vm.format === 'json') {
+        _createJson(e.parametersToData());
       }
     }
 

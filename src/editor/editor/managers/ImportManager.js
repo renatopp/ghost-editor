@@ -1,6 +1,10 @@
 b3e.editor.ImportManager = function(editor) {
   "use strict";
 
+  this.parametersAsData = function(data) {
+    console.log(data);
+  }
+
   this.projectAsData = function(data) {
     var project = editor.project.get();
     if (!project) return;

@@ -59,8 +59,8 @@
         else if (vm.type === 'tree' && vm.format === 'json') {
           i.treeAsData(data);
         }
-        else if (vm.type === 'nodes' && vm.format === 'json') {
-          i.nodesAsData(data);
+        else if (vm.type === 'parameters' && vm.format === 'json') {
+          i.parametersAsData(data);
         }
       } catch(e) {
         notificationService.error(

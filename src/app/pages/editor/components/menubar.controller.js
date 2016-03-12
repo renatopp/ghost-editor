@@ -21,34 +21,34 @@
                              projectModel,
                              notificationService) {
     var vm = this;
-    vm.onNewTree           = onNewTree;
-    vm.onCloseProject      = onCloseProject;
-    vm.onSaveProject       = onSaveProject;
-    vm.onExportProjectJson = onExportProjectJson;
-    vm.onExportTreeJson    = onExportTreeJson;
-    vm.onExportNodesJson   = onExportNodesJson;
-    vm.onImportProjectJson = onImportProjectJson;
-    vm.onImportTreeJson    = onImportTreeJson;
-    vm.onImportNodesJson   = onImportNodesJson;
-    vm.onUndo              = onUndo;
-    vm.onRedo              = onRedo;
-    vm.onCopy              = onCopy;
-    vm.onCut               = onCut;
-    vm.onPaste             = onPaste;
-    vm.onDuplicate         = onDuplicate;
-    vm.onRemove            = onRemove;
-    vm.onRemoveAllConns    = onRemoveAllConns;
-    vm.onRemoveInConns     = onRemoveInConns;
-    vm.onRemoveOutConns    = onRemoveOutConns;
-    vm.onAutoOrganize      = onAutoOrganize;
-    vm.onZoomIn            = onZoomIn;
-    vm.onZoomOut           = onZoomOut;
-    vm.onSelectAll         = onSelectAll;
-    vm.onDeselectAll       = onDeselectAll;
-    vm.onInvertSelection   = onInvertSelection;
-    vm.onEnable            = onEnable;
-    vm.onDisable           = onDisable;
-    vm.onInvertEnabled     = onInvertEnabled;
+    vm.onNewTree              = onNewTree;
+    vm.onCloseProject         = onCloseProject;
+    vm.onSaveProject          = onSaveProject;
+    vm.onExportProjectJson    = onExportProjectJson;
+    vm.onExportTreeJson       = onExportTreeJson;
+    vm.onExportParametersJson = onExportParametersJson;
+    vm.onImportProjectJson    = onImportProjectJson;
+    vm.onImportTreeJson       = onImportTreeJson;
+    vm.onImportParametersJson = onImportParametersJson;
+    vm.onUndo                 = onUndo;
+    vm.onRedo                 = onRedo;
+    vm.onCopy                 = onCopy;
+    vm.onCut                  = onCut;
+    vm.onPaste                = onPaste;
+    vm.onDuplicate            = onDuplicate;
+    vm.onRemove               = onRemove;
+    vm.onRemoveAllConns       = onRemoveAllConns;
+    vm.onRemoveInConns        = onRemoveInConns;
+    vm.onRemoveOutConns       = onRemoveOutConns;
+    vm.onAutoOrganize         = onAutoOrganize;
+    vm.onZoomIn               = onZoomIn;
+    vm.onZoomOut              = onZoomOut;
+    vm.onSelectAll            = onSelectAll;
+    vm.onDeselectAll          = onDeselectAll;
+    vm.onInvertSelection      = onInvertSelection;
+    vm.onEnable               = onEnable;
+    vm.onDisable              = onDisable;
+    vm.onInvertEnabled        = onInvertEnabled;
 
     _create();
     _activate();
@@ -120,8 +120,8 @@
       $state.go('editor.export', {type:'tree', format:'json'});
       return false;
     }
-    function onExportNodesJson() {
-      $state.go('editor.export', {type:'nodes', format:'json'});
+    function onExportParametersJson() {
+      $state.go('editor.export', {type:'parameters', format:'json'});
       return false;
     }
     function onImportProjectJson() {
@@ -132,8 +132,8 @@
       $state.go('editor.import', {type:'tree', format:'json'});
       return false;
     }
-    function onImportNodesJson() {
-      $state.go('editor.import', {type:'nodes', format:'json'});
+    function onImportParametersJson() {
+      $state.go('editor.import', {type:'parameters', format:'json'});
       return false;
     }
 
