@@ -88,6 +88,7 @@ b3e.editor.ExportManager = function(editor) {
       title       : node.title,
       description : node.description,
       properties  : properties,
+      enabled     : node.display.isEnabled,
       children    : getBlockChildrenIds(node),
       display: {
         x: node.display.x,

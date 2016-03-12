@@ -1,4 +1,4 @@
-b3e.editor.ConnectionSystem = function(editor) {
+b3e.editor.DisableSystem = function(editor) {
   "use strict";
 
   this.update = function(delta) {

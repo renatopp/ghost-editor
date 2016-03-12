@@ -53,10 +53,12 @@ b3e.editor.ImportManager = function(editor) {
       node.id = spec.id;
       node.title = spec.title;
       node.description = spec.description;
-
       Object.keys(spec.properties).forEach(_func);
-      // node.properties = tine.merge({}, node.properties, spec.properties);
       node.display.redraw();
+
+      if (!spec.enabled) {
+        node.display.disable();
+      }
     }
 
     // Connections
