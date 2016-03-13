@@ -3,7 +3,8 @@
 ## 0.12.0-dev
 
 - Added enable/disable feature.
-- Organization features.
+- Added organization features.
+- Added parameters export/import feature.
 
 
 ## 0.11.0-dev
