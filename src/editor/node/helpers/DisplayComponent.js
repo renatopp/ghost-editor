@@ -45,7 +45,18 @@
     var color = this._settings.get('selection_color');
     this._shadow = new createjs.Shadow(color, 0, 0, 10);
     this._disabledOverlay = new createjs.Shape();
+    this._disabledOverlay.alpha = 0.6;
+    this._disabledOverlay.visible = !this.isEnabled;
+
     this.redraw();
+
+    var g = this._disabledOverlay.graphics;
+    g.beginFill('#414141');
+    g.drawRoundRect(
+      -this.width/2, -this.height/2,
+      this.width, this.height,
+      10
+    );
 
   };
 
@@ -61,17 +72,7 @@
     this.width = this._settings.get('block_action_width');
     this.height = this._settings.get('block_action_height');
     b3e.node.draw(this.node, this._settings);
-
-
-    this._disabledOverlay.alpha = 0.6;
-    this._disabledOverlay.visible = false;
-    var g = this._disabledOverlay.graphics;
-    g.beginFill('#414141');
-    g.drawRoundRect(
-      -this.width/2, -this.height/2,
-      this.width, this.height,
-      10
-    );
+    
     this.addChild(this._disabledOverlay);
   };
 
