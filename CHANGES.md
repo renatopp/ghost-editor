@@ -1,5 +1,11 @@
 # CHANGES
 
+## 0.12.0-dev
+
+- Added enable/disable feature.
+- Organization features.
+
+
 ## 0.11.0-dev
 
 - Massive number of icons.
@@ -13,6 +19,7 @@
 - Changing cursor for each action.
 - Using C to use the CUT tool (to remove connections).
 - Fixing bug on "Remove All Connections" and "Remove All In Connections".
+
 
 ## 0.10.0-dev
 
