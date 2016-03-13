@@ -2,7 +2,23 @@ b3e.editor.ImportManager = function(editor) {
   "use strict";
 
   this.parametersAsData = function(data) {
-    console.log(data);
+    var project = editor.project.get();
+    if (!project) return;
+
+    for (var i=0; i<data.length; i++) {
+      var _tree = data[i];
+      var tree = project.trees.get(_tree.id);
+
+      for (var j=0; j<_tree.nodes.length; j++) {
+        var _node = _tree.nodes[j];
+        var node = tree.nodes.get(_node.id);
+
+        Object.keys(_node.properties).forEach(function(name) {
+          node.properties[name].fromJson(_node.properties[name]);
+        });
+        node.display.redraw();
+      }
+    }
   }
 
   this.projectAsData = function(data) {
