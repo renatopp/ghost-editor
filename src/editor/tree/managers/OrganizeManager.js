@@ -1,109 +1,154 @@
 b3e.tree.OrganizeManager = function(editor, project, tree) {
   "use strict";
 
-  var lastLayout           = null;
-  var depth                = 0;
-  var leafCount            = 0;
-  var horizontalSpacing    = 208;
-  var verticalSpacing      = 88;
-  var verticalCompensation = 42;
-  var orderByIndex         = false;
-  var connections          = []; // to redraw connections
-  var blocks               = []; // to reposition blocks
+  this.alignVertically = function() {
+    project.history._beginBatch();
+    var nodes = tree.nodes.getSelected();
+    var i, j, x;
+    if (!nodes.length) return;
 
-  function stepH(block) {
-    var x, y;
-    blocks.push(block);
-
-    // leaf
-    if (block._outConnections.length === 0) {
-      leafCount++;
-
-      // leaf nodes have the position accord. to the depth and leaf cont.
-      x = depth*horizontalSpacing;
-      y = leafCount*verticalSpacing;
+    x = 0;
+    for (i=0; i<nodes.length; i++) {
+      x += nodes[i].display.x;
     }
 
-    // internal node
-    else {
-      // internal nodes have the position acord. to the depth and the
-      //    mean position of its children
-      var ySum = 0;
-      var conns;
+    x = x/nodes.length;
+    for (i=0; i<nodes.length; i++) {
+      var node = nodes[i];
+      var xOld = node.display.x;
+      node.display.x = x;
+      node.display.snap();
 
-      if (orderByIndex) {
-        conns = block._outConnections;
-      } else {
-        // get connections ordered by y position
-        conns = block._outConnections.slice(0);
-        conns.sort(function(a, b) {
-          return a._outBlock.y - b._outBlock.y;
-        });
+      // redraw connections linked to the node
+      for (j=0; j<node.inConnections.length; j++) {
+        node.inConnections[j].display.redraw();
+      }
+      for (j=0; j<node.outConnections.length; j++) {
+        node.outConnections[j].display.redraw();
       }
 
-      for (var i=0; i<conns.length; i++) {
-        depth++;
-        connections.push(conns[i]);
-        ySum += stepH(conns[i]._outBlock);
-        depth--;
-      }
+      // history
+      var _old = [node, tree.nodes._move, [node, xOld, node.display.y]];
+      var _new = [node, tree.nodes._move, [node, node.display.x, node.display.y]];
+      project.history._add(new b3e.Command(_old, _new));
+    }
+    project.history._endBatch();
+  };
 
-      x = depth*horizontalSpacing;
-      y = ySum/block._outConnections.length;
+  this.alignHorizontally = function() {
+    project.history._beginBatch();
+    var nodes = tree.nodes.getSelected();
+    var i, j, y;
+    if (!nodes.length) return;
+
+    y = 0;
+    for (i=0; i<nodes.length; i++) {
+      y += nodes[i].display.y;
     }
 
-    block.x = x;
-    block.y = y;
+    y = y/nodes.length;
+    for (i=0; i<nodes.length; i++) {
+      var node = nodes[i];
+      var yOld = node.display.y;
+      node.display.y = y;
+      node.display.snap();
 
-    return y;
-  }
-
-  function stepV(block) {
-    var x, y;
-    blocks.push(block);
-
-    // leaf
-    if (block._outConnections.length === 0) {
-      leafCount++;
-
-      // leaf nodes have the position accord. to the depth and leaf cont.
-      x = leafCount*horizontalSpacing;
-      y = depth*(verticalSpacing+verticalCompensation);
-    }
-
-    // internal node
-    else {
-      // internal nodes have the position acord. to the depth and the
-      //    mean position of its children
-      var xSum = 0;
-      var conns;
-
-      if (orderByIndex) {
-        conns = block._outConnections;
-      } else {
-        // get connections ordered by y position
-        conns = block._outConnections.slice(0);
-        conns.sort(function(a, b) {
-          return a._outBlock.x - b._outBlock.x;
-        });
+      // redraw connections linked to the node
+      for (j=0; j<node.inConnections.length; j++) {
+        node.inConnections[j].display.redraw();
+      }
+      for (j=0; j<node.outConnections.length; j++) {
+        node.outConnections[j].display.redraw();
       }
 
-      for (var i=0; i<conns.length; i++) {
-        depth++;
-        connections.push(conns[i]);
-        xSum += stepV(conns[i]._outBlock);
-        depth--;
-      }
+      // history
+      var _old = [node, tree.nodes._move, [node, node.display.x, yOld]];
+      var _new = [node, tree.nodes._move, [node, node.display.x, node.display.y]];
+      project.history._add(new b3e.Command(_old, _new));
+    }
+    project.history._endBatch();
+  };
 
-      x = xSum/block._outConnections.length;
-      y = depth*(verticalSpacing+verticalCompensation);
+  this.distributeVertically = function() {
+    project.history._beginBatch();
+    var nodes = tree.nodes.getSelected();
+    var i, j, minY, maxY, step, y;
+    if (!nodes.length) return;
+
+    minY = nodes[0].display.y;
+    maxY = nodes[0].display.y;
+
+    for (i=0; i<nodes.length; i++) {
+      minY = Math.min(minY, nodes[i].display.y);
+      maxY = Math.max(maxY, nodes[i].display.y);
     }
 
-    block.x = x;
-    block.y = y;
+    step = (maxY-minY)/(nodes.length-1);
+    y = minY;
 
-    return x;
-  }
+    for (i=0; i<nodes.length; i++) {
+      var node = nodes[i];
+      var yOld = node.display.y
+      node.display.y = y;
+      node.display.snap();
+      y += step;
+
+      // redraw connections linked to the node
+      for (j=0; j<node.inConnections.length; j++) {
+        node.inConnections[j].display.redraw();
+      }
+      for (j=0; j<node.outConnections.length; j++) {
+        node.outConnections[j].display.redraw();
+      }
+      
+      // history
+      var _old = [node, tree.nodes._move, [node, node.display.x, yOld]];
+      var _new = [node, tree.nodes._move, [node, node.display.x, node.display.y]];
+      project.history._add(new b3e.Command(_old, _new));
+    }
+    project.history._endBatch();
+  };
+
+  this.distributeHorizontally = function() {
+    project.history._beginBatch();
+    var nodes = tree.nodes.getSelected();
+    var i, j, minX, maxX, step, x;
+    if (!nodes.length) return;
+
+    minX = nodes[0].display.x;
+    maxX = nodes[0].display.x;
+
+    for (i=0; i<nodes.length; i++) {
+      minX = Math.min(minX, nodes[i].display.x);
+      maxX = Math.max(maxX, nodes[i].display.x);
+    }
+
+    step = (maxX-minX)/(nodes.length-1);
+    x = minX;
+
+    for (i=0; i<nodes.length; i++) {
+      var node = nodes[i];
+      var xOld = node.display.x
+      node.display.x = x;
+      node.display.snap();
+      x += step;
+
+      // redraw connections linked to the node
+      for (j=0; j<node.inConnections.length; j++) {
+        node.inConnections[j].display.redraw();
+      }
+      for (j=0; j<node.outConnections.length; j++) {
+        node.outConnections[j].display.redraw();
+      }
+      
+      // history
+      var _old = [node, tree.nodes._move, [node, xOld, node.display.y]];
+      var _new = [node, tree.nodes._move, [node, node.display.x, node.display.y]];
+      project.history._add(new b3e.Command(_old, _new));
+    }
+    project.history._endBatch();
+  };
+
 
   this.organize = function(root, byIndex) {
     root = root || tree.blocks.getRoot();
@@ -157,10 +202,10 @@ b3e.tree.OrganizeManager = function(editor, project, tree) {
   };
 
   this._applySettings = function(settings) {
-    var layout = settings.get('layout');
-    if (lastLayout && layout !== lastLayout) {
-      this.organize();
-    }
-    lastLayout = layout;
+    // var layout = settings.get('layout');
+    // if (lastLayout && layout !== lastLayout) {
+    //   this.organize();
+    // }
+    // lastLayout = layout;
   };
 };

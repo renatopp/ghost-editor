@@ -21,34 +21,38 @@
                              projectModel,
                              notificationService) {
     var vm = this;
-    vm.onNewTree              = onNewTree;
-    vm.onCloseProject         = onCloseProject;
-    vm.onSaveProject          = onSaveProject;
-    vm.onExportProjectJson    = onExportProjectJson;
-    vm.onExportTreeJson       = onExportTreeJson;
-    vm.onExportParametersJson = onExportParametersJson;
-    vm.onImportProjectJson    = onImportProjectJson;
-    vm.onImportTreeJson       = onImportTreeJson;
-    vm.onImportParametersJson = onImportParametersJson;
-    vm.onUndo                 = onUndo;
-    vm.onRedo                 = onRedo;
-    vm.onCopy                 = onCopy;
-    vm.onCut                  = onCut;
-    vm.onPaste                = onPaste;
-    vm.onDuplicate            = onDuplicate;
-    vm.onRemove               = onRemove;
-    vm.onRemoveAllConns       = onRemoveAllConns;
-    vm.onRemoveInConns        = onRemoveInConns;
-    vm.onRemoveOutConns       = onRemoveOutConns;
-    vm.onAutoOrganize         = onAutoOrganize;
-    vm.onZoomIn               = onZoomIn;
-    vm.onZoomOut              = onZoomOut;
-    vm.onSelectAll            = onSelectAll;
-    vm.onDeselectAll          = onDeselectAll;
-    vm.onInvertSelection      = onInvertSelection;
-    vm.onEnable               = onEnable;
-    vm.onDisable              = onDisable;
-    vm.onInvertEnabled        = onInvertEnabled;
+    vm.onNewTree                = onNewTree;
+    vm.onCloseProject           = onCloseProject;
+    vm.onSaveProject            = onSaveProject;
+    vm.onExportProjectJson      = onExportProjectJson;
+    vm.onExportTreeJson         = onExportTreeJson;
+    vm.onExportParametersJson   = onExportParametersJson;
+    vm.onImportProjectJson      = onImportProjectJson;
+    vm.onImportTreeJson         = onImportTreeJson;
+    vm.onImportParametersJson   = onImportParametersJson;
+    vm.onUndo                   = onUndo;
+    vm.onRedo                   = onRedo;
+    vm.onCopy                   = onCopy;
+    vm.onCut                    = onCut;
+    vm.onPaste                  = onPaste;
+    vm.onDuplicate              = onDuplicate;
+    vm.onRemove                 = onRemove;
+    vm.onRemoveAllConns         = onRemoveAllConns;
+    vm.onRemoveInConns          = onRemoveInConns;
+    vm.onRemoveOutConns         = onRemoveOutConns;
+    vm.onAutoOrganize           = onAutoOrganize;
+    vm.onZoomIn                 = onZoomIn;
+    vm.onZoomOut                = onZoomOut;
+    vm.onSelectAll              = onSelectAll;
+    vm.onDeselectAll            = onDeselectAll;
+    vm.onInvertSelection        = onInvertSelection;
+    vm.onEnable                 = onEnable;
+    vm.onDisable                = onDisable;
+    vm.onInvertEnabled          = onInvertEnabled;
+    vm.onAlignVertically        = onAlignVertically;
+    vm.onAlignHorizontally      = onAlignHorizontally;
+    vm.onDistributeVertically   = onDistributeVertically;
+    vm.onDistributeHorizontally = onDistributeHorizontally;
 
     _create();
     _activate();
@@ -268,6 +272,23 @@
     function onInvertEnabled() {
       var tree = _getTree();
       tree.edit.invertEnabled();
+    }
+
+    function onAlignVertically() {
+      var tree = _getTree();
+      tree.organize.alignVertically();
+    }
+    function onAlignHorizontally() {
+      var tree = _getTree();
+      tree.organize.alignHorizontally();
+    }
+    function onDistributeVertically() {
+      var tree = _getTree();
+      tree.organize.distributeVertically();
+    }
+    function onDistributeHorizontally() {
+      var tree = _getTree();
+      tree.organize.distributeHorizontally();
     }
   }
 })();
