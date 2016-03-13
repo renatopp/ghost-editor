@@ -24,7 +24,38 @@ b3e.editor.ExportManager = function(editor) {
   }
 
   this.parametersToData = function() {
-    return {oi:"=)"};
+    var data = [];
+
+    var project = editor.project.get();
+    if (!project) return;
+
+    project.trees.each(function(tree) {
+      var _root = tree.nodes.getRoot();
+      var _tree = {
+        id: tree._id,
+        title: _root.getTitle(),
+        nodes: []
+      };
+
+      tree.nodes.each(function(node) {
+        var _node = {
+          id: node.id,
+          title: node.getTitle(),
+          properties: {}
+        };
+
+        var keys = Object.keys(node.properties);
+        if (!keys.length) return;
+
+        keys.forEach(function(name) {
+          _node.properties[name] = node.properties[name].toJson();
+        });
+        _tree.nodes.push(_node);
+      });
+      data.push(_tree);
+    });
+
+    return data;
   }
 
   this.projectToData = function() {
