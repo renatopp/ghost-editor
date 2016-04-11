@@ -1,5 +1,10 @@
 # CHANGES
 
+## 0.12-1-dev
+
+- Fixing bug where the tree panel wasn't updating the tree name.
+
+
 ## 0.12.0-dev
 
 - Added enable/disable feature.
