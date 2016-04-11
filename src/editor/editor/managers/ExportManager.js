@@ -56,7 +56,7 @@ b3e.editor.ExportManager = function(editor) {
     });
 
     return data;
-  }
+  };
 
   this.projectToData = function() {
     var project = editor.project.get();

@@ -5,6 +5,10 @@ b3e.editor.ImportManager = function(editor) {
     var project = editor.project.get();
     if (!project) return;
 
+    var f = function(name) {
+      node.properties[name].fromJson(_node.properties[name]);
+    };
+
     for (var i=0; i<data.length; i++) {
       var _tree = data[i];
       var tree = project.trees.get(_tree.id);
@@ -13,13 +17,11 @@ b3e.editor.ImportManager = function(editor) {
         var _node = _tree.nodes[j];
         var node = tree.nodes.get(_node.id);
 
-        Object.keys(_node.properties).forEach(function(name) {
-          node.properties[name].fromJson(_node.properties[name]);
-        });
+        Object.keys(_node.properties).forEach(f);
         node.display.redraw();
       }
     }
-  }
+  };
 
   this.projectAsData = function(data) {
     var project = editor.project.get();

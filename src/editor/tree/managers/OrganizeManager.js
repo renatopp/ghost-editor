@@ -88,7 +88,7 @@ b3e.tree.OrganizeManager = function(editor, project, tree) {
 
     for (i=0; i<nodes.length; i++) {
       var node = nodes[i];
-      var yOld = node.display.y
+      var yOld = node.display.y;
       node.display.y = y;
       node.display.snap();
       y += step;
@@ -128,7 +128,7 @@ b3e.tree.OrganizeManager = function(editor, project, tree) {
 
     for (i=0; i<nodes.length; i++) {
       var node = nodes[i];
-      var xOld = node.display.x
+      var xOld = node.display.x;
       node.display.x = x;
       node.display.snap();
       x += step;
