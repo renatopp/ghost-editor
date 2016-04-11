@@ -73,6 +73,7 @@
     }
 
     function change() {
+      $window.editor.trigger('nodechanged', self.node);
       self.node.display.redraw();
     }
 

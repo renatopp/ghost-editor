@@ -114,11 +114,15 @@
     }
 
     function _event(e) {
+      if (e.type === 'nodechanged' && e._target.category !== b3e.ROOT) {
+        return;
+      }
+
       setTimeout(function() {$scope.$apply(function() { _activate(); });}, 0);
     }
 
     function _create() {
-      // $window.editor.on('nodechanged', _event);
+      $window.editor.on('nodechanged', _event);
       $window.editor.on('treeadded', _event);
       $window.editor.on('treeselected', _event);
       $window.editor.on('treeremoved', _event);
@@ -127,7 +131,7 @@
 
     function _destroy() {
       $window.editor.off('treeadded', _event);
-      // $window.editor.off('nodechanged', _event);
+      $window.editor.off('nodechanged', _event);
       $window.editor.off('treeselected', _event);
       $window.editor.off('treeremoved', _event);
       $window.editor.off('treeimported', _event);
